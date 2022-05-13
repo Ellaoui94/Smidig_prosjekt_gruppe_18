@@ -7,13 +7,16 @@ import { Profile } from "./pages/profilePage/profile";
 import { Session } from "./pages/sessionPage/session";
 import { FriendsActivity } from "./pages/friendsActivityPage/friendsActivity";
 import { FriendPage } from "./pages/friendsPage/friendPage";
+import { NewProfile } from "./pages/registerUserPage/newProfile";
+import { LoginPage } from "./pages/loginPage/loginPage";
 
 function Application() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<FrontPage />} />
-
+        <Route path={"/register"} element={<NewProfile />} />
+        <Route path={"/login/*"} element={<LoginPage />} />
         <Route path={"/diary"} element={<Diary />} />
         <Route path={"/profile"} element={<Profile />} />
         <Route path={"/session"} element={<Session />} />
