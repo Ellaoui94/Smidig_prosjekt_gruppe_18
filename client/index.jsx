@@ -9,7 +9,7 @@ import { FriendsActivity } from "./pages/friendsActivityPage/friendsActivity";
 import { FriendPage } from "./pages/friendsPage/friendPage";
 import { NewProfile } from "./pages/registerUserPage/newProfile";
 import { LoginPage } from "./pages/loginPage/loginPage";
-import "./index.css"
+import "./css/index.css"
 
 function NavBar() {
   return (<>
