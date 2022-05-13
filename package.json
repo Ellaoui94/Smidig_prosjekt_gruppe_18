@@ -1,0 +1,29 @@
+{
+  "name": "smidig_prosjekt_gruppe_18",
+  "version": "1.0.0",
+  "description": "Gruppe 18",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently npm:dev:client npm:dev:server",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "format": "prettier --write *.{jsx,js}",
+    "format:check": "prettier --check *.{jsx,js}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TonjeHusvik/Smidig_prosjekt_gruppe_18.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TonjeHusvik/Smidig_prosjekt_gruppe_18/issues"
+  },
+  "homepage": "https://github.com/TonjeHusvik/Smidig_prosjekt_gruppe_18#readme",
+  "devDependencies": {
+    "concurrently": "^7.1.0",
+    "prettier": "^2.6.2"
+  }
+}
