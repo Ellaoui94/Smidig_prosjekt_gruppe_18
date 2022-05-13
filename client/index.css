@@ -1,0 +1,22 @@
+#app {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: auto 1fr;
+}
+
+body {
+    margin: 0;
+}
+
+#nav-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+footer {
+    width: 100vw;
+    bottom: 0;
+    position: absolute;
+    background-color: lightblue;
+}
