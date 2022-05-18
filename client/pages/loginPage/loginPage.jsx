@@ -27,8 +27,7 @@ export function LoginPage() {
 
       <TextField required style={{background: "white"}} label={'Passord'} type={"password"} margin="normal"/>
 
-      <button>lll</button>
-      <Button component={"span"} style={{
+      <Button type={"submit"} style={{
         top: "10px",
         background: "#3E989C",
         fontSize: "25px",
