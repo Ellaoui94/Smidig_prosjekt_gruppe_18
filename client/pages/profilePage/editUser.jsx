@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 
 /* Needs handleSubmit and handleInput to fully work. */
+/* THIS CODE _DOES NOT WORK_ */
 
-export function editUser() {
+/*export function editUser() {
   const [user, setUser] = useState("");
   useEffect(() => {
     //Waiting on database
@@ -15,11 +16,11 @@ export function editUser() {
     }
   }, []);
   return <div>Edit user</div>;
-}
+}*/
 
-/* These is taken from Johannes' repo, postJSON. Only thing I edited is "PUT", but doesnt know
+/* This is taken from Johannes' repo, postJSON. Only thing I edited is "PUT", but doesnt know
  * if that will work. Probably not. */
-async function updateJSON(url, object) {
+/*async function updateJSON(url, object) {
   //doublecheck that this one makes updates!
   const res = await fetch(url, {
     method: "PUT",
@@ -36,4 +37,4 @@ async function updateJSON(url, object) {
 async function updateUserProfile(user) {
   //doublecheck if url-endpoint-user_id and "user" is the same thing.
   return await updateJSON(`/api/profile/edit/${user_id}`, user);
-}
+}*/

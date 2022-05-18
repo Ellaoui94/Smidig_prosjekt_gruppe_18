@@ -1,6 +1,30 @@
 import React from "react";
 import { editUser } from "./editUser";
 
+const userProfile = [
+  {
+    username: "brukernavn",
+    info: "informasjon",
+    age: "alder",
+    course: "studieretning",
+    school: "skole",
+  },
+];
+
+function ProfileCard({ profile: { username, info, age, course, school } }) {
+  return (
+    <>
+      <div className={"profile-card"}>
+        <h3>{username}</h3>
+        <p>{info}</p>
+        <p>{age}</p>
+        <p>{course}</p>
+        <p>{school}</p>
+      </div>
+    </>
+  );
+}
+
 function EditUserButton({ label }) {
   return (
     <div>
@@ -11,16 +35,15 @@ function EditUserButton({ label }) {
 
 export function Profile() {
   return (
-    <div>
-      <h1>Profile photo / add new photo - function</h1>
+    <>
+      <h1>Profile</h1>
+      <p>(Profile-photo + add new photo function in here)</p>
       <EditUserButton label={"Rediger profil"} />
-      <div id="profile">
-        <h3>Brukernavn</h3>
-        <p id="aboutMe">Info</p>
-        <p id="age">Alder</p>
-        <p id="education">Studieretning</p>
-        <p id="school">Skole</p>
-      </div>
-    </div>
+      {userProfile.map((profile) => (
+        <>
+          <ProfileCard key={profile.username} profile={profile} />
+        </>
+      ))}
+    </>
   );
 }
