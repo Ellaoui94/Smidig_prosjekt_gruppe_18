@@ -6,8 +6,7 @@
 }
 
 body {
-    margin: 1em 1em 15em 1em;
-    left: -1em;
+    margin: 0em 0em 15em 0em;
     position: relative;
 }
 
@@ -26,15 +25,20 @@ footer {
 }
 
 /* diary */
+.diary-div {
+    margin-bottom: 4em;
+    color: darkslategrey;
+}
+
 .diary-session-card {
-    padding: 1em;
+    padding-bottom: 1em;
     margin-bottom: 1em;
     background-color: lavender;
 }
 
-.evaluation-div {
-    display: flex;
-    justify-content: space-between;
+.card-header {
+    background-color: darkslategrey;
+    color: #fff;
 }
 
 .todos-div {
