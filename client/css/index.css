@@ -6,7 +6,9 @@
 }
 
 body {
-    margin: 1em 1em 5em 1em;
+    margin: 1em 1em 15em 1em;
+    left: -1em;
+    position: relative;
 }
 
 #nav-bar {
