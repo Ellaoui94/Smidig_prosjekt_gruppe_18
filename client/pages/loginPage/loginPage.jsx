@@ -1,12 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 import { Box, Button, Container, IconButton, TextField } from "@mui/material";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import './login.css'
 
 export function LoginPage() {
+  const [data, setData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:3000/api/auth";
+      const { data: res } = await axios.post(url, data);
+      localStorage.setItem("token", res.data);
+      window.location = "/";
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
+
   return (
-    <form className={"loginForm"}>
+    <form className={"loginForm"} onSubmit={handleSubmit}>
       <IconButton component={Link} to="/" size="large" aria-label="menu" sx={{mr: 'auto'}}>
     <ArrowBackIosNew/>
   </IconButton>
@@ -23,9 +50,25 @@ export function LoginPage() {
         '& .MuiTextField-root': {width: '25ch'},
       }}
     >
-      <TextField required style={{background: "white"}} label={'Email eller brukernavn'} type={"text"} margin="normal"/>
+      <input
+        type="email"
+        placeholder="Email"
+        name="email"
+        onChange={handleChange}
+        value={data.email}
+        required
+      />
 
-      <TextField required style={{background: "white"}} label={'Passord'} type={"password"} margin="normal"/>
+      <input
+        type="password"
+        placeholder="Password"
+        name="password"
+        onChange={handleChange}
+        value={data.password}
+        required
+      />
+
+      {error && <div>{error}</div>}
 
       <Button type={"submit"} style={{
         top: "10px",

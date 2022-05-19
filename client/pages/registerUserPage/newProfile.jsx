@@ -1,15 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { Box, Button, Container, IconButton, TextField } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import React, { useState } from "react";
+import axios from "axios";
 import { DatePicker } from "@mui/x-date-pickers";
 import "./register.css";
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-};
 
 const schools = ["Høyskolen Kristiania", "Oslo Met", "UIO", "Høyskolen Kristiania Bergen", "UIO Bergen"];
 
@@ -20,7 +17,36 @@ export function NewProfile() {
   const [date, setDate] = useState(null);
   const [school, setSchool] = useState("");
 
-  console.log(date);
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:3000/api/users";
+      const { data: res } = await axios.post(url, data);
+      navigate("/login");
+      console.log(res.message);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
   return (
     <form className="registerForm" onSubmit={handleSubmit}>
@@ -40,36 +66,46 @@ export function NewProfile() {
             "select": {width: "55ch", display: "flex"}
           }}
         >
-          <TextField style={{ background: "white" }}
-                     label={"Navn"}
-                     margin="normal"
-                     type="text"
-                     onChange={(e) => setUserName(e.target.value)}
-                     value={userName}
-                     required
+
+          <input
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            onChange={handleChange}
+            value={data.firstName}
+            required
           />
 
-          <TextField style={{ background: "white" }} label={"Etternavn"} margin="normal" required/>
 
-          <TextField style={{ background: "white" }}
-                     label={"E-post"}
-                     margin="normal"
-                     type="email"
-                     onChange={(e) => setEmail(e.target.value)}
-                     value={email}
-                     required
+          <input
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            onChange={handleChange}
+            value={data.lastName}
+            required
           />
 
-          <TextField style={{ background: "white" }}
-                     label={"Passord"}
-                     margin="normal"
-                     type="password"
-                     onChange={(e) => setPassword(e.target.value)}
-                     value={password}
-                     required
+
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+            value={data.email}
+            required
           />
 
-          <TextField style={{ background: "white" }} label={"Gjenta passord"} margin="normal" required/>
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={handleChange}
+            value={data.password}
+            required
+          />
+
+          <TextField style={{ background: "white" }} label={"Gjenta passord"} margin="normal" />
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
@@ -89,6 +125,8 @@ export function NewProfile() {
               ))}
             </select>
           </label>
+
+          {error && <div>{error}</div>}
 
           <Button type={"submit"} style={{
             top: "10px",
