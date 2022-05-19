@@ -8,6 +8,7 @@
 body {
     margin: 0em 0em 15em 0em;
     position: relative;
+    overflow-x: hidden;
 }
 
 #nav-bar {
@@ -30,27 +31,48 @@ footer {
     color: darkslategrey;
 }
 
+.cards-div {
+    height: 11em;
+    width: fit-content;
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: inline-flex;
+}
+
+.horizontal-scroll-div {
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 600px;
+    margin-bottom: 5em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.plans-div {
+
+}
+
 .diary-session-card {
+    width: 500px;
+    height: 200px;
     padding-bottom: 1em;
     margin-bottom: 1em;
+    margin-right: 1em;
     background-color: lavender;
 }
 
 .card-header {
     background-color: darkslategrey;
+    height: 2em;
     color: #fff;
+    margin-top: -1.4em;
 }
 
-.todos-div {
-    background-color: aliceblue;
-    margin-bottom: 1em;
-    padding: 1em;
-}
-
-.streak-div {
-    background-color: aliceblue;
-    margin-bottom: 1em;
-    padding: 1em;
+.accomplished-div {
+    margin: 1em 1em 1em 1em;
+    top: -1em;
+    display: flex;
+    justify-content: space-between;
 }
 
 .choose-user-diary-buttons-div {
