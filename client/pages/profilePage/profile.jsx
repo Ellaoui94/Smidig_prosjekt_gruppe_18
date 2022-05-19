@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { editUser } from "./editUser";
 import { UserApiContext } from "../../userApiContext";
 import { useLoading } from "../../useLoading";
+import { Link, useNavigate } from "react-router-dom";
 
 function ProfileCard({ profile: { first_name, last_name } }) {
   return (
@@ -21,6 +22,17 @@ function EditUserButton({ label }) {
       <button onClick={editUser}>{label}</button>
     </div>
   );
+}
+
+export function DeleteUser({ reload }) {
+  const navigate = useNavigate();
+  const { deleteUser } = useContext(UserApiContext);
+  useEffect(async () => {
+    await deleteUser();
+    reload();
+    navigate("/");
+  });
+  return <h1>Please wait...</h1>;
 }
 
 export function Profile() {
@@ -49,6 +61,8 @@ export function Profile() {
           <ProfileCard key={profile.first_name} profile={profile} />
         </>
       ))}
+
+      <Link to={"/deleteUser"}>Delete User</Link>
     </>
   );
 }
