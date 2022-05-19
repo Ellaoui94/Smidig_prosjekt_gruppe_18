@@ -18,26 +18,26 @@ const schools = [
 
 export function NewProfile() {
   const { creatUser } = useContext(UserApiContext);
-  const [userFirstName, setUserFirstName] = useState("");
-  const [userLastName, setUserLastName] = useState("");
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userBirthday, setUserBirthday] = useState(null);
+  const [date_of_birth, setDate_of_birth] = useState(null);
   const [school, setSchool] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     creatUser({
-      userFirstName,
-      userLastName,
+      first_name,
+      last_name,
       email,
       password,
-      userBirthday,
+      date_of_birth,
       school,
     });
   };
 
-  console.log(userBirthday);
+  console.log(date_of_birth);
 
   return (
     <form className="registerForm" onSubmit={handleSubmit}>
@@ -66,16 +66,16 @@ export function NewProfile() {
             style={{ background: "white" }}
             label={"Fornavn"}
             margin="normal"
-            onChange={(e) => setUserFirstName(e.target.value)}
-            value={userFirstName}
+            onChange={(e) => setFirst_name(e.target.value)}
+            value={first_name}
             required
           />
           <TextField
             style={{ background: "white" }}
             label={"Etternavn"}
             margin="normal"
-            onChange={(e) => setUserLastName(e.target.value)}
-            value={userLastName}
+            onChange={(e) => setLast_name(e.target.value)}
+            value={last_name}
             required
           />
           <TextField
@@ -105,8 +105,8 @@ export function NewProfile() {
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label={"Fødselsdato"}
-              onChange={(newValue) => setUserBirthday(newValue)}
-              value={userBirthday}
+              onChange={(newValue) => setDate_of_birth(newValue)}
+              value={date_of_birth}
               renderInput={(params) => (
                 <TextField
                   style={{ background: "white" }}
