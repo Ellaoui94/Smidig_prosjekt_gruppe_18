@@ -1,9 +1,16 @@
 import { Router } from "express";
-import {User, validate} from "../models/user.js"
-import bcrypt from "bcrypt"
+import { User, validate } from "../models/user.js";
+import bcrypt from "bcrypt";
 
-export function UsersRoutes(){
+export function UsersRoutes() {
   const router = new Router();
+
+  /*
+  Here we do some validations when register a user.
+  - Checking if email already exists.
+  - Checking if the password contains at least eight characters. (salt)
+  - Crypt the password when adding it to the database
+   */
   router.post("/", async (req, res) => {
     try {
       const { error } = validate(req.body);
@@ -26,5 +33,5 @@ export function UsersRoutes(){
     }
   });
 
-  return router
+  return router;
 }

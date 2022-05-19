@@ -1,11 +1,14 @@
 import { Router } from "express";
-import {User} from "../models/user.js"
-import bcrypt from "bcrypt"
-import Joi from "joi"
+import { User } from "../models/user.js";
+import bcrypt from "bcrypt";
+import Joi from "joi";
 
-export function AuthRoutes(){
+export function AuthRoutes() {
   const router = new Router();
 
+  /*
+  Checking if the email and password is correct.
+   */
   router.post("/", async (req, res) => {
     try {
       const { error } = validate(req.body);
@@ -33,6 +36,7 @@ export function AuthRoutes(){
   return router;
 }
 
+//Please explain
 const validate = (data) => {
   const schema = Joi.object({
     email: Joi.string().email().required().label("Email"),
@@ -40,5 +44,3 @@ const validate = (data) => {
   });
   return schema.validate(data);
 };
-
-

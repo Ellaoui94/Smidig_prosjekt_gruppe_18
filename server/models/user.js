@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
-import jwt from "jsonwebtoken"
-import Joi from "joi"
-import passwordComplexity from "joi-password-complexity"
+import jwt from "jsonwebtoken";
+import Joi from "joi";
+import passwordComplexity from "joi-password-complexity";
 
+//Don't know what this is.
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -10,6 +11,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
+//How long the token lasts.
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
     expiresIn: "7d",
@@ -19,6 +21,7 @@ userSchema.methods.generateAuthToken = function () {
 
 const User = mongoose.model("user", userSchema);
 
+//Don't understand what is going on here.
 const validate = (data) => {
   const schema = Joi.object({
     firstName: Joi.string().required().label("First Name"),
