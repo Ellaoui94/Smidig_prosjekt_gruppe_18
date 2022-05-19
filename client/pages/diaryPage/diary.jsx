@@ -1,105 +1,152 @@
-import React from "react";
+import React, { useState } from "react";
 
+// get today's date to use for filtering reference
+const today = new Date();
+let todaysDate = today.getDate() + "/" + (today.getMonth() + 1);
+
+// data for each session, later to be taken from database
 const sessionData = [
   {
     day: "Monday",
-    date: "13. Mai",
+    date: todaysDate,
     subject: "Smidig Prosjekt",
-    status: "alone",
-    duration: "2 hours",
-    rating: "good",
+    timeframe: "14:00 - 16:00",
+  },
+  {
+    day: "Monday",
+    date: todaysDate,
+    subject: "Avansert Java",
+    timeframe: "14:00 - 16:00",
   },
   {
     day: "Tuesday",
-    date: "14. Mai",
-    subject: "Avansert Java",
-    status: "2 others",
-    duration: "5 hours",
-    rating: "ok",
+    date: "19/5",
+    subject: "Androidprogrammering",
+    timeframe: "14:00 - 16:00",
   },
   {
     day: "Wednesday",
-    date: "15. Mai",
-    subject: "Androidprogrammering",
-    status: "alone",
-    duration: "9 hours",
-    rating: "bad",
+    date: "20/5",
+    subject: "Enterpriseprogrammering",
+    timeframe: "14:00 - 16:00",
   },
 ];
 
-function DiarySessionCard({
-  session: { day, date, subject, status, duration, rating },
-}) {
+// filtering out plans for today and plans for later in two separate arrays
+const todaysPlans = sessionData.filter((e) => e.date === todaysDate);
+const futurePlans = sessionData.filter((e) => e.date !== todaysDate);
+
+function DiarySessionCard({ session: { day, date, subject, timeframe } }) {
   return (
     <>
       <div className={"diary-session-card"}>
-        <h5>
-          {day}, {date}
-        </h5>
-        <h6>{subject}</h6>
-        <div className={"evaluation-div"}>
-          <p>{status}</p>
-          <p>{duration}</p>
-          <p>{rating}</p>
+        <div className={"card-header"}>
+          <h5>
+            {day}, {date}
+          </h5>
         </div>
+        <h6>{subject}</h6>
+        <p>{timeframe}</p>
       </div>
     </>
   );
 }
 
-function Streak() {
+function MyPlans() {
   return (
     <>
-      <div className={"streak-div"}>
-        <h5>Streak</h5>
-        <p>Empty streak....</p>
+      <h1>My Plans</h1>
+      <h4>I Dag</h4>
+      <div className={"upcoming-div"}>
+        {todaysPlans.map((session) => (
+          <>
+            {
+              <DiarySessionCard
+                key={session.day + session.date}
+                session={session}
+              />
+            }
+          </>
+        ))}
+      </div>
+
+      <h4>Kommende</h4>
+      <div className={"upcoming-div"}>
+        {futurePlans.map((session) => (
+          <>
+            <DiarySessionCard
+              key={session.day + session.date}
+              session={session}
+            />
+          </>
+        ))}
       </div>
     </>
   );
 }
 
-function DailyTodos() {
+function FriendsPlans() {
   return (
     <>
-      <div className={"todos-div"}>
-        <h5>Todo's of today</h5>
-        <form>
-          <div>
-            <input type={"checkbox"} name={"todo-checkbox1"} id={"goal1"} />
-            <label htmlFor={"goal1"}>Goal 1</label>
-          </div>
-          <div>
-            <input type={"checkbox"} name={"todo-checkbox1"} id={"Goal2"} />
-            <label htmlFor={"goal2"}>Goal 2</label>
-          </div>
-          <button>Check</button>
-        </form>
+      <h1>Friends Plans</h1>
+      <h4>I Dag</h4>
+      <div className={"upcoming-div"}>
+        {todaysPlans.map((session) => (
+          <>
+            {
+              <DiarySessionCard
+                key={session.day + session.date}
+                session={session}
+              />
+            }
+          </>
+        ))}
+      </div>
+
+      <h4>Kommende</h4>
+      <div className={"upcoming-div"}>
+        {futurePlans.map((session) => (
+          <>
+            <DiarySessionCard
+              key={session.day + session.date}
+              session={session}
+            />
+          </>
+        ))}
       </div>
     </>
   );
 }
 
 export function Diary() {
+  const [showMyPlans, setShowMyPlans] = useState(true);
+  const [showFriendsPlans, setShowFriendsPlans] = useState(false);
+
+  // keeps track of which button is active, so the right component is displayed when clicking a button
+  function onClickHandlerMyPlans() {
+    setShowMyPlans((current) => !current);
+    setShowFriendsPlans((current) => !current);
+    console.log(showMyPlans.toString());
+    console.log(showFriendsPlans.toString());
+  }
+
+  function onClickHandlerFriendsPlans() {
+    setShowMyPlans((current) => !current);
+    setShowFriendsPlans((current) => !current);
+    console.log(showMyPlans.toString());
+    console.log(showFriendsPlans.toString());
+  }
+
   return (
     <>
-      <h1>Diary</h1>
+      <div className={"diary-div"}>
+        <div className={"choose-user-diary-buttons-div"}>
+          <button onClick={onClickHandlerMyPlans}>Me</button>
+          <button onClick={onClickHandlerFriendsPlans}>My Friends</button>
+        </div>
 
-      <div className={"choose-user-diary-buttons-div"}>
-        <button>Me</button>
-        <button>My Friends</button>
+        {showFriendsPlans ? <FriendsPlans /> : <MyPlans />}
       </div>
-
-      <Streak />
-      <DailyTodos />
-
-      {sessionData.map((session) => (
-        <>
-          <DiarySessionCard
-            key={session.day + session.date}
-            session={session}
-          />
-        </>
-      ))}
     </>
   );
 }

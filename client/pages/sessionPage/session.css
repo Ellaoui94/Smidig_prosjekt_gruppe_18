@@ -1,0 +1,10 @@
+.borderLine {
+    border: 1px solid black;
+    margin: 10px
+}
+
+.itemDiv {
+    border: 1px solid black;
+    border-radius: 24px;
+    width: 150px;
+}

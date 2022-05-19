@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowBackIosNew } from "@mui/icons-material";
-import { Box, Container, IconButton, TextField } from "@mui/material";
+import { Box, Button, Container, IconButton, TextField } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import React, { useState } from "react";
@@ -90,8 +90,14 @@ export function NewProfile() {
             </select>
           </label>
 
-          <button>yes</button>
-          {/*    {!isPending && <Button style={{
+          <Button type={"submit"} style={{
+            top: "10px",
+            background: "#3E989C",
+            fontSize: "25px",
+            fontWeight: "bold",
+            color: "white",
+            borderRadius: "50px"
+          }} > Logg inn</Button>          {/*    {!isPending && <Button style={{
               top: "10px",
               background: "#3E989C",
               fontSize: "25px",

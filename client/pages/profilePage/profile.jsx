@@ -1,25 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { editUser } from "./editUser";
+import { UserApiContext } from "../../userApiContext";
+import { useLoading } from "../../useLoading";
 
-const userProfile = [
-  {
-    username: "brukernavn",
-    info: "informasjon",
-    age: "alder",
-    course: "studieretning",
-    school: "skole",
-  },
-];
-
-function ProfileCard({ profile: { username, info, age, course, school } }) {
+function ProfileCard({ profile: { first_name, last_name } }) {
   return (
     <>
       <div className={"profile-card"}>
-        <h3>{username}</h3>
-        <p>{info}</p>
-        <p>{age}</p>
-        <p>{course}</p>
-        <p>{school}</p>
+        <h3>
+          {last_name}, {first_name}{" "}
+        </h3>
       </div>
     </>
   );
@@ -34,14 +24,29 @@ function EditUserButton({ label }) {
 }
 
 export function Profile() {
+  const { listUser } = useContext(UserApiContext);
+
+  const { loading, error, data } = useLoading(listUser);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <div id="error-text">{error.toString()}</div>
+      </div>
+    );
+  }
   return (
     <>
       <h1>Profile</h1>
       <p>(Profile-photo + add new photo function in here)</p>
       <EditUserButton label={"Rediger profil"} />
-      {userProfile.map((profile) => (
+      {data.map((profile) => (
         <>
-          <ProfileCard key={profile.username} profile={profile} />
+          <ProfileCard key={profile.first_name} profile={profile} />
         </>
       ))}
     </>
