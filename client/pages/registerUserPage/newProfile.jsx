@@ -17,9 +17,6 @@ const schools = [
 ];
 
 export function NewProfile() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
   const [date, setDate] = useState(null);
   const [school, setSchool] = useState("");
 
