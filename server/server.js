@@ -5,6 +5,12 @@ import * as path from "path";
 import cookieParser from "cookie-parser";
 import { MongoClient } from "mongodb";
 import { UserApi } from "./userApi.js";
+import cors from "cors"
+import { connection } from "./db.js";
+
+import {AuthRoutes} from "./routes/auth.js";
+import {UsersRoutes} from "./routes/users.js";
+
 
 dotenv.config();
 
@@ -13,15 +19,13 @@ const app = express();
 app.use(express.static("../client/dist"));
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cors());
 
-const mongoClient = new MongoClient(process.env.MONGODB_URL);
-mongoClient.connect().then(async () => {
-  console.log("Connected to mongodb");
-  app.use(
-    "/api/user",
-    UserApi(mongoClient.db(process.env.MONGODB_DATABASE || "test-1-smidig"))
-  );
-});
+connection();
+
+app.use("/api/users", UsersRoutes());
+app.use("/api/auth", AuthRoutes());
+
 
 app.use((req, res, next) => {
   if (req.method === "GET" && !req.path.startsWith("/api")) {

@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { Box, Button, Container, IconButton, TextField } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { DatePicker } from "@mui/x-date-pickers";
 import "./register.css";
-import { UserApiContext } from "../../userApiContext";
 
 const schools = [
   "Høyskolen Kristiania",
@@ -17,27 +17,39 @@ const schools = [
 ];
 
 export function NewProfile() {
-  const { creatUser } = useContext(UserApiContext);
-  const [first_name, setFirst_name] = useState("");
-  const [last_name, setLast_name] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [date_of_birth, setDate_of_birth] = useState(null);
+  const [date, setDate] = useState(null);
   const [school, setSchool] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    creatUser({
-      first_name,
-      last_name,
-      email,
-      password,
-      date_of_birth,
-      school,
-    });
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
   };
 
-  console.log(date_of_birth);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `${window.location.origin}/api/users`;
+      const { data: res } = await axios.post(url, data);
+      navigate("/login");
+      console.log(res.message);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
   return (
     <form className="registerForm" onSubmit={handleSubmit}>
@@ -62,51 +74,49 @@ export function NewProfile() {
             select: { width: "55ch", display: "flex" },
           }}
         >
-          <TextField
-            style={{ background: "white" }}
-            label={"Fornavn"}
-            margin="normal"
-            onChange={(e) => setFirst_name(e.target.value)}
-            value={first_name}
+          <input
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            onChange={handleChange}
+            value={data.firstName}
             required
           />
-          <TextField
-            style={{ background: "white" }}
-            label={"Etternavn"}
-            margin="normal"
-            onChange={(e) => setLast_name(e.target.value)}
-            value={last_name}
+          <input
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            onChange={handleChange}
+            value={data.lastName}
             required
           />
-          <TextField
-            style={{ background: "white" }}
-            label={"E-post"}
-            margin="normal"
+          <input
             type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+            value={data.email}
+            required
+          />
+          <input
+            style={{ background: "white" }}
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={handleChange}
+            value={data.password}
             required
           />
           <TextField
-            style={{ background: "white" }}
-            label={"Passord"}
-            margin="normal"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            required
-          />
-          {/*<TextField
             style={{ background: "white" }}
             label={"Gjenta passord"}
             margin="normal"
-            required
-          />*/}
+          />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label={"Fødselsdato"}
-              onChange={(newValue) => setDate_of_birth(newValue)}
-              value={date_of_birth}
+              onChange={(newValue) => setDate(newValue)}
+              value={date}
               renderInput={(params) => (
                 <TextField
                   style={{ background: "white" }}
@@ -128,6 +138,7 @@ export function NewProfile() {
               ))}
             </select>
           </label>
+          {error && <div>{error}</div>}
           <Button
             type={"submit"}
             style={{

@@ -118,7 +118,7 @@ function FriendsPlans() {
   );
 }
 
-export function Diary() {
+export function DiaryV2() {
   const [showMyPlans, setShowMyPlans] = useState(true);
   const [showFriendsPlans, setShowFriendsPlans] = useState(false);
 
@@ -145,6 +145,7 @@ export function Diary() {
           <button onClick={onClickHandlerFriendsPlans}>My Friends</button>
         </div>
 
+        {/* */}
         {showFriendsPlans ? <FriendsPlans /> : <MyPlans />}
       </div>
     </>

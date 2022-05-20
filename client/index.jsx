@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { FrontPage } from "./pages/frontPage/frontPage";
 import { Diary } from "./pages/diaryPage/diary";
-import { DeleteUser, Profile } from "./pages/profilePage/profile";
+import { DiaryV2 } from "./pages/diaryPage/diaryV2";
+import { Profile } from "./pages/profilePage/profile";
 import { Session } from "./pages/sessionPage/session";
 import { FriendsActivity } from "./pages/friendsActivityPage/friendsActivity";
 import { FriendPage } from "./pages/friendsPage/friendPage";
@@ -32,12 +33,11 @@ function Application() {
             <Route path={"/"} element={<FrontPage />} />
             <Route path={"/register"} element={<NewProfile />} />
             <Route path={"/login/*"} element={<LoginPage />} />
-            <Route path={"/diary"} element={<Diary />} />
+            <Route path={"/diary"} element={<DiaryV2 />} />
             <Route path={"/profile"} element={<Profile />} />
             <Route path={"/session"} element={<Session />} />
             <Route path={"/friends-activity"} element={<FriendsActivity />} />
             <Route path={"/friend-page"} element={<FriendPage />} />
-            <Route path={"/deleteUser"} element={<DeleteUser />} />
           </Routes>
         </main>
 
