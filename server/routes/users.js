@@ -2,6 +2,9 @@ import { Router } from "express";
 import { User, validate } from "../models/user.js";
 import bcrypt from "bcrypt";
 
+
+const maxAge = 3 * 24 * 60 * 60;
+
 export function UsersRoutes() {
   const router = new Router();
 
@@ -18,10 +21,17 @@ export function UsersRoutes() {
         return res.status(400).send({ message: error.details[0].message });
 
       const user = await User.findOne({ email: req.body.email });
+
+      res.cookie("jwt", user, {
+        withCredentials: true,
+        httpOnly: false,
+        maxAge: maxAge * 1000,
+      });
+
       if (user)
         return res
           .status(409)
-          .send({ message: "User with given email already Exist!" });
+          .send({ message: "User with given email already exist!" });
 
       const salt = await bcrypt.genSalt(Number(process.env.SALT));
       const hashPassword = await bcrypt.hash(req.body.password, salt);
