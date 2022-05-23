@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
-export function connection(){
+export function connection() {
   const connectionParams = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   };
   try {
-    mongoose.connect(process.env.DB, connectionParams);
+    mongoose.connect(process.env.MONGODB_URL, connectionParams);
     console.log("Connected to database successfully");
   } catch (error) {
     console.log(error);
     console.log("Could not connect database!");
   }
-};
+}
