@@ -3,6 +3,8 @@ import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 import Joi from "joi";
 
+const maxAge = 3 * 24 * 60 * 60;
+
 export function AuthRoutes() {
   const router = new Router();
 
@@ -19,6 +21,9 @@ export function AuthRoutes() {
       if (!user)
         return res.status(401).send({ message: "Invalid Email or Password" });
 
+      res.cookie("jwt", user, { httpOnly: false, maxAge: maxAge * 1000, signed: true });
+
+
       const validPassword = await bcrypt.compare(
         req.body.password,
         user.password
@@ -31,6 +36,19 @@ export function AuthRoutes() {
     } catch (error) {
       res.status(500).send({ message: "Internal Server Error" });
     }
+  });
+
+  router.get("/me", (req, res) => {
+    const cookie = req.signedCookies;
+
+    const user = {firstName: cookie.jwt.firstName, lastName: cookie.jwt.lastName, email: cookie.jwt.email}
+
+    res.json(user)
+  })
+
+  router.delete("/", (req, res) => {
+    res.clearCookie("jwt");
+    res.sendStatus(200);
   });
 
   return router;

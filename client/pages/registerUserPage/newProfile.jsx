@@ -74,35 +74,45 @@ export function NewProfile() {
             select: { width: "55ch", display: "flex" },
           }}
         >
-          <input
+          <TextField
             type="text"
-            placeholder="First Name"
             name="firstName"
+            style={{ background: "white" }}
+            label={"Fornavn"}
+            margin="normal"
             onChange={handleChange}
             value={data.firstName}
             required
           />
-          <input
+
+          <TextField
             type="text"
-            placeholder="Last Name"
             name="lastName"
+            style={{ background: "white" }}
+            label={"Etternavn"}
+            margin="normal"
             onChange={handleChange}
             value={data.lastName}
             required
           />
-          <input
+
+          <TextField
             type="email"
-            placeholder="Email"
             name="email"
+            style={{ background: "white" }}
+            label={"Email"}
+            margin="normal"
             onChange={handleChange}
             value={data.email}
             required
           />
-          <input
-            style={{ background: "white" }}
+
+          <TextField
             type="password"
-            placeholder="Password"
             name="password"
+            style={{ background: "white" }}
+            label={"Passord"}
+            margin="normal"
             onChange={handleChange}
             value={data.password}
             required
