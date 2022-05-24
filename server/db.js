@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export function connection(){
+export function connection() {
   const connectionParams = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -12,4 +12,4 @@ export function connection(){
     console.log(error);
     console.log("Could not connect database!");
   }
-};
+}

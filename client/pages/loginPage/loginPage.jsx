@@ -20,7 +20,7 @@ export function LoginPage() {
       const url = `${window.location.origin}/api/auth`;
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
-      window.location = "/";
+      window.location = "/main-page";
     } catch (error) {
       if (
         error.response &&
@@ -35,52 +35,56 @@ export function LoginPage() {
   return (
     <form className={"loginForm"} onSubmit={handleSubmit}>
       <IconButton component={Link} to="/" size="large" aria-label="menu" sx={{mr: 'auto'}}>
-    <ArrowBackIosNew/>
-  </IconButton>
+        <ArrowBackIosNew/>
+      </IconButton>
 
 
-  <Container maxWidth="md">
+      <Container maxWidth="md">
 
-    <h1 style={{color: "#023F4A"}}>Logg In</h1>
+        <h1 style={{color: "#023F4A"}}>Logg In</h1>
 
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        '& .MuiTextField-root': {width: '25ch'},
-      }}
-    >
-      <input
-        type="email"
-        placeholder="Email"
-        name="email"
-        onChange={handleChange}
-        value={data.email}
-        required
-      />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            '& .MuiTextField-root': {width: '25ch'},
+          }}
+        >
+          <TextField
+            type="email"
+            name="email"
+            style={{ background: "white" }}
+            label={"Email"}
+            margin="normal"
+            onChange={handleChange}
+            value={data.email}
+            required
+          />
 
-      <input
-        type="password"
-        placeholder="Password"
-        name="password"
-        onChange={handleChange}
-        value={data.password}
-        required
-      />
+          <TextField
+            type="password"
+            name="password"
+            style={{ background: "white" }}
+            label={"Passord"}
+            margin="normal"
+            onChange={handleChange}
+            value={data.password}
+            required
+          />
 
-      {error && <div>{error}</div>}
+          {error && <div>{error}</div>}
 
-      <Button type={"submit"} style={{
-        top: "10px",
-        background: "#3E989C",
-        fontSize: "25px",
-        fontWeight: "bold",
-        color: "white",
-        borderRadius: "50px"
-      }} > Logg inn</Button>
+          <Button type={"submit"} style={{
+            top: "10px",
+            background: "#3E989C",
+            fontSize: "25px",
+            fontWeight: "bold",
+            color: "white",
+            borderRadius: "50px"
+          }} > Logg inn</Button>
 
-    </Box>
-  </Container>
-      </form>
-);
+        </Box>
+      </Container>
+    </form>
+  );
 }

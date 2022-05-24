@@ -26,7 +26,6 @@ connection();
 app.use("/api/users", UsersRoutes());
 app.use("/api/auth", AuthRoutes());
 
-
 app.use((req, res, next) => {
   if (req.method === "GET" && !req.path.startsWith("/api")) {
     res.sendFile(path.resolve("../client/dist/index.html"));
