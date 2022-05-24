@@ -94,3 +94,14 @@ footer {
     margin-bottom: 1em;
     background-color: gray;
 }
+/* other users profile */
+.other-users-profile {
+    margin-bottom: 4em;
+    padding-left: 1em;
+    color: black;
+    font-size: 15px;
+    text-align: left;
+}
+.boolean-add-friend {
+    grid-column: auto;
+}
