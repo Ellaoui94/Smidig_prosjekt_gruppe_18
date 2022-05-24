@@ -78,3 +78,19 @@ footer {
 .choose-user-diary-buttons-div {
     margin-bottom: 1em;
 }
+
+/* list friends page */
+.list-friends-page {
+    margin-bottom: 4em;
+    padding-left: 1em;
+    color: black;
+    font-size: 15px;
+    text-align: left;
+}
+.view-friends-card {
+    width: auto;
+    height: auto;
+    padding: 2px 0 2px 0;
+    margin-bottom: 1em;
+    background-color: gray;
+}

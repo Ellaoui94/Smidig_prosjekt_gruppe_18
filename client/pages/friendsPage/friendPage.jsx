@@ -31,77 +31,31 @@ function ViewFriendCard({ friend: { username, school } }) {
   return (
     <>
       <div className={"view-friends-card"}>
-        <h2>*profilbilde* {username}</h2>
+        <h2>{username}</h2>
         <p>{school}</p>
       </div>
     </>
   );
 }
 
-function allFriends() {
-  return <h3>hello all friends</h3>;
-}
-
-function AllFriendsButton({ label }) {
-  return (
-    <div>
-      <button onClick={allFriends}>{label}</button>
-    </div>
-  );
-}
-
-function closeFriends() {
-  return <h3>hello close friends</h3>;
-}
-
-function CloseFriendsButton({ label }) {
-  return (
-    <div>
-      <button onClick={closeFriends}>{label}</button>
-    </div>
-  );
-}
-
-function request() {
-  return <h3>hello friend requests</h3>;
-}
-
-function RequestButton({ label }) {
-  return (
-    <div>
-      <button onClick={request}>{label}</button>
-    </div>
-  );
-}
-
-function sentInvitation() {
-  return <h3>hello sent invitations</h3>;
-}
-
-function SentInvitationButton({ label }) {
-  return (
-    <div>
-      <button onClick={sentInvitation}>{label}</button>
-    </div>
-  );
-}
-
 export function FriendPage() {
   return (
     <>
-      <h1>Venner</h1>
-      <div className={"choose-view"}>
-        <AllFriendsButton label={"Alle venner"} />
-        <CloseFriendsButton label={"Nære venner"} />
-        <RequestButton label={"Forespørsler"} />
-        <SentInvitationButton label={"Sendte invitasjoner"} />
-      </div>
+      <div className={"list-friends-page"}>
+        <h1>Brukere</h1>
+        <div className={"choose-view"}>
+          <button>Alle venner</button>
+          <button>Nære venner</button>
+          <button>Forespørsler</button>
+          <button>Sendte invitasjoner</button>
+        </div>
 
-      {viewFriends.map((friend) => (
-        <>
-          <ViewFriendCard key={friend.username} friend={friend} />
-        </>
-      ))}
+        {viewFriends.map((friend) => (
+          <>
+            <ViewFriendCard key={friend.username} friend={friend} />
+          </>
+        ))}
+      </div>
     </>
   );
 }
