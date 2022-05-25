@@ -19,7 +19,7 @@ userSchema.methods.generateAuthToken = function () {
   return token;
 };
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("users", userSchema);
 
 //Don't understand what is going on here.
 const validate = (data) => {

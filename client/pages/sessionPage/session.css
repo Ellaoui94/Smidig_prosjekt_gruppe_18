@@ -8,3 +8,17 @@
     border-radius: 24px;
     width: 150px;
 }
+
+body {
+    margin: 1em 0em 15em 0em;
+    position: relative;
+    overflow-x: hidden;
+}
+
+footer {
+    width: 100vw;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: lightblue;
+}

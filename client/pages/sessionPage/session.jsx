@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { IconButton, TextField } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import "./session.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ export function Session() {
   const [data, setData] = useState({
     courseTitle: "",
     location: "",
-    studyStatus: "",
+    studyStatus: "nei",
   });
 
   const [error, setError] = useState("");
@@ -48,19 +48,19 @@ export function Session() {
     <div>
       <h1>Start a Session</h1>
 
-
       <form onSubmit={handleSubmit}>
         <h1>Add a new Article</h1>
-        <TextField
-          type="text"
-          name="courseTitle"
-          style={{ background: "white" }}
-          label={"courseTitle"}
-          margin="normal"
-          onChange={handleChange}
-          value={data.courseTitle}
-          required
-        />
+
+        {subjects.map((subject) => (
+          <div>
+            {subject}
+            <input
+              type="checkbox"
+              onChange={handleChange}
+              value={data.courseTitle}
+            />
+          </div>
+        ))}
 
         <TextField
           type="text"
@@ -84,13 +84,11 @@ export function Session() {
           required
         />
 
-
         <button>Save</button>
       </form>
 
-
       <Link to={"/start-session"}>Start økt</Link>
-      <div className={"borderLine"}>
+      <div>
         <h3>Subject</h3>
         {subjects.map((subject) => (
           <IconButton>
