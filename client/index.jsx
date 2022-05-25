@@ -67,7 +67,7 @@ function Application() {
             <Route path={"/friend-page"} element={<FriendPage />} />
             <Route path={"/friend-profile"} element={<FriendProfile />} />
             <Route path={"/map-page"} element={<MapPage />} />
-            <Route path={"/course-view"} element={<CourseView />} />
+            <Route path={"/course-view/:course"} element={<CourseView />} />
           </Routes>
         </main>
 
