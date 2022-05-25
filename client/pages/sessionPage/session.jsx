@@ -93,16 +93,6 @@ export function Session() {
 
         <button>Start økt</button>
       </form>
-
-      <Link to={"/start-session"}>Start økt</Link>
-
-      <form>
-        <input type="text" placeholder={"Add comment"} />
-        <div>
-          <input type="file" />
-        </div>
-        <button>Click to add an Image</button>
-      </form>
     </div>
   );
 }
