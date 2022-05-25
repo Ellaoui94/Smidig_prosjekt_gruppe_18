@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, IconButton, TextField } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import "./session.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -56,8 +56,10 @@ export function Session() {
             {subject}
             <input
               type="checkbox"
+              name="courseTitle"
+              label={"courseTitle"}
               onChange={handleChange}
-              value={data.courseTitle}
+              value={subject}
             />
           </div>
         ))}
