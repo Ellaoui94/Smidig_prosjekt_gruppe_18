@@ -9,14 +9,14 @@ import axios from "axios";
 const subjects = ["Math", "Religion", "Physics", "History"];
 const types = ["Exam", "Submission", "Project"];
 const locations = ["Library", "Cafe"];
-const status = ["Alone", "Invisible", "Public", "Friends only"];
+const states = ["Alone", "Invisible", "Public", "Friends only"];
 const goals = ["Finish exams", "Dont forget to drink water"];
 
 export function Session() {
   const [data, setData] = useState({
     courseTitle: "",
     location: "",
-    studyStatus: "",
+    studyStatus: "nei",
   });
 
   const [error, setError] = useState("");
@@ -31,7 +31,7 @@ export function Session() {
     try {
       const url = `${window.location.origin}/api/session`;
       const { data: res } = await axios.post(url, data);
-      navigate("/");
+      navigate("/start-session");
       console.log(res.message);
     } catch (error) {
       if (
@@ -48,124 +48,50 @@ export function Session() {
     <div>
       <h1>Start a Session</h1>
 
-
       <form onSubmit={handleSubmit}>
-        <h1>Add a new Article</h1>
-        <TextField
-          type="text"
-          name="courseTitle"
-          style={{ background: "white" }}
-          label={"courseTitle"}
-          margin="normal"
-          onChange={handleChange}
-          value={data.courseTitle}
-          required
-        />
-
-        <TextField
-          type="text"
-          name="location"
-          style={{ background: "white" }}
-          label={"location"}
-          margin="normal"
-          onChange={handleChange}
-          value={data.location}
-          required
-        />
-
-        <TextField
-          type="text"
-          name="studyStatus"
-          style={{ background: "white" }}
-          label={"studyStatus"}
-          margin="normal"
-          onChange={handleChange}
-          value={data.studyStatus}
-          required
-        />
-
-
-        <button>Save</button>
-      </form>
-
-
-      <Link to={"/start-session"}>Start økt</Link>
-      <div className={"borderLine"}>
-        <h3>Subject</h3>
+        <h2>Hvilket emne vil du jobbe med?</h2>
         {subjects.map((subject) => (
-          <IconButton>
-            <div className={"itemDiv"} key={subject}>
-              {subject}
-            </div>
-          </IconButton>
+          <div>
+            {subject}
+            <input
+              type="checkbox"
+              name="courseTitle"
+              label={"courseTitle"}
+              onChange={handleChange}
+              value={subject}
+            />
+          </div>
         ))}
-        <IconButton onClick={() => subjects.push("Culture")}>
-          <AddIcon />
-        </IconButton>
-      </div>
 
-      <div className={"borderLine"}>
-        <h3>Type</h3>
-        {types.map((type) => (
-          <IconButton>
-            <div className={"itemDiv"} key={type}>
-              {type}
-            </div>
-          </IconButton>
-        ))}
-        <IconButton onClick={() => subjects.push("Culture")}>
-          <AddIcon />
-        </IconButton>
-      </div>
-
-      <div className={"borderLine"}>
-        <h3>Location</h3>
+        <h2>Hvor vil du jobbe</h2>
         {locations.map((location) => (
-          <IconButton>
-            <div className={"itemDiv"} key={location}>
-              {location}
-            </div>
-          </IconButton>
+          <div>
+            {location}
+            <input
+              type="checkbox"
+              name="location"
+              label={"location"}
+              onChange={handleChange}
+              value={location}
+            />
+          </div>
         ))}
-        <IconButton onClick={() => subjects.push("Culture")}>
-          <AddIcon />
-        </IconButton>
-      </div>
 
-      <div className={"borderLine"}>
-        <h3>Status</h3>
-        {status.map((s) => (
-          <IconButton>
-            <div className={"itemDiv"} key={s}>
-              {s}
-            </div>
-          </IconButton>
+        <h2>Sett arbeidstatus for denne økten</h2>
+        {states.map((status) => (
+          <div>
+            {status}
+            <input
+              type="checkbox"
+              name="studyStatus"
+              label={"studyStatus"}
+              onChange={handleChange}
+              value={status}
+            />
+          </div>
         ))}
-        <IconButton onClick={() => subjects.push("Culture")}>
-          <AddIcon />
-        </IconButton>
-      </div>
 
-      <div className={"borderLine"}>
-        <h3>Goals</h3>
-        {goals.map((goal) => (
-          <IconButton>
-            <div className={"itemDiv"} key={goal}>
-              {goal}
-            </div>
-          </IconButton>
-        ))}
-        <IconButton onClick={() => subjects.push("Culture")}>
-          <AddIcon />
-        </IconButton>
-      </div>
-
-      <form>
-        <input type="text" placeholder={"Add comment"} />
-        <div>
-          <input type="file" />
-        </div>
-        <button>Click to add an Image</button>
+        <button>Start økt</button>
       </form>
     </div>
   );

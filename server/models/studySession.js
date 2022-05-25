@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 //Don't know what this is.
 const userSchema = new mongoose.Schema({
   courseTitle: { type: String, required: true },
@@ -12,10 +11,8 @@ const userSchema = new mongoose.Schema({
   finished: { type: Boolean, required: false },
 });
 
-
 const Session = mongoose.model("session", userSchema);
 
 //Don't understand what is going on here.
-
 
 export { Session };

@@ -5,13 +5,13 @@ import * as path from "path";
 import cookieParser from "cookie-parser";
 import { MongoClient } from "mongodb";
 import { UserApi } from "./userApi.js";
-import cors from "cors"
+import cors from "cors";
 import { connection } from "./db.js";
 
-import {AuthRoutes} from "./routes/auth.js";
-import {UsersRoutes} from "./routes/users.js";
+import { AuthRoutes } from "./routes/auth.js";
+import { UsersRoutes } from "./routes/users.js";
 import { StudySessionApi } from "./routes/studySessions.js";
-
+import { CourseRoutes } from "./routes/course.js";
 
 dotenv.config();
 
@@ -27,6 +27,7 @@ connection();
 app.use("/api/users", UsersRoutes());
 app.use("/api/auth", AuthRoutes());
 app.use("/api/session", StudySessionApi());
+app.use("/api/course", CourseRoutes());
 
 app.use((req, res, next) => {
   if (req.method === "GET" && !req.path.startsWith("/api")) {

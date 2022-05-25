@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // get today's date to use for filtering reference
 const today = new Date();
@@ -133,8 +134,8 @@ const myFriends = [
 function MySubjectsCard({ mySubjects: { subject, code } }) {
   return (
     <>
-      <div className={"diary-session-card"}>
-        <h5>{subject}</h5>
+      <div className={"main-page-components-card"}>
+        <Link to={"/course-view/" + subject}>{subject}</Link>
         <h6>{code}</h6>
         <div className={"arrow-div"}>
           <p>></p>
@@ -149,7 +150,7 @@ function PlannedSessionsCard({
 }) {
   return (
     <>
-      <div className={"diary-session-card"}>
+      <div className={"main-page-components-card"}>
         <h6>{day + ", " + date}</h6>
         <h5>{courseTitle}</h5>
         <h6>{"- " + todos[0]}</h6>
@@ -176,7 +177,7 @@ function FinishedSessionsCard({
 }) {
   return (
     <>
-      <div className={"diary-session-card"}>
+      <div className={"main-page-components-card"}>
         <h6>{day + ", " + date}</h6>
         <h5>{courseTitle}</h5>
         <h6>{"- " + todos[0]}</h6>
@@ -254,7 +255,7 @@ function Feed() {
 export function MainPage() {
   return (
     <>
-      <div className={"diary-div"}>
+      <div className={"main-div"}>
         <h2>Hei, Navn</h2>
         <Feed />
       </div>
