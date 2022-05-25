@@ -22,6 +22,7 @@
     "@mui/material": "^5.7.0",
     "@mui/x-date-pickers": "^5.0.0-alpha.3",
     "@parcel/transformer-react-refresh-wrap": "^2.5.0",
+    "@react-google-maps/api": "^2.11.8",
     "axios": "^0.27.2",
     "react": "^17.0.2",
     "react-cookie": "^4.1.1",
