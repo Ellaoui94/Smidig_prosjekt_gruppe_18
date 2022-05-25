@@ -1,27 +1,23 @@
-import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
-
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyCBa-5tK7ycBCJwSEXvhaAy9q_pfN4f8Ww",
-})(MapContainer);
-
-export function MapContainer() {
-  return (
-    <>
-      <Map google={google} zoom={14}></Map>
-      <Marker onClick={onMarkerClick} name={"Current location"} />
-      <InfoWindow onClose={onInfoWindowClose}>
-        <div>
-          <h1></h1>
-        </div>
-      </InfoWindow>
-    </>
-  );
-}
+import { useMemo } from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 export function MapPage() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyCBa-5tK7ycBCJwSEXvhaAy9q_pfN4f8Ww",
+  });
+
+  if (!isLoaded) return <div>Loading...</div>;
+  return <Map />;
+}
+
+function Map() {
   return (
-    <>
-      <h1>Map comes here</h1>;
-    </>
+    <GoogleMap
+      zoom={14}
+      center={{ lat: 59.911491, lng: 10.757933 }}
+      mapContainerClassName="map-container"
+    >
+      <Marker />
+    </GoogleMap>
   );
 }
