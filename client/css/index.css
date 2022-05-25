@@ -98,10 +98,39 @@ footer {
 .other-users-profile {
     margin-bottom: 4em;
     padding-left: 1em;
+    padding-right: 1em;
     color: black;
     font-size: 15px;
     text-align: left;
 }
-.boolean-add-friend {
-    grid-column: auto;
+.contact-userinfo {
+    background-color: white;
+    padding: 10px;
+    border-style: solid;
+    border-color: #138ca7;
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+.bio-userinfo {
+    background-color: white;
+    padding: 10px;
+    border-style: solid;
+    border-color: #138ca7;
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+.active-courses-card {
+    display: grid;
+    grid-column-start: auto;
+}
+.course-card {
+    grid-column-start: auto;
+    display: inline-grid;
+    width: fit-content;
+    background-color: white;
+    padding: 3px;
+    border-style: solid;
+    border-color: #138ca7;
+    border-radius: 4px;
+    margin-bottom: 1em;
 }
