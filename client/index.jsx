@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { FrontPage } from "./pages/frontPage/frontPage";
-import { DiaryV2 } from "./pages/diaryPage/diaryV2";
 import { Logout, Profile } from "./pages/profilePage/profile";
 import { Session } from "./pages/sessionPage/session";
 import { FriendsActivity } from "./pages/friendsActivityPage/friendsActivity";
@@ -57,7 +56,6 @@ function Application() {
             <Route path={"/register"} element={<NewProfile />} />
             <Route path={"/login/*"} element={<LoginPage />} />
             <Route path={"/main-page"} element={<MainPage />} />
-            <Route path={"/diary"} element={<DiaryV2 />} />
             <Route path={"/profile"} element={<Profile />} />
             <Route path={"/session"} element={<Session />} />
             <Route path={"/start-session"} element={<StartSession />} />
