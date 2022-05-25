@@ -43,5 +43,28 @@ export function UsersRoutes() {
     }
   });
 
+  router.post("/update", async (req, res) => {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      Object.assign(user, req.body)
+      user.save();
+      res.send({data: user});
+    }catch{
+      res.status(404).send({error: "User is not found"})
+    }
+  })
+
+  router.delete("/delete/:email", async (req, res) => {
+    try {
+      const {email} = req.params
+      console.log(email)
+      const user = await User.findOne({ email: `${email}` });
+      await user.remove();
+      res.send({data: true});
+    }catch{
+      res.status(404).send({error: "User is not found"})
+    }
+  })
+
   return router;
 }
