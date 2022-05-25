@@ -2,8 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { FrontPage } from "./pages/frontPage/frontPage";
-import { Diary } from "./pages/diaryPage/diary";
-import { DiaryV2 } from "./pages/diaryPage/diaryV2";
 import { Logout, Profile } from "./pages/profilePage/profile";
 import { Session } from "./pages/sessionPage/session";
 import { FriendsActivity } from "./pages/friendsActivityPage/friendsActivity";
@@ -52,13 +50,12 @@ function Application() {
         </header>
         <main>
           <Routes>
-            <Route path={"/delete"} element={<Logout/>}/>
+            <Route path={"/delete"} element={<Logout />} />
             <Route path={"/"} element={<FrontPage />} />
             <Route path={"/register"} element={<NewProfile />} />
             <Route path={"/login/*"} element={<LoginPage />} />
             <Route path={"/main-page"} element={<MainPage />} />
-            <Route path={"/diary"} element={<DiaryV2 />} />
-            <Route path={"/profile"} element={<Profile/>} />
+            <Route path={"/profile"} element={<Profile />} />
             <Route path={"/session"} element={<Session />} />
             <Route path={"/start-session"} element={<StartSession />} />
             <Route path={"/end-session"} element={<EndSession />} />
@@ -66,7 +63,7 @@ function Application() {
             <Route path={"/friends-activity"} element={<FriendsActivity />} />
             <Route path={"/friend-page"} element={<FriendPage />} />
             <Route path={"/map-page"} element={<MapPage />} />
-            <Route path={"/course-view"} element={<CourseView />} />
+            <Route path={"/course-view/:course"} element={<CourseView />} />
           </Routes>
         </main>
 
