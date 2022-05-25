@@ -21,7 +21,16 @@ export function AuthRoutes() {
       if (!user)
         return res.status(401).send({ message: "Invalid Email or Password" });
 
-      res.cookie("jwt", user, { httpOnly: false, maxAge: maxAge * 1000, signed: true });
+      const {_id, firstName, lastName, email} = user
+
+      const userInfo = {
+        _id: _id,
+        firstName: firstName,
+        lastName: lastName,
+        email: email
+      }
+
+      res.cookie("jwt", userInfo, { httpOnly: false, maxAge: maxAge * 1000, signed: true });
 
 
       const validPassword = await bcrypt.compare(
@@ -41,7 +50,7 @@ export function AuthRoutes() {
   router.get("/me", (req, res) => {
     const cookie = req.signedCookies;
 
-    const user = {firstName: cookie.jwt.firstName, lastName: cookie.jwt.lastName, email: cookie.jwt.email}
+    const user = {id: cookie.jwt._id, firstName: cookie.jwt.firstName, lastName: cookie.jwt.lastName, email: cookie.jwt.email}
 
     res.json(user)
   })

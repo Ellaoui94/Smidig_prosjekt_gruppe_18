@@ -43,11 +43,14 @@ export function UsersRoutes() {
     }
   });
 
-  router.post("/update", async (req, res) => {
+  router.post("/update/:id", async (req, res) => {
     try {
-      const user = await User.findOne({ email: req.body.email });
+      const {id} = req.params
+      const user = await User.findOne({ id: `${id}` });
       Object.assign(user, req.body)
       user.save();
+
+      res.cookie("jwt", user, { httpOnly: false, maxAge: maxAge * 1000, signed: true });
       res.send({data: user});
     }catch{
       res.status(404).send({error: "User is not found"})
