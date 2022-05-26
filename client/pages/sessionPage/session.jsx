@@ -28,7 +28,7 @@ export function Session({ email }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `${window.location.origin}/api/session`;
+      const url = `${window.location.origin}/api/session/${email}`;
       const { data: res } = await axios.post(url, data);
       navigate("/start-session");
       console.log(res.message);

@@ -6,6 +6,7 @@ import axios from "axios";
 const evaluation = ["Bra", "Helt ok", "Dårlig"];
 
 export function StartSession({ emailInput }) {
+  console.log("before setting data.email: " + emailInput);
   const [data, setData] = useState({
     email: emailInput,
     evaluate: "",
@@ -13,6 +14,8 @@ export function StartSession({ emailInput }) {
     other: "",
     finished: true,
   });
+
+  console.log("inside startSession: " + data.email);
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -24,8 +27,9 @@ export function StartSession({ emailInput }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `${window.location.origin}/api/session`;
+      const url = `${window.location.origin}/api/session/${emailInput}`;
       const { data: res } = await axios.post(url, data);
+      console.log("inside handelSubmit try: " + data.email);
       navigate("/session");
       console.log(res.message);
     } catch (error) {
