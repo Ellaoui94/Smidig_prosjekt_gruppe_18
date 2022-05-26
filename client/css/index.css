@@ -120,13 +120,10 @@ footer {
     margin-bottom: 2px;
 }
 .active-courses-card {
-    display: grid;
-    grid-column-start: auto;
+    display: flex;
 }
 .course-card {
-    grid-column-start: auto;
-    display: inline-grid;
-    width: fit-content;
+    flex: 1;
     background-color: white;
     padding: 3px;
     border-style: solid;
@@ -138,4 +135,26 @@ footer {
 .map-container {
     width: 100%;
     height: 100vh;
+}
+.filter-by-course {
+    background-color: aliceblue;
+    color: black;
+    width: 500px;
+    line-height:0.6em;
+}
+.flex-container {
+    display: flex;
+}
+.flex-item {
+    flex: 1;
+    height: fit-content;
+    font-size: small;
+}
+.info-window {
+    color: black;
+}
+/* Marker/pin in map (which is profile picture now */
+.marker {
+    border: 6px solid green;
+    border-radius: 100%;
 }
