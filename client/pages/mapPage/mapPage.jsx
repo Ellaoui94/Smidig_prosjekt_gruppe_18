@@ -2,9 +2,9 @@ import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 export function MapPage() {
+  //connects to .env file
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    //Have to put the Api key into .env later (it doesnt work now somehow)
   });
 
   if (!isLoaded) return <div>Loading...</div>;
