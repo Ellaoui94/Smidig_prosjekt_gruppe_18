@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { FrontpageApiContext } from "../../frontpageApiContext";
+import { MainPageApiContext } from "../../mainPageApiContext";
 import { useLoading } from "../../useLoading";
 import { useParams } from "react-router-dom";
 
@@ -19,7 +19,7 @@ function MyGroupsCard({ assignments: { type, assignmentStudents } }) {
 }
 
 function People() {
-  const { showCourse } = useContext(FrontpageApiContext);
+  const { showCourse } = useContext(MainPageApiContext);
   const { course } = useParams();
   const { loading, error, data } = useLoading(
     async () => await showCourse({ course: course }),
@@ -54,7 +54,7 @@ function People() {
 }
 
 function MyGroups() {
-  const { showCourse } = useContext(FrontpageApiContext);
+  const { showCourse } = useContext(MainPageApiContext);
   const { course } = useParams();
   const { loading, error, data } = useLoading(
     async () => await showCourse({ course: course }),
@@ -91,7 +91,7 @@ function MyGroups() {
 export function CourseView() {
   const [showPeople, setShowPeople] = useState(true);
   const [showMyGroups, setShowMyGroups] = useState(false);
-  const { showCourse } = useContext(FrontpageApiContext);
+  const { showCourse } = useContext(MainPageApiContext);
   const { course } = useParams();
   const { loading, error, data } = useLoading(
     async () => await showCourse({ course: course }),
@@ -148,7 +148,7 @@ export function CourseView() {
           <button onClick={onClickHandlerMyGroups}>Mine grupper</button>
         </div>
 
-        {/* */}
+        {/* if Groups-button is active, show MyGroups-component. Else, show People-component */}
         {showMyGroups ? <MyGroups /> : <People />}
       </div>
     </>

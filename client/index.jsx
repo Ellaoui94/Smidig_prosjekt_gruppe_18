@@ -14,21 +14,24 @@ import { MainPage } from "./pages/mainPage/mainPage";
 import { CourseView } from "./pages/courseView/courseView";
 import { StartSession } from "./pages/sessionPage/startSession";
 import { EndSession } from "./pages/sessionPage/endSession";
-import { PlannedSessions } from "./pages/sessionPage/plannedSessions";
+import { PlannedSession } from "./pages/sessionPage/plannedSession";
 import { EditProfile } from "./pages/profilePage/editProfile";
 import axios from "axios";
 import AddContactInfo from "./pages/profilePage/addContactInfo";
 import { FriendProfile } from "./pages/friendProfilePage/friendProfile";
 
-
 async function getUser() {
-  const res = await axios.get(`${window.location.origin}/api/auth/me`)
+  const res = await axios.get(`${window.location.origin}/api/auth/me`);
 
-  const user = {id: res.data.id, firstName: res.data.firstName, lastName: res.data.lastName, email: res.data.email}
+  const user = {
+    id: res.data.id,
+    firstName: res.data.firstName,
+    lastName: res.data.lastName,
+    email: res.data.email,
+  };
 
-  return user
+  return user;
 }
-
 
 function NavBar() {
   return (
@@ -60,15 +63,15 @@ function Application() {
   const [id, setId] = useState();
 
   useEffect(async () => {
-    const user = await getUser()
+    const user = await getUser();
 
-    console.log(user)
+    console.log(user);
 
-    setFirstName(user.firstName)
-    setLastName(user.lastName)
-    setEmail(user.email)
-    setId(user.id)
-  }, [])
+    setFirstName(user.firstName);
+    setLastName(user.lastName);
+    setEmail(user.email);
+    setId(user.id);
+  }, []);
 
   const user = localStorage.getItem("token");
 
@@ -80,18 +83,30 @@ function Application() {
         </header>
         <main>
           <Routes>
-            <Route path={"/contactInfo"} element={<AddContactInfo id={id}/>}/>
-            <Route path={"/edit"} element={<EditProfile id={id}/>}/>
-            <Route path={"/delete"} element={<Logout/>}/>
+            <Route path={"/contactInfo"} element={<AddContactInfo id={id} />} />
+            <Route path={"/edit"} element={<EditProfile id={id} />} />
+            <Route path={"/delete"} element={<Logout />} />
             <Route path={"/"} element={<FrontPage />} />
             <Route path={"/register"} element={<NewProfile />} />
             <Route path={"/login/*"} element={<LoginPage />} />
             <Route path={"/main-page"} element={<MainPage />} />
-            <Route path={"/profile"} element={<Profile email={email} firstName={firstName} lastName={lastName}/>} />
+            <Route
+              path={"/profile"}
+              element={
+                <Profile
+                  email={email}
+                  firstName={firstName}
+                  lastName={lastName}
+                />
+              }
+            />
             <Route path={"/session"} element={<Session />} />
             <Route path={"/start-session"} element={<StartSession />} />
             <Route path={"/end-session"} element={<EndSession />} />
-            <Route path={"/planned-sessions"} element={<PlannedSessions />} />
+            <Route
+              path={"/planned-session/:sessionId"}
+              element={<PlannedSession />}
+            />
             <Route path={"/friends-activity"} element={<FriendsActivity />} />
             <Route path={"/friend-page"} element={<FriendPage />} />
             <Route path={"/friend-profile"} element={<FriendProfile />} />
