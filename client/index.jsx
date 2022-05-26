@@ -19,6 +19,7 @@ import { EditProfile } from "./pages/profilePage/editProfile";
 import axios from "axios";
 import AddContactInfo from "./pages/profilePage/addContactInfo";
 import { FriendProfile } from "./pages/friendProfilePage/friendProfile";
+import { FinishedSession } from "./pages/sessionPage/finishedSession";
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -106,6 +107,10 @@ function Application() {
             <Route
               path={"/planned-session/:sessionId"}
               element={<PlannedSession />}
+            />
+            <Route
+              path={"/finished-session/:sessionId"}
+              element={<FinishedSession />}
             />
             <Route path={"/friends-activity"} element={<FriendsActivity />} />
             <Route path={"/friend-page"} element={<FriendPage />} />

@@ -63,5 +63,78 @@ export function StudySessionApi() {
     res.json(queryResult);
   });
 
+  router.get("/finished-session/", async (req, res) => {
+    const today = new Date();
+    let yesterdaysDate = today.getDate() - 1 + "/" + (today.getMonth() + 1);
+
+    const finishedSessions = [
+      {
+        sessionId: "1",
+        day: "Mandag",
+        date: yesterdaysDate,
+        courseTitle: "Filosofi",
+        location: "Cafe",
+        todos: [
+          {
+            todo: "Gjøre ferdig rapport",
+            checked: false,
+          },
+          {
+            todo: "Lese kapittel 5",
+            checked: true,
+          },
+        ],
+      },
+      {
+        sessionId: "2",
+        day: "Tirsdag",
+        date: yesterdaysDate,
+        courseTitle: "Smidig Prosjekt",
+        location: "Cafe",
+        todos: [
+          {
+            todo: "Planlegge sprint",
+            checked: true,
+          },
+          {
+            todo: "Lese kapittel 5",
+            checked: false,
+          },
+        ],
+      },
+      {
+        sessionId: "3",
+        day: "Onsdag",
+        date: yesterdaysDate,
+        courseTitle: "Design",
+        location: "Cafe",
+        todos: [
+          {
+            todo: "Starte på moodboard",
+            checked: true,
+          },
+          {
+            todo: "Lese kapittel 5",
+            checked: true,
+          },
+        ],
+      },
+    ];
+
+    const { sessionId } = req.query;
+    let queryResult = "";
+    console.log("id " + sessionId);
+
+    if (sessionId) {
+      queryResult = finishedSessions.filter(
+        (sessions) => sessions.sessionId === sessionId
+      );
+    } else {
+      queryResult = finishedSessions;
+    }
+
+    res.json(queryResult);
+  });
+
   return router;
 }

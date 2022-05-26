@@ -1,36 +1,9 @@
 import React from "react";
 import { PlannedSessionsCard } from "./cards/plannedSessionsCard";
 import { MySubjectsCard } from "./cards/mySubjectsCard";
+import { FinishedSessionsCard } from "./cards/finishedSessionsCard";
 
-// get today's date to use for filtering reference
-const today = new Date();
-let yesterdaysDate = today.getDate() - 1 + "/" + (today.getMonth() + 1);
-
-// data for each session, later to be taken from database
-const finishedSessions = [
-  {
-    day: "Mandag",
-    date: yesterdaysDate,
-    courseTitle: "Filosofi",
-    location: "Cafe",
-    todos: ["Gjøre ferdig rapport", "Lese kapittel 5"],
-  },
-  {
-    day: "Tirsdag",
-    date: yesterdaysDate,
-    courseTitle: "Smidig Prosjekt",
-    location: "Cafe",
-    todos: ["Planlegge sprint", "Lese kapittel 5"],
-  },
-  {
-    day: "Onsdag",
-    date: yesterdaysDate,
-    courseTitle: "Design",
-    location: "Cafe",
-    todos: ["Starte på moodboard", "Lese kapittel 5"],
-  },
-];
-
+// mock data, later to be taken from database
 const myFriends = [
   {
     name: "Noah",
@@ -68,23 +41,6 @@ function MyFriendsCard({ myFriends: { name, photo } }) {
   );
 }
 
-function FinishedSessionsCard({
-  finishedSessions: { day, date, courseTitle, todos },
-}) {
-  return (
-    <>
-      <div className={"main-page-components-card"}>
-        <h6>{day + ", " + date}</h6>
-        <h5>{courseTitle}</h5>
-        <h6>{"- " + todos[0]}</h6>
-        <div className={"arrow-div"}>
-          <p>></p>
-        </div>
-      </div>
-    </>
-  );
-}
-
 function Feed() {
   return (
     <>
@@ -116,16 +72,7 @@ function Feed() {
       <h4>Tidligere arbeidsøkter</h4>
       <div className={"horizontal-scroll-div"}>
         <div className={"cards-div"}>
-          {finishedSessions.map((finishedSessions) => (
-            <>
-              {
-                <FinishedSessionsCard
-                  key={finishedSessions.day + finishedSessions.date}
-                  finishedSessions={finishedSessions}
-                />
-              }
-            </>
-          ))}
+          <FinishedSessionsCard />
         </div>
       </div>
     </>

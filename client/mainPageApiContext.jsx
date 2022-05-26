@@ -10,4 +10,9 @@ export const MainPageApiContext = React.createContext({
       "/api/session/planned-session?" + new URLSearchParams(sessionId)
     );
   },
+  async showFinishedSession(sessionId) {
+    return await fetchJSON(
+      "/api/session/finished-session?" + new URLSearchParams(sessionId)
+    );
+  },
 });
