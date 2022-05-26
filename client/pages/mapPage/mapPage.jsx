@@ -5,11 +5,14 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+import React from "react";
 
 export function MapPage() {
   //connects to .env file
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    //to view map propery: make a new .env file in client and paste this line below:
+    //NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyCBa-5tK7ycBCJwSEXvhaAy9q_pfN4f8Ww
   });
 
   if (!isLoaded) return <div>Loading...</div>;
@@ -44,10 +47,9 @@ function Map() {
             scaledSize: { width: 70, height: 70 },
           }}
           position={{ lat: 59.911481, lng: 10.757923 }}
-          anchor={50}
         >
           <div>hva er dette og hvor går den</div>
-          <InfoWindow position={{ lat: 59.911481, lng: 10.757923 }}>
+          <InfoWindow position={{ lat: 59.914551, lng: 10.757863 }}>
             <div className={"info-window"}>
               <h3>Navn navnesen</h3>
               <p>Programmering</p>
