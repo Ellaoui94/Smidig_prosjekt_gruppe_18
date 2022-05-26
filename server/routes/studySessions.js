@@ -1,8 +1,8 @@
-import {Router} from "express";
+import { Router } from "express";
 import { Session } from "../models/studySession.js";
 
-export function StudySessionApi(){
-  const router = new Router()
+export function StudySessionApi() {
+  const router = new Router();
 
   router.post("/", async (req, res) => {
     try {

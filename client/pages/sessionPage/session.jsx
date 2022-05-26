@@ -7,16 +7,15 @@ import { UserApiContext } from "../../userApiContext";
 import axios from "axios";
 
 const subjects = ["Math", "Religion", "Physics", "History"];
-const types = ["Exam", "Submission", "Project"];
 const locations = ["Library", "Cafe"];
 const states = ["Alone", "Invisible", "Public", "Friends only"];
-const goals = ["Finish exams", "Dont forget to drink water"];
 
-export function Session() {
+export function Session({ email }) {
   const [data, setData] = useState({
-    courseTitle: "",
+    email: email,
+    courseTitle: [""],
     location: "",
-    studyStatus: "nei",
+    studyStatus: "",
   });
 
   const [error, setError] = useState("");

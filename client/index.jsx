@@ -20,15 +20,19 @@ import axios from "axios";
 import AddContactInfo from "./pages/profilePage/addContactInfo";
 import { FriendProfile } from "./pages/friendProfilePage/friendProfile";
 
-
 async function getUser() {
-  const res = await axios.get(`${window.location.origin}/api/auth/me`)
+  const res = await axios.get(`${window.location.origin}/api/auth/me`);
 
-  const user = {id: res.data.id, firstName: res.data.firstName, lastName: res.data.lastName, email: res.data.email}
+  const user = {
+    id: res.data.id,
+    firstName: res.data.firstName,
+    lastName: res.data.lastName,
+    email: res.data.email,
+  };
 
-  return user
+  console.log("Inside getUSer: " + user.email);
+  return user;
 }
-
 
 function NavBar() {
   return (
@@ -60,15 +64,17 @@ function Application() {
   const [id, setId] = useState();
 
   useEffect(async () => {
-    const user = await getUser()
+    const user = await getUser();
 
-    console.log(user)
+    console.log(user);
 
-    setFirstName(user.firstName)
-    setLastName(user.lastName)
-    setEmail(user.email)
-    setId(user.id)
-  }, [])
+    setFirstName(user.firstName);
+    setLastName(user.lastName);
+    setEmail(user.email);
+    setId(user.id);
+
+    console.log("Inside application" + user.email);
+  }, []);
 
   const user = localStorage.getItem("token");
 
@@ -80,17 +86,32 @@ function Application() {
         </header>
         <main>
           <Routes>
-            <Route path={"/contactInfo"} element={<AddContactInfo id={id}/>}/>
-            <Route path={"/edit"} element={<EditProfile id={id}/>}/>
-            <Route path={"/delete"} element={<Logout/>}/>
+            <Route path={"/contactInfo"} element={<AddContactInfo id={id} />} />
+            <Route path={"/edit"} element={<EditProfile id={id} />} />
+            <Route path={"/delete"} element={<Logout />} />
             <Route path={"/"} element={<FrontPage />} />
             <Route path={"/register"} element={<NewProfile />} />
             <Route path={"/login/*"} element={<LoginPage />} />
             <Route path={"/main-page"} element={<MainPage />} />
-            <Route path={"/profile"} element={<Profile email={email} firstName={firstName} lastName={lastName}/>} />
-            <Route path={"/session"} element={<Session />} />
-            <Route path={"/start-session"} element={<StartSession />} />
-            <Route path={"/end-session"} element={<EndSession />} />
+            <Route
+              path={"/profile"}
+              element={
+                <Profile
+                  email={email}
+                  firstName={firstName}
+                  lastName={lastName}
+                />
+              }
+            />
+            <Route path={"/session"} element={<Session email={email} />} />
+            <Route
+              path={"/start-session"}
+              element={<StartSession emailInput={email} />}
+            />
+            <Route
+              path={"/end-session"}
+              element={<EndSession email={email} />}
+            />
             <Route path={"/planned-sessions"} element={<PlannedSessions />} />
             <Route path={"/friends-activity"} element={<FriendsActivity />} />
             <Route path={"/friend-page"} element={<FriendPage />} />
