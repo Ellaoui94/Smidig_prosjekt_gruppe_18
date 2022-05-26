@@ -32,4 +32,13 @@ const validate = (data) => {
   return schema.validate(data);
 };
 
-export { User, validate };
+const updateValidate = (data) => {
+  const schema = Joi.object({
+    firstName: Joi.string().required().label("First Name"),
+    lastName: Joi.string().required().label("Last Name"),
+    email: Joi.string().email().required().label("Email"),
+  });
+  return schema.validate(data);
+};
+
+export { User, validate, updateValidate };

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { User, validate } from "../models/user.js";
+import { updateValidate, User, validate } from "../models/user.js";
 import bcrypt from "bcrypt";
 
 
@@ -45,6 +45,11 @@ export function UsersRoutes() {
 
   router.post("/update/:id", async (req, res) => {
     try {
+
+      const { error } = updateValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
       const {id} = req.params
       const user = await User.findOne({ id: `${id}` });
       Object.assign(user, req.body)

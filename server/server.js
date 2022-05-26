@@ -12,6 +12,7 @@ import { AuthRoutes } from "./routes/auth.js";
 import { UsersRoutes } from "./routes/users.js";
 import { StudySessionApi } from "./routes/studySessions.js";
 import { CourseRoutes } from "./routes/course.js";
+import { ContactInfoApi } from "./routes/contactInfo.js";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use("/api/users", UsersRoutes());
 app.use("/api/auth", AuthRoutes());
 app.use("/api/session", StudySessionApi());
 app.use("/api/course", CourseRoutes());
+app.use("/api/contactInfo", ContactInfoApi());
 
 app.use((req, res, next) => {
   if (req.method === "GET" && !req.path.startsWith("/api")) {

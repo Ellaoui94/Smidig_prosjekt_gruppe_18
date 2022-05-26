@@ -4,6 +4,8 @@ import { useLoading } from "../../useLoading";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import img from './img.png'
+import { SiDiscord, SiFacebook } from "react-icons/si";
+
 import { Box, Button, Container, IconButton, TextField } from "@mui/material";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -23,7 +25,21 @@ export function Logout() {
   return <h1>Please wait...</h1>;
 }
 
-function ProfileCard({ profile: { firstName, lastName } }) {
+function ProfileCard({ profile: { firstName, lastName, email } }) {
+  const [faceBook, setFaceBook] = useState();
+  const [discord, setDiscord] = useState();
+  const [shcoolMail, setShcoolMail] = useState();
+  const [bio, setBio] = useState();
+  useEffect(async () => {
+    const url = `${window.location.origin}/api/contactInfo/userInfo`;
+    const { data: res } = await axios.get(url)
+    res.map((r) => {
+      setFaceBook(r.faceBook)
+      setDiscord(r.discord)
+      setShcoolMail(r.email)
+      setBio(r.bio)
+    })
+  }, [])
   return (
     <>
       <div className={"profile-card"}>
@@ -35,16 +51,56 @@ function ProfileCard({ profile: { firstName, lastName } }) {
         </div>
 
         <div>
-        <h2>Kontakt:</h2>
-        <h4>Facebook:</h4>
-        <h4>Discord:</h4>
-        <h4>Skolemail:</h4>
+          <h2>Kontakt Info:</h2>
+
+          <Button
+            component={Link}
+            to={"/contactInfo"}
+            style={{
+              background: "#3E989C",
+              fontSize: "10px",
+              fontWeight: "bold",
+              color: "white",
+              borderRadius: "50px",
+            }}
+          >Legg til kontakt info
+          </Button>
+
+
+          <div>
+            <a href={`${faceBook}`}>
+              <SiFacebook style={{fontSize: 70, color: "blue"}}/>
+            </a>
+          </div>
+          <div>
+            <a href={`${discord}`}>
+
+              <SiDiscord style={{fontSize: 70, color: "#5865F2"}}/>
+            </a>
+
+          </div>
+          <div>
+            <a style={{color: "#4211b2"}} href={`mailto:${email}`}><h4>{email}</h4></a>
+          </div>
+
+          <Button
+            component={Link}
+            to={"/"}
+            style={{
+              background: "#3E989C",
+              fontSize: "10px",
+              fontWeight: "bold",
+              color: "white",
+              borderRadius: "50px",
+            }}
+          >
+            Endre kontakt info
+          </Button>
         </div>
 
         <div>
           <h2>Bio:</h2>
-          <h4>Jeg studerer XXX ved UiO, er glad
-          i å jobbe med teamarbeid. Ta kontakt via sosiale medier eller mail hvis du vil samarbeide! </h4>
+          <h4>{bio}</h4>
         </div>
 
       <div>
@@ -75,7 +131,7 @@ function DeleteButton({ label, email }) {
 
 export function Profile({firstName, lastName, email}) {
 
-const profile = {firstName, lastName}
+const profile = {firstName, lastName, email}
 
   return (
     <>
@@ -83,12 +139,12 @@ const profile = {firstName, lastName}
       <p>(Profile-photo + add new photo function in here)</p>
 
       <Link to={"/edit"}>Endre bruker</Link>
-
-      <DeleteButton label={"Slett bruker"} email={email}/>
-
+      
       <ProfileCard profile={profile}/>
 
       <Link to={"/delete"}>Log out</Link>
+
+      <DeleteButton label={"Slett bruker"} email={email}/>
     </>
   );
 }
