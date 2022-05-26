@@ -1,19 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const evaluation = ["Bra", "Helt ok", "Dårlig"];
 
 export function StartSession({ emailInput }) {
   console.log("before setting data.email: " + emailInput);
+
   const [data, setData] = useState({
-    email: emailInput,
+    email: "",
     evaluate: "",
     focus: "",
     other: "",
     finished: true,
   });
+
+  data.email = emailInput;
 
   console.log("inside startSession: " + data.email);
 
