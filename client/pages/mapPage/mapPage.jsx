@@ -3,7 +3,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 export function MapPage() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCBa-5tK7ycBCJwSEXvhaAy9q_pfN4f8Ww",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     //Have to put the Api key into .env later (it doesnt work now somehow)
   });
 
@@ -21,7 +21,11 @@ function Map() {
       center={{ lat: 59.911491, lng: 10.757933 }}
       mapContainerClassName="map-container"
     >
-      <Marker position={{ lat: 59.911491, lng: 10.757933 }} />
+      <Marker
+        title={"does this work"}
+        name={"or this????"}
+        position={{ lat: 59.911491, lng: 10.757933 }}
+      />
     </GoogleMap>
   );
 }
