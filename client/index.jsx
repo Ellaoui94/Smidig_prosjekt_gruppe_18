@@ -14,11 +14,12 @@ import { MainPage } from "./pages/mainPage/mainPage";
 import { CourseView } from "./pages/courseView/courseView";
 import { StartSession } from "./pages/sessionPage/startSession";
 import { EndSession } from "./pages/sessionPage/endSession";
-import { PlannedSessions } from "./pages/sessionPage/plannedSessions";
+import { PlannedSession } from "./pages/sessionPage/plannedSession";
 import { EditProfile } from "./pages/profilePage/editProfile";
 import axios from "axios";
 import AddContactInfo from "./pages/profilePage/addContactInfo";
 import { FriendProfile } from "./pages/friendProfilePage/friendProfile";
+import { FinishedSession } from "./pages/sessionPage/finishedSession";
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -30,7 +31,6 @@ async function getUser() {
     email: res.data.email,
   };
 
-  console.log("Inside getUSer: " + user.email);
   return user;
 }
 
@@ -72,8 +72,6 @@ function Application() {
     setLastName(user.lastName);
     setEmail(user.email);
     setId(user.id);
-
-    console.log("Inside application" + user.email);
   }, []);
 
   const user = localStorage.getItem("token");
@@ -103,16 +101,17 @@ function Application() {
                 />
               }
             />
-            <Route path={"/session"} element={<Session email={email} />} />
+            <Route path={"/session"} element={<Session />} />
+            <Route path={"/start-session"} element={<StartSession />} />
+            <Route path={"/end-session"} element={<EndSession />} />
             <Route
-              path={"/start-session"}
-              element={<StartSession emailInput={email} />}
+              path={"/planned-session/:sessionId"}
+              element={<PlannedSession />}
             />
             <Route
-              path={"/end-session"}
-              element={<EndSession email={email} />}
+              path={"/finished-session/:sessionId"}
+              element={<FinishedSession />}
             />
-            <Route path={"/planned-sessions"} element={<PlannedSessions />} />
             <Route path={"/friends-activity"} element={<FriendsActivity />} />
             <Route path={"/friend-page"} element={<FriendPage />} />
             <Route path={"/friend-profile"} element={<FriendProfile />} />
