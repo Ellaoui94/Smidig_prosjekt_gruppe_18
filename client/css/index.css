@@ -139,7 +139,7 @@ footer {
 .filter-by-course {
     background-color: aliceblue;
     color: black;
-    width: 500px;
+    width: 550px;
     line-height:0.6em;
 }
 .flex-container {
@@ -150,6 +150,7 @@ footer {
     height: fit-content;
     font-size: small;
 }
+/* Info window in map */
 .info-window {
     color: black;
 }
