@@ -61,10 +61,15 @@ export function CourseRoutes() {
 
   router.get("/", (req, res) => {
     const { course } = req.query;
+    let queryResult = "";
 
-    const queryResult = mySubjects.filter(
-      (mySubject) => mySubject.subject === course
-    );
+    if (course) {
+      queryResult = mySubjects.filter(
+        (mySubject) => mySubject.subject === course
+      );
+    } else {
+      queryResult = mySubjects;
+    }
 
     res.json(queryResult);
   });

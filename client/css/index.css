@@ -42,10 +42,11 @@ footer {
 .horizontal-scroll-div {
     overflow-y: hidden;
     overflow-x: auto;
-    width: 600px;
+    width: 85vw;
+    max-width: 1200px;
     margin-bottom: 5em;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 0;
 }
 
 .main-page-components-card {
