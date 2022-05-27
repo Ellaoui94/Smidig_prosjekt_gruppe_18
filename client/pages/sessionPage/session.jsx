@@ -7,17 +7,20 @@ import { UserApiContext } from "../../userApiContext";
 import axios from "axios";
 
 const subjects = ["Math", "Religion", "Physics", "History"];
-const types = ["Exam", "Submission", "Project"];
 const locations = ["Library", "Cafe"];
 const states = ["Alone", "Invisible", "Public", "Friends only"];
-const goals = ["Finish exams", "Dont forget to drink water"];
 
-export function Session() {
+export function Session({ email }) {
   const [data, setData] = useState({
-    courseTitle: "",
+    email: "",
+    courseTitle: [""],
     location: "",
-    studyStatus: "nei",
+    studyStatus: "",
+    studySessionTitle: "",
   });
+
+  console.log("inside session: " + email);
+  data.email = email;
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -29,7 +32,7 @@ export function Session() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `${window.location.origin}/api/session`;
+      const url = `${window.location.origin}/api/session/${email}`;
       const { data: res } = await axios.post(url, data);
       navigate("/start-session");
       console.log(res.message);
@@ -90,6 +93,13 @@ export function Session() {
             />
           </div>
         ))}
+
+        <textarea
+          name="studySessionTitle"
+          label={"studySessionTitle"}
+          onChange={handleChange}
+          value={data.studySessionTitle}
+        />
 
         <button>Start økt</button>
       </form>

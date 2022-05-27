@@ -1,15 +1,32 @@
 import { Router } from "express";
-import { Session } from "../models/studySession.js";
+import { Session, updateValidateStudySession } from "../models/studySession.js";
+import { validate } from "../models/user.js";
 
 export function StudySessionApi() {
   const router = new Router();
 
-  router.post("/", async (req, res) => {
+  router.post("/:email", async (req, res) => {
     try {
       await new Session(req.body).save();
       res.status(201).send({ message: "Session created successfully" });
     } catch (error) {
       res.status(400).json({ message: error.message });
+    }
+  });
+
+  router.post("/update/:email", async (req, res) => {
+    try {
+      const { error } = updateValidateStudySession(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
+      const { email } = req.params;
+      const studySession = await Session.findOne({ email: `${email}` });
+      Object.assign(studySession, req.body);
+      studySession.save();
+      res.send({ data: studySession });
+    } catch {
+      res.status(404).send({ error: "User is not found" });
     }
   });
 

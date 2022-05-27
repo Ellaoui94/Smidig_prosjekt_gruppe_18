@@ -96,6 +96,25 @@ function Application() {
             <Route path={"/start-session"} element={<StartSession />} />
             <Route path={"/end-session"} element={<EndSession />} />
             <Route
+              path={"/profile"}
+              element={
+                <Profile
+                  email={email}
+                  firstName={firstName}
+                  lastName={lastName}
+                />
+              }
+            />
+            <Route path={"/session"} element={<Session email={email} />} />
+            <Route
+              path={"/start-session"}
+              element={<StartSession email={email} />}
+            />
+            <Route
+              path={"/end-session"}
+              element={<EndSession emailInput={email} />}
+            />
+            <Route
               path={"/planned-session/:sessionId"}
               element={<PlannedSession />}
             />
