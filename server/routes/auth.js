@@ -21,17 +21,20 @@ export function AuthRoutes() {
       if (!user)
         return res.status(401).send({ message: "Invalid Email or Password" });
 
-      const {_id, firstName, lastName, email} = user
+      const { _id, firstName, lastName, email } = user;
 
       const userInfo = {
         _id: _id,
         firstName: firstName,
         lastName: lastName,
-        email: email
-      }
+        email: email,
+      };
 
-      res.cookie("jwt", userInfo, { httpOnly: false, maxAge: maxAge * 1000, signed: true });
-
+      res.cookie("jwt", userInfo, {
+        httpOnly: false,
+        maxAge: maxAge * 1000,
+        signed: true,
+      });
 
       const validPassword = await bcrypt.compare(
         req.body.password,
@@ -50,10 +53,15 @@ export function AuthRoutes() {
   router.get("/me", (req, res) => {
     const cookie = req.signedCookies;
 
-    const user = {id: cookie.jwt._id, firstName: cookie.jwt.firstName, lastName: cookie.jwt.lastName, email: cookie.jwt.email}
+    const user = {
+      id: cookie.jwt._id,
+      firstName: cookie.jwt.firstName,
+      lastName: cookie.jwt.lastName,
+      email: cookie.jwt.email,
+    };
 
-    res.json(user)
-  })
+    res.json(user);
+  });
 
   router.delete("/", (req, res) => {
     res.clearCookie("jwt");
@@ -63,7 +71,6 @@ export function AuthRoutes() {
   return router;
 }
 
-//Please explain
 const validate = (data) => {
   const schema = Joi.object({
     email: Joi.string().email().required().label("Email"),
