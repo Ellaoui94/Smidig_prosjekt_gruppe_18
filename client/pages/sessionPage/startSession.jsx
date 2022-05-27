@@ -1,24 +1,26 @@
+import React, { useContext, useState } from "react";
+import { IconButton, TextField } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import "./session.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Checkbox, FormControlLabel } from "@mui/material";
-import { useEffect, useState } from "react";
+import { UserApiContext } from "../../userApiContext";
 import axios from "axios";
 
-const evaluation = ["Bra", "Helt ok", "Dårlig"];
+const subjects = ["Math", "Religion", "Physics", "History"];
+const locations = ["Library", "Cafe"];
+const states = ["Alone", "Invisible", "Public", "Friends only"];
 
-export function StartSession({ emailInput }) {
-  console.log("before setting data.email: " + emailInput);
-
+export function StartSession({ email }) {
   const [data, setData] = useState({
     email: "",
-    evaluate: "",
-    focus: "",
-    other: "",
-    finished: true,
+    courseTitle: [""],
+    location: "",
+    studyStatus: "",
+    studySessionTitle: "",
   });
 
-  data.email = emailInput;
-
-  console.log("inside startSession: " + data.email);
+  console.log("inside session: " + email);
+  data.email = email;
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -30,10 +32,9 @@ export function StartSession({ emailInput }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `${window.location.origin}/api/session/${emailInput}`;
+      const url = `${window.location.origin}/api/session/${email}`;
       const { data: res } = await axios.post(url, data);
-      console.log("inside handelSubmit try: " + data.email);
-      navigate("/session");
+      navigate("/end-session");
       console.log(res.message);
     } catch (error) {
       if (
@@ -46,50 +47,62 @@ export function StartSession({ emailInput }) {
     }
   };
 
-  console.log(emailInput);
   return (
-    <>
-      <h1>Etter å ha trykket start på start siden kommer man hit</h1>
+    <div>
+      <h1>Start a Session</h1>
+
       <form onSubmit={handleSubmit}>
-        <h2>Vurder økten</h2>
-        {evaluation.map((evaluate) => (
+        <h2>Hvilket emne vil du jobbe med?</h2>
+        {subjects.map((subject) => (
           <div>
-            {evaluate}
+            {subject}
             <input
               type="checkbox"
-              name="evaluation"
-              label={"evaluation"}
+              name="courseTitle"
+              label={"courseTitle"}
               onChange={handleChange}
-              value={evaluate}
+              value={subject}
             />
           </div>
         ))}
 
-        <h2>Hvordan var fokuset under denne økten?</h2>
-        {evaluation.map((evaluate) => (
+        <h2>Hvor vil du jobbe</h2>
+        {locations.map((location) => (
           <div>
-            {evaluate}
+            {location}
             <input
               type="checkbox"
-              name="focus"
-              label={"focus"}
+              name="location"
+              label={"location"}
               onChange={handleChange}
-              value={evaluate}
+              value={location}
             />
           </div>
         ))}
 
-        <h2>Legg til kommentar</h2>
+        <h2>Sett arbeidstatus for denne økten</h2>
+        {states.map((status) => (
+          <div>
+            {status}
+            <input
+              type="checkbox"
+              name="studyStatus"
+              label={"studyStatus"}
+              onChange={handleChange}
+              value={status}
+            />
+          </div>
+        ))}
+
         <textarea
-          name="other"
-          label={"other"}
+          name="studySessionTitle"
+          label={"studySessionTitle"}
           onChange={handleChange}
-          value={data.other}
+          value={data.studySessionTitle}
         />
-        <div>
-          <button>Avslutt økt</button>
-        </div>
+
+        <button>Start økt</button>
       </form>
-    </>
+    </div>
   );
 }

@@ -12,11 +12,15 @@ const states = ["Alone", "Invisible", "Public", "Friends only"];
 
 export function Session({ email }) {
   const [data, setData] = useState({
-    email: email,
+    email: "",
     courseTitle: [""],
     location: "",
     studyStatus: "",
+    studySessionTitle: "",
   });
+
+  console.log("inside session: " + email);
+  data.email = email;
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -89,6 +93,13 @@ export function Session({ email }) {
             />
           </div>
         ))}
+
+        <textarea
+          name="studySessionTitle"
+          label={"studySessionTitle"}
+          onChange={handleChange}
+          value={data.studySessionTitle}
+        />
 
         <button>Start økt</button>
       </form>
