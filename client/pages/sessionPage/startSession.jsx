@@ -13,7 +13,7 @@ const states = ["Alone", "Invisible", "Public", "Friends only"];
 export function StartSession({ email }) {
   const [data, setData] = useState({
     email: "",
-    courseTitle: [""],
+    courseTitle: [],
     location: "",
     studyStatus: "",
     studySessionTitle: "",

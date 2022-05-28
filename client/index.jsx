@@ -20,6 +20,7 @@ import axios from "axios";
 import AddContactInfo from "./pages/profilePage/addContactInfo";
 import { FriendProfile } from "./pages/friendProfilePage/friendProfile";
 import { FinishedSession } from "./pages/sessionPage/finishedSession";
+import { AddNewFriendPage } from "./pages/addNewFriendPage/addNewFriendPage";
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -39,7 +40,7 @@ function NavBar() {
     <>
       <div id={"nav-bar"}>
         <Link to={"/main-page"}>Hovedside</Link>
-        <Link to={"/session"}>Legg til ny studieøkt</Link>
+        <Link to={"/start-session"}>Legg til ny studieøkt</Link>
         <Link to={"/map-page"}>Kart</Link>
       </div>
     </>
@@ -125,6 +126,7 @@ function Application() {
             <Route path={"/friends-activity"} element={<FriendsActivity />} />
             <Route path={"/friend-page"} element={<FriendPage />} />
             <Route path={"/friend-profile"} element={<FriendProfile />} />
+            <Route path={"/add-new-friend"} element={<AddNewFriendPage />} />
             <Route path={"/map-page"} element={<MapPage />} />
             <Route path={"/course-view/:course"} element={<CourseView />} />
           </Routes>

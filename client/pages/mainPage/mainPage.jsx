@@ -2,6 +2,7 @@ import React from "react";
 import { PlannedSessionsCard } from "./cards/plannedSessionsCard";
 import { MySubjectsCard } from "./cards/mySubjectsCard";
 import { FinishedSessionsCard } from "./cards/finishedSessionsCard";
+import { Link } from "react-router-dom";
 
 // mock data, later to be taken from database
 const myFriends = [
@@ -83,6 +84,7 @@ export function MainPage() {
   return (
     <>
       <div className={"main-div"}>
+        <Link to="/add-new-friend">Legg til ny venn</Link>
         <h2>Hei, Navn</h2>
         <Feed />
       </div>
