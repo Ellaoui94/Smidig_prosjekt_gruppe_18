@@ -25,6 +25,7 @@ export function NewProfile() {
     lastName: "",
     email: "",
     password: "",
+    subject: {},
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -160,9 +161,8 @@ export function NewProfile() {
               borderRadius: "50px",
             }}
           >
-            {" "}
             Logg inn
-          </Button>{" "}
+          </Button>
           {/*    {!isPending && <Button style={{
               top: "10px",
               background: "#3E989C",

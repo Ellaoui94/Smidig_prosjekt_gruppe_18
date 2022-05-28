@@ -10,7 +10,6 @@ export default function AddContactInfo({ id }) {
     _id: id,
     faceBook: "",
     discord: "",
-    schoolMail: "",
     bio: "",
   });
   const [error, setError] = useState("");
@@ -84,16 +83,6 @@ export default function AddContactInfo({ id }) {
             margin="normal"
             onChange={handleChange}
             value={data.discord}
-          />
-
-          <TextField
-            type="email"
-            name="schoolMail"
-            style={{ background: "white" }}
-            label={"Skole mail"}
-            margin="normal"
-            onChange={handleChange}
-            value={data.schoolMail}
           />
 
           <TextField

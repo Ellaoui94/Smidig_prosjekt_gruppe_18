@@ -37,7 +37,7 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
   const [clicked, setClicked] = useState(false);
 
   useEffect(async () => {
-    const url = `${window.location.origin}/api/contactInfo/userInfo`;
+    const url = `${window.location.origin}/api/contactInfo/userInfo/${id}`;
     const { data: res } = await axios.get(url)
     console.log(res)
     res.map((r) => {
@@ -47,7 +47,7 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
       setBio(r.bio)
       setContactId(r._id)
     })
-  }, [])
+  }, [id])
 
   return (
     <>
@@ -114,7 +114,7 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
 
         <Link to={"/delete"}>Log out</Link>
 
-        <DeleteButton label={"Slett bruker"} email={email}/>
+        <DeleteButton label={"Slett bruker"} id={id}/>
 
         <div id={"wrapper"}>
           <h1>Aktive emner</h1>
@@ -127,7 +127,7 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
             timeout={700}
             classNames={"alert"}
           unmountOnExit>
-            <AddSubject/>
+            <AddSubject id={id}/>
           </CSSTransition>
 
 
@@ -136,11 +136,11 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
   );
 }
 
-function DeleteButton({ label, email }) {
+function DeleteButton({ label, id }) {
   const navigate = useNavigate();
   const { endSession } = useContext(UserApiContext);
   async function deleteUser() {
-    await axios.delete(`${window.location.origin}/api/users/delete/${email}`)
+    await axios.delete(`${window.location.origin}/api/users/delete/${id}`)
     await endSession();
     navigate("/");
   }
