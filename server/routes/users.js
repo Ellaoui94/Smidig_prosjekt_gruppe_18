@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { subjectValidate, updateValidate, User, validate } from "../models/user.js";
+import { updateValidate, User, validate } from "../models/user.js";
 import bcrypt from "bcrypt";
 import { ContactDetails } from "../models/contactDetails.js";
+import Joi from "joi";
 
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -85,6 +86,10 @@ export function UsersRoutes() {
 
   router.post("/subject/:id/:subject", async (req, res) => {
     try {
+      const { error } = subjectValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
       const {id} = req.params
       const subject = JSON.parse(req.params.subject)
 
@@ -115,3 +120,13 @@ export function UsersRoutes() {
 
   return router;
 }
+
+const subjectValidate = (data) => {
+  const schema = Joi.object({
+    subjectName: Joi.string().required().label("Subjects"),
+    subjectCode: Joi.string().required().label("Code"),
+    startDate: Joi.date().required().label("Emne start"),
+    endDate: Joi.date().required().label("Emne slutt")
+  });
+  return schema.validate(data);
+};

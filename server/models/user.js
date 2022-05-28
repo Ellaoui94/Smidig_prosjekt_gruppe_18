@@ -50,11 +50,4 @@ const updateValidate = (data) => {
   return schema.validate(data);
 };
 
-const subjectValidate = (data) => {
-  const schema = Joi.object({
-    subjects: Joi.object().required().label("Subjects")
-  });
-  return schema.validate(data);
-};
-
-export { User, validate, updateValidate, subjectValidate };
+export { User, validate, updateValidate };
