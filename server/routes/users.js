@@ -78,10 +78,6 @@ export function UsersRoutes() {
 
   router.post("/subject/:id/:subject", async (req, res) => {
     try {
-      const { error } = subjectValidate(req.body);
-      if (error)
-        return res.status(400).send({ message: error.details[0].message });
-
       const {id} = req.params
       const subject = JSON.parse(req.params.subject)
 
@@ -100,8 +96,10 @@ export function UsersRoutes() {
       const {id} = req.params
       const user = await User.findOne({ _id: { $eq: id } });
       const userDetails = await ContactDetails.findOne({ _id: { $eq: id } });
+      if (userDetails){
+        await userDetails.remove();
+      }
       await user.remove();
-      userDetails.remove();
       res.send({data: true});
     }catch{
       res.status(404).send({error: "User is not found"})

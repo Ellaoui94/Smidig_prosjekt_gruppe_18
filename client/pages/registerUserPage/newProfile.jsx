@@ -25,7 +25,6 @@ export function NewProfile() {
     lastName: "",
     email: "",
     password: "",
-    subject: {},
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
