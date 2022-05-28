@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-export default function AddSubject({id}) {
+export default function AddSubject({id, handleNewSubject}) {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [subjectName, setSubjectName] = useState("");
@@ -14,20 +14,14 @@ export default function AddSubject({id}) {
 
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setSubjectName(e.target.value)
-    setSubjectCode(e.target.value)
-    setStartDate(e.target.value)
-    setEndDate(e.target.value)
-  };
-
   const subjectObj = {subjectName, subjectCode, startDate, endDate}
-  console.log(subjectObj)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const url = `${window.location.origin}/api/users/subject/${id}/${encodeURIComponent(JSON.stringify(subjectObj))}`;
       const { data: res } = await axios.post(url, subjectObj);
+      handleNewSubject(subjectObj)
       console.log(res.message);
     } catch (error) {
       if (
@@ -63,7 +57,7 @@ export default function AddSubject({id}) {
             style={{ background: "white" }}
             label={"Emne kode"}
             margin="normal"
-            onChange={handleChange}
+            onChange={(e) => setSubjectCode(e.target.value)}
             value={subjectCode}
           />
         </div>

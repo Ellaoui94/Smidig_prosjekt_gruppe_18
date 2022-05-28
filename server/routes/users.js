@@ -44,13 +44,20 @@ export function UsersRoutes() {
     }
   });
 
-  router.get("/getAllUsers", async (req, res) => {
+  router.get("/getAllUsers/:id", async (req, res) => {
     try {
-      User.find().then((result) => {
-        res.json(result);
-      });
+      const { id } = req.params;
+      if (id !== `${undefined}`) {
+        await User.find({ _id: { $eq: id } }).then((result) => {
+          res.json(result);
+        });
+      } else {
+        console.log("userId", id);
+      }
+
+
     } catch (error) {
-      res.status(400).json({ message: "okei" });
+      res.status(400).json({ message: error.message });
     }
   });
 

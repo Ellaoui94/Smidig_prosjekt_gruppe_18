@@ -13,14 +13,14 @@ export function ContactInfoApi() {
     }
   });
 
-  router.get("/userInfo/:id", (req, res) => {
+  router.get("/userInfo/:id", async (req, res) => {
     try {
       const { id } = req.params;
       if (id !== `${undefined}`) {
-        ContactDetails.find({ _id: { $eq: id } }).then((result) => {
+        await ContactDetails.find({ _id: { $eq: id } }).then((result) => {
           res.json(result);
         });
-      }else {
+      } else {
         console.log("subjectId", id);
       }
 

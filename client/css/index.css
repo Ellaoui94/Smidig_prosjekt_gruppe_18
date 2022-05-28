@@ -218,3 +218,12 @@ footer {
     justify-content: center;
 }
 
+.subjectDiv{
+    padding: 7px;
+    margin: 5px;
+    display: inline-block;
+    justify-content: center;
+    border-style: solid;
+    border-radius: 40px;
+}
+

@@ -16,7 +16,7 @@ import AddSubject from "./addSubject";
 import {CSSTransition} from "react-transition-group"
 
 
-
+const initialSubjects = [];
 
 export function Logout() {
   const navigate = useNavigate();
@@ -31,23 +31,50 @@ export function Logout() {
 function ProfileCard({ profile: { firstName, lastName, email, id } }) {
   const [faceBook, setFaceBook] = useState();
   const [discord, setDiscord] = useState();
-  const [shcoolMail, setShcoolMail] = useState();
   const [bio, setBio] = useState();
   const [contactId, setContactId] = useState();
+
   const [clicked, setClicked] = useState(false);
+
+  const [userSubjects, setUserSubjects] = useState([]);
+
+  const [newSubjects, setNewSubjects] = useState(initialSubjects);
+  const [ws, setWs] = useState();
 
   useEffect(async () => {
     const url = `${window.location.origin}/api/contactInfo/userInfo/${id}`;
     const { data: res } = await axios.get(url)
-    console.log(res)
     res.map((r) => {
       setFaceBook(r.faceBook)
       setDiscord(r.discord)
-      setShcoolMail(r.email)
       setBio(r.bio)
       setContactId(r._id)
     })
+
+    const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`
+    const { data: response } = await axios.get(userURL)
+    response.map((r) => {
+      setUserSubjects(r.subjects)
+    })
+
+    const ws = new WebSocket(window.location.origin.replace(/^http/, "ws"));
+    ws.onopen = (event) => {
+      console.log("Opened", event);
+    };
+    ws.onmessage = (event) => {
+      console.log("message", event);
+      const { subject } = JSON.parse(event.data);
+      setNewSubjects((a) => [...a, { subject }]);
+    };
+    setWs(ws);
   }, [id])
+
+  function handleNewSubject(subject) {
+    console.log(subject);
+    ws.send(JSON.stringify({ subject }));
+    setNewSubjects(subject);
+  }
+
 
   return (
     <>
@@ -122,12 +149,20 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
             <SettingsIcon  className={"addSubj"} style={{fontSize: "60px", color: "#285057"}} />
           </IconButton>
         </div>
+
+        {userSubjects.map((subject) => (
+          <div key={subject.subjectName} className={"subjectDiv"}>{subject.subjectName}</div>
+        ))}
+        {newSubjects.map((subject) => (
+          <div key={subject.subjectName} className={"subjectDiv"}>{subject.subjectName}</div>
+        ))}
+
           <CSSTransition
             in={clicked}
             timeout={700}
             classNames={"alert"}
           unmountOnExit>
-            <AddSubject id={id}/>
+            <AddSubject id={id} handleNewSubject={handleNewSubject}/>
           </CSSTransition>
 
 
