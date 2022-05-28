@@ -2,7 +2,6 @@ import { Router } from "express";
 import { updateValidate, User, validate } from "../models/user.js";
 import bcrypt from "bcrypt";
 
-
 const maxAge = 3 * 24 * 60 * 60;
 
 export function UsersRoutes() {
@@ -43,36 +42,49 @@ export function UsersRoutes() {
     }
   });
 
+  router.get("/getAllUsers", async (req, res) => {
+    try {
+      User.find().then((result) => {
+        res.json(result);
+      });
+    } catch (error) {
+      res.status(400).json({ message: "okei" });
+    }
+  });
+
   router.post("/update/:id", async (req, res) => {
     try {
-
       const { error } = updateValidate(req.body);
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
-      const {id} = req.params
+      const { id } = req.params;
       const user = await User.findOne({ id: `${id}` });
-      Object.assign(user, req.body)
+      Object.assign(user, req.body);
       user.save();
 
-      res.cookie("jwt", user, { httpOnly: false, maxAge: maxAge * 1000, signed: true });
-      res.send({data: user});
-    }catch{
-      res.status(404).send({error: "User is not found"})
+      res.cookie("jwt", user, {
+        httpOnly: false,
+        maxAge: maxAge * 1000,
+        signed: true,
+      });
+      res.send({ data: user });
+    } catch {
+      res.status(404).send({ error: "User is not found" });
     }
-  })
+  });
 
   router.delete("/delete/:email", async (req, res) => {
     try {
-      const {email} = req.params
-      console.log(email)
+      const { email } = req.params;
+      console.log(email);
       const user = await User.findOne({ email: `${email}` });
       await user.remove();
-      res.send({data: true});
-    }catch{
-      res.status(404).send({error: "User is not found"})
+      res.send({ data: true });
+    } catch {
+      res.status(404).send({ error: "User is not found" });
     }
-  })
+  });
 
   return router;
 }
