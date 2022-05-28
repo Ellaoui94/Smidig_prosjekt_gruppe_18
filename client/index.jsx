@@ -92,6 +92,10 @@ function Application() {
             <Route path={"/register"} element={<NewProfile />} />
             <Route path={"/login/*"} element={<LoginPage />} />
             <Route path={"/main-page"} element={<MainPage />} />
+            <Route path={"/profile"} element={<Profile email={email} firstName={firstName} lastName={lastName} id={id}/>} />
+            <Route path={"/session"} element={<Session />} />
+            <Route path={"/start-session"} element={<StartSession />} />
+            <Route path={"/end-session"} element={<EndSession />} />
             <Route
               path={"/profile"}
               element={
