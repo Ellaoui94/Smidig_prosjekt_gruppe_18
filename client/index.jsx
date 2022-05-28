@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { FrontPage } from "./pages/frontPage/frontPage";
 import { Logout, Profile } from "./pages/profilePage/profile";
-import { Session } from "./pages/sessionPage/session";
+import Session from "./pages/sessionPage/session";
 import { FriendsActivity } from "./pages/friendsActivityPage/friendsActivity";
 import { FriendPage } from "./pages/friendsPage/friendPage";
 import { NewProfile } from "./pages/registerUserPage/newProfile";
