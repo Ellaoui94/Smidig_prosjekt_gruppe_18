@@ -139,13 +139,26 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
             </Button>
           )}
 
-        <Link to={"/delete"}>Log out</Link>
-
-        <DeleteButton label={"Slett bruker"} id={id}/>
+        <Button
+          component={Link}
+          to={"/delete"}
+          style={{
+            background: "#3E989C",
+            fontSize: "10px",
+            fontWeight: "bold",
+            color: "white",
+            borderRadius: "50px",
+          }}>
+          Logg ut
+        </Button>
 
         <div id={"wrapper"}>
           <h1>Aktive emner</h1>
-          <IconButton onClick={()=> setClicked(!clicked)}>
+          <IconButton onClick={()=> {
+            setClicked(!clicked);
+            let element = document.getElementById("bottom")
+            element.scrollIntoView({behavior: "smooth"})
+          }}>
             <SettingsIcon  className={"addSubj"} style={{fontSize: "60px", color: "#285057"}} />
           </IconButton>
         </div>
@@ -171,7 +184,7 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
   );
 }
 
-function DeleteButton({ label, id }) {
+export function DeleteButton({ label, id }) {
   const navigate = useNavigate();
   const { endSession } = useContext(UserApiContext);
   async function deleteUser() {
@@ -182,7 +195,17 @@ function DeleteButton({ label, id }) {
 
   return (
     <div>
-      <button onClick={deleteUser}>{label}</button>
+      <Button
+        onClick={deleteUser}
+        style={{
+          background: "#3E989C",
+          fontSize: "10px",
+          fontWeight: "bold",
+          color: "white",
+          borderRadius: "50px",
+        }}>
+        {label}
+      </Button>
     </div>
   );
 }

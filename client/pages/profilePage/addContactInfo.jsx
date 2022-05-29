@@ -110,7 +110,7 @@ export default function AddContactInfo({ id }) {
               borderRadius: "50px",
             }}
           >
-            Endre bruker
+          Legg til
           </Button>
           {/*    {!isPending && <Button style={{
               top: "10px",

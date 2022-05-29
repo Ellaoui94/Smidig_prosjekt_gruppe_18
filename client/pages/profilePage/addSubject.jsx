@@ -2,11 +2,11 @@ import { Button, TextField } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { DeleteButton } from "./profile";
 
-export default function AddSubject({id, handleNewSubject}) {
+export default function AddSubject({ id, handleNewSubject }) {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [subjectName, setSubjectName] = useState("");
@@ -14,14 +14,14 @@ export default function AddSubject({id, handleNewSubject}) {
 
   const [error, setError] = useState("");
 
-  const subjectObj = {subjectName, subjectCode, startDate, endDate}
+  const subjectObj = { subjectName, subjectCode, startDate, endDate };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const url = `${window.location.origin}/api/users/subject/${id}/${encodeURIComponent(JSON.stringify(subjectObj))}`;
       const { data: res } = await axios.post(url, subjectObj);
-      handleNewSubject(subjectObj)
+      handleNewSubject(subjectObj);
       console.log(res.message);
     } catch (error) {
       if (
@@ -45,7 +45,7 @@ export default function AddSubject({id, handleNewSubject}) {
             name="subjectName"
             style={{ background: "white" }}
             label={"Emne Navn"}
-            onChange={(e) => setSubjectName(e.target.value) }
+            onChange={(e) => setSubjectName(e.target.value)}
             value={subjectName}
           />
         </div>
@@ -88,7 +88,7 @@ export default function AddSubject({id, handleNewSubject}) {
           />
         </LocalizationProvider>
 
-        <div>
+        <div id={"bottom"}>
           <Button
             type={"submit"}
             style={{
@@ -99,10 +99,13 @@ export default function AddSubject({id, handleNewSubject}) {
               color: "white",
               borderRadius: "50px"
             }}
-          >Logg inn
+          >Start emne
           </Button>
         </div>
       </form>
+      <div style={{marginTop: 20}}>
+        <DeleteButton label={"Slett bruker"} id={id} />
+      </div>
     </div>
   );
 }
