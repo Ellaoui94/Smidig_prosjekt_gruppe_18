@@ -9,7 +9,6 @@ import cors from "cors";
 import { connection } from "./db.js";
 import { WebSocketServer } from "ws";
 
-
 import { AuthRoutes } from "./routes/auth.js";
 import { UsersRoutes } from "./routes/users.js";
 import { StudySessionApi } from "./routes/studySessions.js";
@@ -34,6 +33,13 @@ wsServer.on("connection", (socket) => {
     console.log("Article: " + subject);
     for (const recipient of sockets) {
       recipient.send(subject.toString());
+    }
+  });
+
+  socket.on("message", (data) => {
+    const { todo, checked } = JSON.parse(data);
+    for (const recipient of sockets) {
+      recipient.send(JSON.stringify({ todo, checked }));
     }
   });
 });

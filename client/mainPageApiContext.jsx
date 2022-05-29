@@ -1,5 +1,6 @@
 import React from "react";
 import { fetchJSON } from "./fetchJSON";
+import { postJSON } from "./postJSON";
 
 export const MainPageApiContext = React.createContext({
   async showCourse(course) {
@@ -13,6 +14,13 @@ export const MainPageApiContext = React.createContext({
   async showFinishedSession(sessionId) {
     return await fetchJSON(
       "/api/session/finished-session?" + new URLSearchParams(sessionId)
+    );
+  },
+  async addNewTodo(todos, sessionId) {
+    console.log("inside api: " + JSON.stringify(todos));
+    return await postJSON(
+      "/api/session/new-todo?" + new URLSearchParams(sessionId),
+      todos
     );
   },
 });
