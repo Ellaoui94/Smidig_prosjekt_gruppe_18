@@ -3,10 +3,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DeleteButton } from "./profile";
 
-export default function AddSubject({ id, handleNewSubject }) {
+export default function AddSubject({ id, setNewSubject }) {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [subjectName, setSubjectName] = useState("");
@@ -14,14 +14,27 @@ export default function AddSubject({ id, handleNewSubject }) {
 
   const [error, setError] = useState("");
 
+  const [ws, setWs] = useState("");
+
   const subjectObj = { subjectName, subjectCode, startDate, endDate };
+
+  useEffect(() => {
+    const ws = new WebSocket(window.location.origin.replace(/^http/, "ws"));
+    setWs(ws);
+
+    // get data from websockets
+    ws.onmessage = (s) => {
+      const { subjectName } = JSON.parse(s.data);
+      setNewSubject((oldState) => [...oldState, { subjectName }]);
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      ws.send(JSON.stringify(subjectObj))
       const url = `${window.location.origin}/api/users/subject/${id}/${encodeURIComponent(JSON.stringify(subjectObj))}`;
       const { data: res } = await axios.post(url, subjectObj);
-      handleNewSubject(subjectObj);
       console.log(res.message);
     } catch (error) {
       if (

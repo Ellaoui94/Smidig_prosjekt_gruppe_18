@@ -26,7 +26,7 @@ export function MySubjectsCard() {
     <>
       {data.map((mySubjects) => (
         <>
-          <div className={"main-page-components-card"}>
+          <div className={`${mySubjects.subject}`}>
             <Link to={"/course-view/" + mySubjects.subject}>
               {mySubjects.subject}
             </Link>

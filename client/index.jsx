@@ -21,6 +21,9 @@ import AddContactInfo from "./pages/profilePage/addContactInfo";
 import { FriendProfile } from "./pages/friendProfilePage/friendProfile";
 import { FinishedSession } from "./pages/sessionPage/finishedSession";
 import { AddNewFriendPage } from "./pages/addNewFriendPage/addNewFriendPage";
+import RoomIcon from '@mui/icons-material/Room';
+import imgpic from './img.png'
+import HouseIcon from '@mui/icons-material/House';
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -39,9 +42,15 @@ function NavBar() {
   return (
     <>
       <div id={"nav-bar"}>
-        <Link to={"/main-page"}>Hovedside</Link>
-        <Link to={"/start-session"}>Legg til ny studieøkt</Link>
-        <Link to={"/map-page"}>Kart</Link>
+        <Link to={"/main-page"}>
+          <HouseIcon style={{fontSize: "65px"}}/>
+        </Link>
+        <Link to={"/start-session"}>
+          <img src={imgpic}/>
+        </Link>
+        <Link to={"/map-page"}>
+          <RoomIcon style={{fontSize: "65px"}}/>
+        </Link>
       </div>
     </>
   );
@@ -75,6 +84,7 @@ function Application() {
     setId(user.id);
   }, []);
 
+  const profile = {firstName, lastName, email, id}
   const user = localStorage.getItem("token");
 
   return (
@@ -91,7 +101,7 @@ function Application() {
             <Route path={"/"} element={<FrontPage />} />
             <Route path={"/register"} element={<NewProfile />} />
             <Route path={"/login/*"} element={<LoginPage />} />
-            <Route path={"/main-page"} element={<MainPage />} />
+            <Route path={"/main-page"} element={<MainPage  />} />
             <Route path={"/profile"} element={<Profile email={email} firstName={firstName} lastName={lastName} id={id}/>} />
             <Route path={"/session"} element={<Session />} />
             <Route path={"/start-session"} element={<StartSession />} />

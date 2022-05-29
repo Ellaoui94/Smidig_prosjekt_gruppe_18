@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import * as path from "path";
 import cookieParser from "cookie-parser";
-import { MongoClient } from "mongodb";
-import { UserApi } from "./userApi.js";
 import cors from "cors";
 import { connection } from "./db.js";
 import { WebSocketServer } from "ws";
@@ -28,18 +26,15 @@ const sockets = [];
 const wsServer = new WebSocketServer({ noServer: true });
 wsServer.on("connection", (socket) => {
   sockets.push(socket);
-
-  socket.on("subject", (subject) => {
-    console.log("Article: " + subject);
-    for (const recipient of sockets) {
-      recipient.send(subject.toString());
-    }
-  });
-
   socket.on("message", (data) => {
+    const { subjectName } = JSON.parse(data);
     const { todo, checked } = JSON.parse(data);
     for (const recipient of sockets) {
-      recipient.send(JSON.stringify({ todo, checked }));
+      if (!subjectName) {
+        recipient.send(JSON.stringify({ todo, checked }));
+      } else {
+        recipient.send(JSON.stringify({ subjectName }));
+      }
     }
   });
 });

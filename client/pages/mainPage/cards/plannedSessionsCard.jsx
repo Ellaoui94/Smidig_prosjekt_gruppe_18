@@ -25,7 +25,7 @@ export function PlannedSessionsCard() {
     <>
       {data.map((session) => (
         <>
-          <div className={"main-page-components-card"}>
+          <div className={`${session.day}`}>
             <Link to={"/planned-session/" + session.sessionId}>
               {session.day + ", " + session.date}
             </Link>
