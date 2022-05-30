@@ -9,18 +9,21 @@ import Joi from "joi";
  */
 const userSchema = new mongoose.Schema({
   email: { type: String, required: false },
-  courseTitle: [
-    { type: String, required: false },
-    { type: String, required: false },
-  ],
+  date: { type: Date, required: false, default: Date.now() },
+  courseTitle: { type: String, required: false },
   location: { type: String, required: false },
-  studySessionTitle: { type: String, requires: false },
-  studyStatus: { type: String, required: false },
+  address: { type: String, required: false },
+  todos: [
+    {
+      todo: { type: String, required: false },
+      checked: { type: Boolean, required: false, default: false },
+    },
+  ],
+  status: { type: String, required: false },
   evaluation: { type: String, required: false },
   focus: { type: String, required: false },
-  other: { type: String, required: false },
+  comment: { type: String, required: false },
   stage: { type: String, required: false },
-  finished: { type: Boolean, required: false },
 });
 
 //We use this in routes so that we can put the different values in the right schema
@@ -46,8 +49,8 @@ const updateValidateStudySession = (data) => {
     email: Joi.string().email(),
     evaluation: Joi.string().label("evaluation"),
     focus: Joi.string().label("focus"),
-    other: Joi.string().label("other"),
-    finished: Joi.boolean(),
+    comment: Joi.string().label("comment"),
+    stage: Joi.string(),
   });
   return schema.validate(data);
 };
