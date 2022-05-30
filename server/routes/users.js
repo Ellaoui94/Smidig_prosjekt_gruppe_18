@@ -1,9 +1,7 @@
 import { Router } from "express";
-import { updateValidate, User, validate } from "../models/user.js";
+import { friendValidate, subjectValidate, updateValidate, User, validate } from "../models/user.js";
 import bcrypt from "bcrypt";
 import { ContactDetails } from "../models/contactDetails.js";
-import Joi from "joi";
-
 
 const maxAge = 3 * 24 * 60 * 60;
 
@@ -45,6 +43,25 @@ export function UsersRoutes() {
     }
   });
 
+  router.post("/postFriend/:id/:friend", (req, res) => {
+    try {
+      const { error } = friendValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
+      const {id} = req.params
+      const friend = JSON.parse(req.params.friend)
+
+      User.findOne({ _id: { $eq: id } }).then((record)=> {
+        record.friends.push(friend);
+        record.save()
+      })
+
+    }catch{
+      res.status(404).send({error: "User is not found"})
+    }
+  })
+
   router.get("/getAllUsers/:id", async (req, res) => {
     try {
       const { id } = req.params;
@@ -69,7 +86,7 @@ export function UsersRoutes() {
         return res.status(400).send({ message: error.details[0].message });
 
       const { id } = req.params;
-      const user = await User.findOne({ id: `${id}` });
+      const user = await  User.findOne({ _id: { $eq: id } });
       Object.assign(user, req.body);
       user.save();
 
@@ -120,13 +137,3 @@ export function UsersRoutes() {
 
   return router;
 }
-
-const subjectValidate = (data) => {
-  const schema = Joi.object({
-    subjectName: Joi.string().required().label("Subjects"),
-    subjectCode: Joi.string().required().label("Code"),
-    startDate: Joi.date().required().label("Emne start"),
-    endDate: Joi.date().required().label("Emne slutt")
-  });
-  return schema.validate(data);
-};

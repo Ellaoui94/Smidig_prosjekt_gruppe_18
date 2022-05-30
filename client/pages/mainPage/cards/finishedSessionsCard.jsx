@@ -29,7 +29,7 @@ export function FinishedSessionsCard() {
   return (
     <>
       {data.map((session, i) => (
-        <div className={"main-page-components-card"} style={{backgroundColor: rColors[i]}}>
+        <div key={i} className={"main-page-components-card"} style={{backgroundColor: rColors[i]}}>
           <Link to={"/finished-session/" + session.sessionId}>
             {session.day + ", " + session.date}
           </Link>

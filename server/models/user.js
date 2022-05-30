@@ -11,12 +11,18 @@ const subjectSchema = new mongoose.Schema({
   endDate: { type: Date, required: true },
 })
 
+const friendsSchema = new mongoose.Schema({
+  name: {type: String, required: true},
+  photo: {type: String, required: true},
+})
+
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  subjects: { type: [subjectSchema], required: false}
+  subjects: { type: [subjectSchema], required: false},
+  friends: { type: [friendsSchema], required: false},
 });
 
 
@@ -30,7 +36,6 @@ userSchema.methods.generateAuthToken = function () {
 
 const User = mongoose.model("users", userSchema);
 
-//Don't understand what is going on here.
 const validate = (data) => {
   const schema = Joi.object({
     firstName: Joi.string().required().label("First Name"),
@@ -50,4 +55,22 @@ const updateValidate = (data) => {
   return schema.validate(data);
 };
 
-export { User, validate, updateValidate };
+const subjectValidate = (data) => {
+  const schema = Joi.object({
+    subjectName: Joi.string().required().label("Emne navn"),
+    subjectCode: Joi.string().required().label("Emne kode"),
+    startDate: Joi.date().required().label("Emne start"),
+    endDate: Joi.date().required().label("Emne slutt")
+  });
+  return schema.validate(data);
+};
+
+const friendValidate = (data) => {
+  const schema = Joi.object({
+    name: Joi.string().required().label("Navn"),
+    photo: Joi.string().required().label("Bilde"),
+  });
+  return schema.validate(data);
+};
+
+export { User, validate, updateValidate, subjectValidate, friendValidate };

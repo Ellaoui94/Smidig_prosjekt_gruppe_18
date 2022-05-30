@@ -65,7 +65,7 @@ export function EditProfile({ id }) {
       const url = `${window.location.origin}/api/users/update/${id}`;
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
-      window.location = "/main-page";
+      window.location = "/profile";
     } catch (error) {
       if (
         error.response &&

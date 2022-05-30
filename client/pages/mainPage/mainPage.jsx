@@ -68,10 +68,8 @@ function Feed() {
 
         <h4>Mine venner</h4>
         <div className={"friends-container"}>
-          {myFriends.map((myFriends) => (
-            <>
-              <MyFriendsCard key={myFriends.name} myFriends={myFriends} />
-            </>
+          {myFriends.map((myFriends, key) => (
+              <MyFriendsCard key={key} myFriends={myFriends} />
           ))}
         </div>
 

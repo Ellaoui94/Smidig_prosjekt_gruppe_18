@@ -21,8 +21,9 @@ import AddContactInfo from "./pages/profilePage/addContactInfo";
 import { FriendProfile } from "./pages/friendProfilePage/friendProfile";
 import { FinishedSession } from "./pages/sessionPage/finishedSession";
 import { AddNewFriendPage } from "./pages/addNewFriendPage/addNewFriendPage";
+import NotFound from "./notFound";
 import RoomIcon from "@mui/icons-material/Room";
-import imgpic from "./img.png";
+import imgPic from "./img.png";
 import HouseIcon from "@mui/icons-material/House";
 import imgProfile from "./imgProfile.png";
 
@@ -47,7 +48,7 @@ function NavBar() {
           <HouseIcon style={{ fontSize: "65px" }} />
         </Link>
         <Link to={"/start-session"}>
-          <img src={imgpic} />
+          <img src={imgPic} />
         </Link>
         <Link to={"/map-page"}>
           <RoomIcon style={{ fontSize: "65px" }} />
@@ -98,66 +99,50 @@ function Application() {
         </header>
         <main>
           <Routes>
-            <Route path={"/contactInfo"} element={<AddContactInfo id={id} />} />
-            <Route path={"/edit"} element={<EditProfile id={id} />} />
-            <Route path={"/delete"} element={<Logout />} />
-            <Route path={"/"} element={<FrontPage />} />
-            <Route path={"/register"} element={<NewProfile />} />
-            <Route path={"/login/*"} element={<LoginPage />} />
-            <Route
-              path={"/main-page"}
-              element={<MainPage firstName={firstName} />}
-            />
-            <Route
-              path={"/profile"}
-              element={
-                <Profile
-                  email={email}
-                  firstName={firstName}
-                  lastName={lastName}
-                  id={id}
+            {id === undefined ?
+              <>
+                <Route path={"/"} element={<FrontPage />} />
+                <Route path={"/register"} element={<NewProfile />} />
+                <Route path={"/login/*"} element={<LoginPage />} />
+                <Route path={"*"} element={<NotFound/>} />
+              </>
+              :
+              <>
+                <Route path={"/main-page"} element={<MainPage firstName={firstName} />} />
+                <Route path={"/profile"} element={<Profile profile={profile}/>} />
+                <Route path={"/contactInfo"} element={<AddContactInfo id={id} />} />
+                <Route path={"/edit"} element={<EditProfile id={id} />} />
+                <Route path={"/delete"} element={<Logout />} />
+
+                <Route path={"/session"} element={<Session email={email} />} />
+                <Route
+                  path={"/start-session"}
+                  element={<StartSession email={email} />}
                 />
-              }
-            />
-            <Route path={"/session"} element={<Session />} />
-            <Route
-              path={"/start-session"}
-              element={<StartSession email={email} />}
-            />
-            <Route path={"/end-session"} element={<EndSession />} />
-            <Route
-              path={"/profile"}
-              element={
-                <Profile
-                  email={email}
-                  firstName={firstName}
-                  lastName={lastName}
+                <Route
+                  path={"/end-session"}
+                  element={<EndSession emailInput={email} />}
                 />
-              }
-            />
-            <Route path={"/session"} element={<Session email={email} />} />
-            <Route
-              path={"/start-session"}
-              element={<StartSession email={email} />}
-            />
-            <Route
-              path={"/end-session"}
-              element={<EndSession emailInput={email} />}
-            />
-            <Route
-              path={"/planned-session/:sessionId"}
-              element={<PlannedSession />}
-            />
-            <Route
-              path={"/finished-session/:sessionId"}
-              element={<FinishedSession />}
-            />
-            <Route path={"/friends-activity"} element={<FriendsActivity />} />
-            <Route path={"/friend-page"} element={<FriendPage />} />
-            <Route path={"/friend-profile"} element={<FriendProfile />} />
-            <Route path={"/add-new-friend"} element={<AddNewFriendPage />} />
-            <Route path={"/map-page"} element={<MapPage />} />
-            <Route path={"/course-view/:course"} element={<CourseView />} />
+                <Route
+                  path={"/planned-session/:sessionId"}
+                  element={<PlannedSession />}
+                />
+                <Route
+                  path={"/finished-session/:sessionId"}
+                  element={<FinishedSession />}
+                />
+
+                <Route path={"/add-new-friend"} element={<AddNewFriendPage id={id} />} />
+                <Route path={"/friend-page"} element={<FriendPage />} />
+                <Route path={"/friend-profile"} element={<FriendProfile />} />
+                <Route path={"/friends-activity"} element={<FriendsActivity />} />
+
+                <Route path={"/map-page"} element={<MapPage />} />
+                <Route path={"/course-view/:course"} element={<CourseView />} />
+                <Route path={"*"} element={<NotFound id={id}/>} />
+
+              </>
+            }
           </Routes>
         </main>
 

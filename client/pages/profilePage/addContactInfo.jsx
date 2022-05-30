@@ -29,7 +29,7 @@ export default function AddContactInfo({ id }) {
         const url = `${window.location.origin}/api/contactInfo`;
         const { data: res } = await axios.post(url, data);
         localStorage.setItem("token", res.data);
-        window.location = "/main-page";
+        window.location = "/profile";
       }
     } catch (error) {
       if (

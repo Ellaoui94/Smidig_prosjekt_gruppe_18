@@ -16,11 +16,10 @@ import AddSubject from "./addSubject";
 import { CSSTransition } from "react-transition-group";
 
 export function Logout() {
-  const navigate = useNavigate();
   const { endSession } = useContext(UserApiContext);
   useEffect(async () => {
     await endSession();
-    navigate("/");
+    window.location = "/";
   });
   return <h1>Please wait...</h1>;
 }
@@ -141,16 +140,12 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
           </IconButton>
         </div>
 
-        {userSubjects.map((subject) => (
-          <div key={subject.subjectName} className={"subjectDiv"}>
-            {subject.subjectName}
-          </div>
+        {userSubjects.map((subject, key) => (
+          <div key={key} className={"subjectDiv"}>{subject.subjectName}</div>
         ))}
-        {newSubject.map((subject) => (
-          <div key={subject.subjectName} className={"subjectDiv"}>
-            {subject.subjectName}
-          </div>
-        ))}
+        {newSubject.map((subject, key) => (
+          <div key={key} className={"subjectDiv"}>{subject.subjectName}</div>
+          ))}
 
         <CSSTransition
           in={clicked}
@@ -192,8 +187,10 @@ export function DeleteButton({ label, id }) {
   );
 }
 
-export function Profile({ firstName, lastName, email, id }) {
-  const profile = { firstName, lastName, email, id };
+
+export function Profile({profile: {firstName, lastName, email, id}}) {
+
+const profile = {firstName, lastName, email, id}
 
   return (
     <>

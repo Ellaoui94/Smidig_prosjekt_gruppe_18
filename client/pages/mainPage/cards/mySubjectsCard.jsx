@@ -29,8 +29,7 @@ export function MySubjectsCard() {
   return (
     <>
       {data.map((mySubjects, i) => (
-        <>
-          <div className={"main-page-components-card"} style={{backgroundColor: rColors[i]}}>
+          <div key={i} className={"main-page-components-card"} style={{backgroundColor: rColors[i]}}>
             <Link to={"/course-view/" + mySubjects.subject}>
               {mySubjects.subject}
             </Link>
@@ -39,7 +38,6 @@ export function MySubjectsCard() {
               <p>></p>
             </div>
           </div>
-        </>
       ))}
     </>
   );
