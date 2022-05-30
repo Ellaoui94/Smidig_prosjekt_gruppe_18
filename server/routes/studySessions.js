@@ -5,7 +5,7 @@ import * as parse from "nodemon";
 export function StudySessionApi() {
   const router = new Router();
 
-  router.post("/", async (req, res) => {
+  router.post("/:email", async (req, res) => {
     try {
       await new Session(req.body).save();
       res.status(201).send({ message: "Session created successfully" });

@@ -243,3 +243,34 @@ footer {
     border-radius: 40px;
 }
 
+/**
+SESSION
+ */
+
+.session-card-div {
+    padding: 5px;
+    height: 2.5em;
+    width: fit-content;
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: inline-flex;
+}
+
+.session-div{
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 25px;
+}
+
+.start-session-btn:hover{
+    background-color: #70A790;
+}
+
+.end-session-btn{
+    background-color: #285057;
+    color: white;
+    border-radius: 25px;
+    margin-left: 350px;
+}
+

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./session.css";
 
 const evaluation = ["Bra", "Helt ok", "Dårlig"];
 
@@ -47,45 +48,51 @@ export function EndSession({ emailInput }) {
 
   return (
     <>
-      <h1>Etter å ha trykket start på start siden kommer man hit</h1>
+      <h1>Hvordan gikk studieøkten?</h1>
       <form onSubmit={handleSubmit}>
-        <h2>Vurder økten</h2>
-        {evaluation.map((evaluate) => (
-          <div>
-            {evaluate}
-            <input
-              type="checkbox"
-              name="evaluation"
-              label={"evaluation"}
-              onChange={handleChange}
-              value={evaluate}
-            />
-          </div>
-        ))}
+        <div className={"session-div"} style={{ backgroundColor: "white" }}>
+          <h2>Vurder økten</h2>
+          {evaluation.map((evaluate) => (
+            <div className={"session-card-div"}>
+              {evaluate}
+              <input
+                type="checkbox"
+                name="evaluation"
+                label={"evaluation"}
+                onChange={handleChange}
+                value={evaluate}
+              />
+            </div>
+          ))}
+        </div>
 
-        <h2>Hvordan var fokuset under denne økten?</h2>
-        {evaluation.map((evaluate) => (
-          <div>
-            {evaluate}
-            <input
-              type="checkbox"
-              name="focus"
-              label={"focus"}
-              onChange={handleChange}
-              value={evaluate}
-            />
-          </div>
-        ))}
+        <div className={"session-div"} style={{ backgroundColor: "white" }}>
+          <h2>Hvordan var fokuset under denne økten?</h2>
+          {evaluation.map((evaluate) => (
+            <div className={"session-card-div"}>
+              {evaluate}
+              <input
+                type="checkbox"
+                name="focus"
+                label={"focus"}
+                onChange={handleChange}
+                value={evaluate}
+              />
+            </div>
+          ))}
+        </div>
 
-        <h2>Legg til kommentar</h2>
-        <textarea
-          name="other"
-          label={"other"}
-          onChange={handleChange}
-          value={data.other}
-        />
+        <div className={"session-div"} style={{ backgroundColor: "white" }}>
+          <h2>Legg til kommentar</h2>
+          <textarea
+            name="other"
+            label={"other"}
+            onChange={handleChange}
+            value={data.other}
+          />
+        </div>
         <div>
-          <button>Avslutt økt</button>
+          <button className={"end-session-btn"}>Avslutt økt</button>
         </div>
 
         {error && <div>{error}</div>}
