@@ -51,6 +51,7 @@ function MyFriendsCard({ myFriends: { name, photo } }) {
 function Feed() {
   return (
     <>
+      <div style={{width: "100%"}}>
       <h4>Mine emner</h4>
       <div className={"horizontal-scroll-div"}>
         <div className={"cards-div"}>
@@ -79,6 +80,7 @@ function Feed() {
         <div className={"cards-div"}>
           <FinishedSessionsCard />
         </div>
+      </div>
       </div>
     </>
   );
