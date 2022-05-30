@@ -1,32 +1,16 @@
 import { Router } from "express";
-import { Session, updateValidateStudySession } from "../models/studySession.js";
-import { validate } from "../models/user.js";
+import { Session } from "../models/studySession.js";
+import * as parse from "nodemon";
 
 export function StudySessionApi() {
   const router = new Router();
 
-  router.post("/:email", async (req, res) => {
+  router.post("/", async (req, res) => {
     try {
       await new Session(req.body).save();
       res.status(201).send({ message: "Session created successfully" });
     } catch (error) {
       res.status(400).json({ message: error.message });
-    }
-  });
-
-  router.post("/update/:email", async (req, res) => {
-    try {
-      const { error } = updateValidateStudySession(req.body);
-      if (error)
-        return res.status(400).send({ message: error.details[0].message });
-
-      const { email } = req.params;
-      const studySession = await Session.findOne({ email: `${email}` });
-      Object.assign(studySession, req.body);
-      studySession.save();
-      res.send({ data: studySession });
-    } catch {
-      res.status(404).send({ error: "User is not found" });
     }
   });
 
@@ -80,64 +64,63 @@ export function StudySessionApi() {
     res.json(queryResult);
   });
 
+  const today = new Date();
+  let yesterdaysDate = today.getDate() - 1 + "/" + (today.getMonth() + 1);
+  const finishedSessions = [
+    {
+      sessionId: "1",
+      day: "Mandag",
+      date: yesterdaysDate,
+      courseTitle: "Filosofi",
+      location: "Cafe",
+      todos: [
+        {
+          todo: "Gjøre ferdig rapport",
+          checked: false,
+        },
+        {
+          todo: "Lese kapittel 5",
+          checked: true,
+        },
+      ],
+    },
+    {
+      sessionId: "2",
+      day: "Tirsdag",
+      date: yesterdaysDate,
+      courseTitle: "Smidig Prosjekt",
+      location: "Cafe",
+      todos: [
+        {
+          todo: "Planlegge sprint",
+          checked: true,
+        },
+        {
+          todo: "Lese kapittel 5",
+          checked: false,
+        },
+      ],
+    },
+    {
+      sessionId: "3",
+      day: "Onsdag",
+      date: yesterdaysDate,
+      courseTitle: "Design",
+      location: "Cafe",
+      todos: [
+        {
+          todo: "Starte på moodboard",
+          checked: true,
+        },
+        {
+          todo: "Lese kapittel 5",
+          checked: true,
+        },
+      ],
+    },
+  ];
+
   router.get("/finished-session/", async (req, res) => {
-    const today = new Date();
-    let yesterdaysDate = today.getDate() - 1 + "/" + (today.getMonth() + 1);
-
-    const finishedSessions = [
-      {
-        sessionId: "1",
-        day: "Mandag",
-        date: yesterdaysDate,
-        courseTitle: "Filosofi",
-        location: "Cafe",
-        todos: [
-          {
-            todo: "Gjøre ferdig rapport",
-            checked: false,
-          },
-          {
-            todo: "Lese kapittel 5",
-            checked: true,
-          },
-        ],
-      },
-      {
-        sessionId: "2",
-        day: "Tirsdag",
-        date: yesterdaysDate,
-        courseTitle: "Smidig Prosjekt",
-        location: "Cafe",
-        todos: [
-          {
-            todo: "Planlegge sprint",
-            checked: true,
-          },
-          {
-            todo: "Lese kapittel 5",
-            checked: false,
-          },
-        ],
-      },
-      {
-        sessionId: "3",
-        day: "Onsdag",
-        date: yesterdaysDate,
-        courseTitle: "Design",
-        location: "Cafe",
-        todos: [
-          {
-            todo: "Starte på moodboard",
-            checked: true,
-          },
-          {
-            todo: "Lese kapittel 5",
-            checked: true,
-          },
-        ],
-      },
-    ];
-
     const { sessionId } = req.query;
     let queryResult = "";
     console.log("id " + sessionId);
@@ -151,6 +134,22 @@ export function StudySessionApi() {
     }
 
     res.json(queryResult);
+  });
+
+  router.post("/new-todo/", async (req, res) => {
+    const { todo, checked } = req.body;
+    const { sessionId } = req.query;
+
+    finishedSessions.map((session, i) => {
+      if (session.sessionId === sessionId) {
+        finishedSessions[i].todos.push({
+          todo: todo,
+          checked: checked,
+        });
+      }
+    });
+
+    res.sendStatus(200);
   });
 
   return router;

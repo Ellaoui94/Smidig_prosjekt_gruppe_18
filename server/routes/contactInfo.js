@@ -13,13 +13,20 @@ export function ContactInfoApi() {
     }
   });
 
-  router.get("/userInfo",  (req, res) => {
+  router.get("/userInfo/:id", async (req, res) => {
     try {
-      ContactDetails.find().then((result) => {
-        res.json(result)
-      })
+      const { id } = req.params;
+      if (id !== `${undefined}`) {
+        await ContactDetails.find({ _id: { $eq: id } }).then((result) => {
+          res.json(result);
+        });
+      } else {
+        console.log("subjectId", id);
+      }
+
+
     } catch (error) {
-      res.status(400).json({ message: "Du har allerede lagt til informasjon" });
+      res.status(400).json({ message: error.message });
     }
   });
 

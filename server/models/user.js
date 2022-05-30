@@ -3,13 +3,22 @@ import jwt from "jsonwebtoken";
 import Joi from "joi";
 import passwordComplexity from "joi-password-complexity";
 
-//Don't know what this is.
+
+const subjectSchema = new mongoose.Schema({
+  subjectName: { type: String, required: true },
+  subjectCode: { type: String, required: true },
+  startDate: { type: Date, required: true },
+  endDate: { type: Date, required: true },
+})
+
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  subjects: { type: [subjectSchema], required: false}
 });
+
 
 //How long the token lasts.
 userSchema.methods.generateAuthToken = function () {

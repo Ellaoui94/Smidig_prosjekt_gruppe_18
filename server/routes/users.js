@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { updateValidate, User, validate } from "../models/user.js";
 import bcrypt from "bcrypt";
+import { ContactDetails } from "../models/contactDetails.js";
+import Joi from "joi";
+
 
 const maxAge = 3 * 24 * 60 * 60;
 
@@ -42,13 +45,20 @@ export function UsersRoutes() {
     }
   });
 
-  router.get("/getAllUsers", async (req, res) => {
+  router.get("/getAllUsers/:id", async (req, res) => {
     try {
-      User.find().then((result) => {
-        res.json(result);
-      });
+      const { id } = req.params;
+      if (id !== `${undefined}`) {
+        await User.find({ _id: { $eq: id } }).then((result) => {
+          res.json(result);
+        });
+      } else {
+        console.log("userId", id);
+      }
+
+
     } catch (error) {
-      res.status(400).json({ message: "okei" });
+      res.status(400).json({ message: error.message });
     }
   });
 
@@ -74,17 +84,49 @@ export function UsersRoutes() {
     }
   });
 
-  router.delete("/delete/:email", async (req, res) => {
+  router.post("/subject/:id/:subject", async (req, res) => {
     try {
-      const { email } = req.params;
-      console.log(email);
-      const user = await User.findOne({ email: `${email}` });
-      await user.remove();
-      res.send({ data: true });
-    } catch {
-      res.status(404).send({ error: "User is not found" });
+      const { error } = subjectValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
+      const {id} = req.params
+      const subject = JSON.parse(req.params.subject)
+
+      User.findOne({ _id: { $eq: id } }).then((record)=> {
+        record.subjects.push(subject);
+        record.save()
+      })
+
+    }catch{
+      res.status(404).send({error: "User is not found"})
     }
-  });
+  })
+
+  router.delete("/delete/:id", async (req, res) => {
+    try {
+      const {id} = req.params
+      const user = await User.findOne({ _id: { $eq: id } });
+      const userDetails = await ContactDetails.findOne({ _id: { $eq: id } });
+      if (userDetails){
+        await userDetails.remove();
+      }
+      await user.remove();
+      res.send({data: true});
+    }catch{
+      res.status(404).send({error: "User is not found"})
+    }
+  })
 
   return router;
 }
+
+const subjectValidate = (data) => {
+  const schema = Joi.object({
+    subjectName: Joi.string().required().label("Subjects"),
+    subjectCode: Joi.string().required().label("Code"),
+    startDate: Joi.date().required().label("Emne start"),
+    endDate: Joi.date().required().label("Emne slutt")
+  });
+  return schema.validate(data);
+};

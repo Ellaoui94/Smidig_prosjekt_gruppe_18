@@ -71,7 +71,6 @@ export function AuthRoutes() {
   return router;
 }
 
-//Please explain
 const validate = (data) => {
   const schema = Joi.object({
     email: Joi.string().email().required().label("Email"),

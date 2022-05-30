@@ -66,6 +66,7 @@ export function FriendProfile() {
             kontakt via sosiale medier eller mail hvis du vil samarbeide!{" "}
           </p>
         </div>
+        <h4>Aktive emner</h4>
         <div className={"active-courses-card"}>
           {courseView.map((courses) => (
             <>
