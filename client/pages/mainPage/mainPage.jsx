@@ -3,40 +3,46 @@ import { PlannedSessionsCard } from "./cards/plannedSessionsCard";
 import { MySubjectsCard } from "./cards/mySubjectsCard";
 import { FinishedSessionsCard } from "./cards/finishedSessionsCard";
 import { Link } from "react-router-dom";
-
+import img from './dummyPics/img.png'
+import img1 from './dummyPics/img_1.png'
+import img2 from './dummyPics/img_2.png'
+import img3 from './dummyPics/img_3.png'
+import img4 from './dummyPics/img_4.png'
+import img5 from './dummyPics/img_5.png'
 // mock data, later to be taken from database
 const myFriends = [
   {
     name: "Noah",
-    photo: "",
+    photo: img,
   },
   {
     name: "Mia",
-    photo: "",
+    photo: img1,
   },
   {
     name: "Karl",
-    photo: "",
+    photo: img2,
   },
   {
     name: "Herman",
-    photo: "",
+    photo: img3,
   },
   {
     name: "Casper",
-    photo: "",
+    photo: img4,
   },
   {
     name: "Emma",
-    photo: "",
+    photo: img5,
   },
 ];
 
 function MyFriendsCard({ myFriends: { name, photo } }) {
   return (
     <>
-      <div>
-        <h6>{name}</h6>
+      <div className={"friends-wrapper"}>
+        <img width={"80px"} height={"80px"} src={photo}/>
+        <h6 style={{marginLeft: "10px"}}>{name}</h6>
       </div>
     </>
   );
@@ -60,14 +66,12 @@ function Feed() {
       </div>
 
       <h4>Mine venner</h4>
-      <div className={"horizontal-scroll-div"}>
-        <div className={"cards-div"}>
+      <div className={"friends-container"}>
           {myFriends.map((myFriends) => (
             <>
               <MyFriendsCard key={myFriends.name} myFriends={myFriends} />
             </>
           ))}
-        </div>
       </div>
 
       <h4>Tidligere arbeidsøkter</h4>

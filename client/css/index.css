@@ -101,6 +101,7 @@ footer {
 
 /*colors for subject cards ^*/
 
+/*colors for session cards*/
 .Mandag{
     border-radius: 50px;
     width: 500px;
@@ -131,6 +132,7 @@ footer {
     background-color: #CFDBC1;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
+/*colors for session cards ^*/
 
 .my-groups-card {
     width: 500px;
@@ -152,6 +154,17 @@ footer {
 
 .choose-user-diary-buttons-div {
     margin-bottom: 1em;
+}
+
+.friends-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px 100px;
+}
+
+.friends-wrapper{
+    display: flex;
+    justify-content: center;
 }
 
 /* list friends page */
