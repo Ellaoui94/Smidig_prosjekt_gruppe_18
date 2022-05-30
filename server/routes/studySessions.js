@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Session } from "../models/studySession.js";
+import { Session, updateValidateStudySession } from "../models/studySession.js";
 import * as parse from "nodemon";
 
 export function StudySessionApi() {
@@ -7,10 +7,33 @@ export function StudySessionApi() {
 
   router.post("/:email", async (req, res) => {
     try {
+      //Here we save the values in the right schema.
       await new Session(req.body).save();
       res.status(201).send({ message: "Session created successfully" });
     } catch (error) {
       res.status(400).json({ message: error.message });
+    }
+  });
+
+  /*
+    Here we update the schema. But we need to find the right schema to update.
+   */
+  router.post("/update/:email", async (req, res) => {
+    try {
+      //We need to know if there is some problems. Maybe a value is not set, that we said need to be required
+      const { error } = updateValidateStudySession(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
+      // We need to find the right data. We use the email to find the right one.
+      const { email } = req.params;
+      //Here we look for the right data, the one containing the email we sent with
+      const studySession = await Session.findOne({ email: `${email}` });
+      Object.assign(studySession, req.body);
+      studySession.save();
+      res.send({ data: studySession });
+    } catch {
+      res.status(404).send({ error: "User is not found" });
     }
   });
 

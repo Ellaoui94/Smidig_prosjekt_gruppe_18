@@ -24,6 +24,7 @@ import { AddNewFriendPage } from "./pages/addNewFriendPage/addNewFriendPage";
 import RoomIcon from "@mui/icons-material/Room";
 import imgpic from "./img.png";
 import HouseIcon from "@mui/icons-material/House";
+import imgProfile from "./imgProfile.png";
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -61,7 +62,9 @@ function HeaderBar() {
   return (
     <>
       <div id={"header"}>
-        <Link to={"/profile"}>Profil</Link>
+        <Link to={"/profile"}>
+          <img src={imgProfile} />
+        </Link>
       </div>
     </>
   );
@@ -101,7 +104,10 @@ function Application() {
             <Route path={"/"} element={<FrontPage />} />
             <Route path={"/register"} element={<NewProfile />} />
             <Route path={"/login/*"} element={<LoginPage />} />
-            <Route path={"/main-page"} element={<MainPage />} />
+            <Route
+              path={"/main-page"}
+              element={<MainPage firstName={firstName} />}
+            />
             <Route
               path={"/profile"}
               element={

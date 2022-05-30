@@ -9,6 +9,7 @@ import axios from "axios";
 const subjects = ["Math", "Religion", "Physics", "History"];
 const locations = ["Library", "Cafe"];
 const states = ["Alone", "Invisible", "Public", "Friends only"];
+const stage = ["Starte", "Planlegge"];
 const colors = [
   "#C2DBE2",
   "#FFBDBD",
@@ -30,6 +31,7 @@ export function StartSession({ email }) {
     location: "",
     studyStatus: "",
     studySessionTitle: "",
+    stage: "",
   });
 
   console.log("inside session: " + email);
@@ -42,12 +44,21 @@ export function StartSession({ email }) {
     setData({ ...data, [input.name]: input.value });
   };
 
+  const changeStage = ({ currentTarget: input }) => {
+    setData({ ...data, stage: "active" });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const url = `${window.location.origin}/api/session/${email}`;
       const { data: res } = await axios.post(url, data);
-      navigate("/session");
+      if (data.stage === "Planned") {
+        navigate("/main-page");
+      } else {
+        navigate("/session");
+      }
+
       console.log(res.message);
     } catch (error) {
       if (
@@ -113,9 +124,22 @@ export function StartSession({ email }) {
           ))}
         </div>
 
-        <div>
-          <Link to="/main-page">Planlegg økt</Link>
+        <div className={"session-div"} style={{ backgroundColor: "white" }}>
+          <h2>Ønsker du å planlegge eller starte økten</h2>
+          {stage.map((stages) => (
+            <div className={"session-card-div"}>
+              {stages}
+              <input
+                type="checkbox"
+                name="stage"
+                label={"stage"}
+                onChange={handleChange}
+                value={stages}
+              />
+            </div>
+          ))}
         </div>
+
         <button style={{ backgroundColor: "green" }}>Start økt</button>
       </form>
     </div>
