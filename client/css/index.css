@@ -164,7 +164,13 @@ footer {
     border-radius: 4px;
     margin-bottom: 1em;
 }
-
+/* mini-map in session*/
+.mini-map-container {
+    width: 90%;
+    height: 60vh;
+    margin-right: auto;
+    margin-left: auto;
+}
 /* map */
 .map-container {
     width: 100%;

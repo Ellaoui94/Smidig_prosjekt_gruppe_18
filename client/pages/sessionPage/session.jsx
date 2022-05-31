@@ -26,7 +26,7 @@ function MapView() {
       <GoogleMap
         zoom={14}
         center={{ lat: 59.911491, lng: 10.757933 }}
-        mapContainerClassName="map-container"
+        mapContainerClassName="mini-map-container"
       >
         <Marker
           style={{
@@ -99,7 +99,6 @@ export default function Session() {
   return (
     <div>
       <h1>{data[0].courseTitle}</h1>
-      <p>Her skal kart komme</p>
       <MapView />
       <p>Endre arbeidsstatus</p>
       <div>
