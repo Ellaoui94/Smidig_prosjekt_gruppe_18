@@ -58,7 +58,7 @@ function Map() {
             width: "101px",
           }}
           icon={{
-            url: "https://cdn.dribbble.com/users/2638821/screenshots/9213234/media/d51ac680af06d6c9642b145ebe24633f.jpg?compress=1&resize=400x300",
+            url: "http://localhost:3000/imgProfile.a4698995.png?1653992732689",
             scaledSize: { width: 70, height: 70 },
             style: { backgroundColor: "red", width: "101px" },
           }}
@@ -84,24 +84,20 @@ function Map() {
             width: "101px",
           }}
           icon={{
-            url: "https://play-lh.googleusercontent.com/I-Yd5tJnxw7Ks8FUhUiFr8I4kohd9phv5sRFHG_-nSX9AAD6Rcy570NBZVFJBKpepmc=w240-h480-rw",
+            url: "https://www.linkpicture.com/q/img_1.257e67a0-2.png",
             scaledSize: { width: 70, height: 70 },
             style: { backgroundColor: "red", width: "101px" },
           }}
           position={{ lat: 59.921481, lng: 10.747923 }}
         >
-          <InfoWindow position={{ lat: 59.921481, lng: 10.747923 }}>
+          <InfoWindow position={{ lat: 59.924481, lng: 10.747923 }}>
             <div className={"info-window"}>
               <div>
-                {user.map((userInfo) => (
-                  <div>
-                    <h1>
-                      {userInfo.firstName} {userInfo.lastName}
-                    </h1>
-                    <p>{userInfo.course}</p>
-                    <p>{userInfo.bio}</p>
-                  </div>
-                ))}
+                <div>
+                  <h1>Mia</h1>
+                  <p>Design</p>
+                  <p>Skal lage prototype til prosjekt, bli med den som vil!</p>
+                </div>
               </div>
             </div>
           </InfoWindow>
@@ -112,18 +108,84 @@ function Map() {
             width: "101px",
           }}
           icon={{
-            url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
+            url: "https://www.linkpicture.com/q/img_2.112eb9c4-2.png",
             scaledSize: { width: 70, height: 70 },
             style: { backgroundColor: "red", width: "101px" },
           }}
           position={{ lat: 59.941481, lng: 10.767923 }}
         >
-          <InfoWindow position={{ lat: 59.941481, lng: 10.767923 }}>
+          <InfoWindow position={{ lat: 59.944481, lng: 10.767923 }}>
             <div className={"info-window"}>
               <div>
-                <h1>Oda Jensen</h1>
-                <p>Sykepleier</p>
-                <p>Jobber med eksamensoppgaver, bli med!</p>
+                <h1>Karl</h1>
+                <p>Digital teknologi</p>
+                <p>Jobber med oppgaver, bli gjerne med!</p>
+              </div>
+            </div>
+          </InfoWindow>
+        </Marker>
+        <Marker
+          style={{
+            backgroundColor: "red",
+            width: "101px",
+          }}
+          icon={{
+            url: "https://www.linkpicture.com/q/img_3.874c01f9-2.png",
+            scaledSize: { width: 70, height: 70 },
+            style: { backgroundColor: "red", width: "101px" },
+          }}
+          position={{ lat: 59.961481, lng: 10.737923 }}
+        >
+          <InfoWindow position={{ lat: 59.964481, lng: 10.737923 }}>
+            <div className={"info-window"}>
+              <div>
+                <h1>Herman</h1>
+                <p>Programmering</p>
+                <p>Skal gjøre innlevering! Bare å bli med!</p>
+              </div>
+            </div>
+          </InfoWindow>
+        </Marker>
+        <Marker
+          style={{
+            backgroundColor: "red",
+            width: "101px",
+          }}
+          icon={{
+            url: "https://www.linkpicture.com/q/img_5.a230af13-2.png",
+            scaledSize: { width: 70, height: 70 },
+            style: { backgroundColor: "red", width: "101px" },
+          }}
+          position={{ lat: 59.924481, lng: 10.707923 }}
+        >
+          <InfoWindow position={{ lat: 59.927481, lng: 10.707923 }}>
+            <div className={"info-window"}>
+              <div>
+                <h1>Emma</h1>
+                <p>Filosofi</p>
+                <p>Gjør undersøkelser om personligheter, join!</p>
+              </div>
+            </div>
+          </InfoWindow>
+        </Marker>
+        <Marker
+          style={{
+            backgroundColor: "red",
+            width: "101px",
+          }}
+          icon={{
+            url: "https://www.linkpicture.com/q/img.e8ad64b6-2.png",
+            scaledSize: { width: 70, height: 70 },
+            style: { backgroundColor: "red", width: "101px" },
+          }}
+          position={{ lat: 59.954481, lng: 10.767923 }}
+        >
+          <InfoWindow position={{ lat: 59.957481, lng: 10.767923 }}>
+            <div className={"info-window"}>
+              <div>
+                <h1>Noah</h1>
+                <p>Digital teknologi</p>
+                <p>Jobber med innlevering alene</p>
               </div>
             </div>
           </InfoWindow>
