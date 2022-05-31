@@ -10,6 +10,11 @@ export function FinishedSession() {
     async () => await showFinishedSession({ sessionId: sessionId }),
     []
   );
+  const dateFormat = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -26,7 +31,7 @@ export function FinishedSession() {
   return (
     <>
       <h1>{data[0].courseTitle}</h1>
-      <h5>{data[0].day + ", " + data[0].date}</h5>
+      <h5>{new Date(data[0].date).toLocaleDateString("no-NO", dateFormat)}</h5>
       <h3>{data[0].location}</h3>
       <h6>{data[0].address}</h6>
       <div>

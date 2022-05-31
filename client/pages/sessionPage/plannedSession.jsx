@@ -14,6 +14,11 @@ export function PlannedSession() {
     async () => await showPlannedSession({ sessionId: sessionId }),
     []
   );
+  const dateFormat = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  };
 
   useEffect(() => {
     const ws = new WebSocket(window.location.origin.replace(/^http/, "ws"));
@@ -49,7 +54,7 @@ export function PlannedSession() {
   return (
     <>
       <h1>{data[0].courseTitle}</h1>
-      <h5>{data[0].day + ", " + data[0].date}</h5>
+      <h5>{new Date(data[0].date).toLocaleDateString("no-NO", dateFormat)}</h5>
       <h3>{data[0].location}</h3>
       <h6>{data[0].address}</h6>
       <div>
@@ -60,7 +65,7 @@ export function PlannedSession() {
             <div>
               <label>
                 <input type={"checkbox"} />
-                {todos}
+                {todos.todo}
               </label>
             </div>
           </>
