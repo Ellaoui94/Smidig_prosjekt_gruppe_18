@@ -117,50 +117,19 @@ export function NewProfile() {
             value={data.password}
             required
           />
-          <TextField
-            style={{ background: "white" }}
-            label={"Gjenta passord"}
-            margin="normal"
-          />
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label={"Fødselsdato"}
-              onChange={(newValue) => setDate(newValue)}
-              value={date}
-              renderInput={(params) => (
-                <TextField
-                  style={{ background: "white" }}
-                  margin={"normal"}
-                  {...params}
-                />
-              )}
-            />
-          </LocalizationProvider>
-          <label>
-            <select onChange={(e) => setSchool(e.target.value)}>
-              <option value="" selected>
-                Skole
-              </option>
-              {schools.map((school) => (
-                <option key={school} value={school}>
-                  {school}
-                </option>
-              ))}
-            </select>
-          </label>
           {error && <div>{error}</div>}
           <Button
             type={"submit"}
             style={{
               top: "10px",
-              background: "#3E989C",
+              background: "#326683",
               fontSize: "25px",
               fontWeight: "bold",
               color: "white",
               borderRadius: "50px",
             }}
           >
-            Logg inn
+            Registrer deg
           </Button>
           {/*    {!isPending && <Button style={{
               top: "10px",

@@ -7,7 +7,7 @@
 
 body {
     margin: 0em 0em 17em 0em;
-    background: #F3F3F3;
+    background: #F5F5F5;
     font-family: sans-serif;
     text-align: center;
     color: #285057;
@@ -29,7 +29,7 @@ footer {
     left: 0;
     bottom: 0;
     position: fixed;
-    background-color: lightblue;
+    background-color: #D7DDD7;
 }
 
 /* diary */

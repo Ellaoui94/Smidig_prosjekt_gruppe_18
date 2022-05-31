@@ -18,29 +18,20 @@ export function FrontPage() {
       <h1>Velkommen</h1>
 
       <p>
-        Finn en kollokviegruppe
-        som passer deg og ditt faglige behov.
+        Finn andre studenter som passer deg og ditt faglige behov,
+        samarbeid og jobb i team
       </p>
 
       <ButtonInfo text="Registrer deg" href="/register" />
 
       <Button component={Link} to="/login" style={{
         top: "10px",
-        background: "#023F4A",
+        background: "#326683",
         fontSize: "25px",
         fontWeight: "bold",
-        color: "#DCE5D1",
+        color: "white",
         borderRadius: "50px"
       }}> Logg inn</Button>
-
-      <p>Eller registrer og logg deg inn med skole mailen din</p>
-
-      <LoginButton
-        label={
-          "Login via Høyskolen Kristiania"
-        }
-        provider={"microsoft"}
-      />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 .content {
-    background: linear-gradient(180deg, #138CA7 0%, #70A790 100%);
     position: absolute;
-    top: 0;
+    top: 1em;
     left: 0;
     right: 0;
     bottom: 0;
@@ -9,6 +8,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #E99C00;
 }
 

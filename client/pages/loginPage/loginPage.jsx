@@ -76,7 +76,7 @@ export function LoginPage() {
 
           <Button type={"submit"} style={{
             top: "10px",
-            background: "#3E989C",
+            background: "#326683",
             fontSize: "25px",
             fontWeight: "bold",
             color: "white",
