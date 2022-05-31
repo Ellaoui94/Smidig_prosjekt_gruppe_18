@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
     focus: { type: String, required: false },
     comment: { type: String, required: false },
     stage: { type: String, required: false },
+    startDate: { type: Date, required: false },
   },
   { timestamps: true }
 );

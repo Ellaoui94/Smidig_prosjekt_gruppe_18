@@ -11,8 +11,8 @@ export function EndSession({ emailInput }) {
     email: "",
     evaluation: "",
     focus: "",
-    other: "",
-    finished: true,
+    comment: "",
+    stage: "finished",
   });
 
   console.log("inside startSession: " + emailInput);
@@ -85,10 +85,10 @@ export function EndSession({ emailInput }) {
         <div className={"session-div"} style={{ backgroundColor: "white" }}>
           <h2>Legg til kommentar</h2>
           <textarea
-            name="other"
-            label={"other"}
+            name="comment"
+            label={"comment"}
             onChange={handleChange}
-            value={data.other}
+            value={data.comment}
           />
         </div>
         <div>
