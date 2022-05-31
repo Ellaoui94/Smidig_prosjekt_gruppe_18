@@ -51,7 +51,7 @@ function MyFriendsCard({ myFriends: { name, photo } }) {
 function Feed() {
   return (
     <>
-      <div style={{ width: "100%" }}>
+      <div>
         <h4>Mine emner</h4>
         <div className={"horizontal-scroll-div"}>
           <div className={"cards-div"}>
@@ -69,7 +69,7 @@ function Feed() {
         <h4>Mine venner</h4>
         <div className={"friends-container"}>
           {myFriends.map((myFriends, key) => (
-              <MyFriendsCard key={key} myFriends={myFriends} />
+            <MyFriendsCard key={key} myFriends={myFriends} />
           ))}
         </div>
 

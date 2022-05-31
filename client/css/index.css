@@ -50,8 +50,10 @@ footer {
 .horizontal-scroll-div {
     overflow-y: hidden;
     overflow-x: auto;
-    max-width: 100%;
+    width: 90vw;
     margin-bottom: 5em;
+    margin-left: auto;
+    margin-right: 0;
 }
 
 @media (max-width: 1080px) and (min-width: 200px) {
