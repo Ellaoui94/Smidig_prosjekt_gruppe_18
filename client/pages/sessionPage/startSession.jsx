@@ -26,7 +26,9 @@ const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const rColors = shuffle(colors);
 
 export function StartSession({ email }) {
-  const [startDate, setStartDate] = useState(null);
+  const [startDateSession, setStartDateSession] = useState(null);
+
+  const test = startDateSession;
 
   const [sessionData, setSessionData] = useState({
     email: "",
@@ -35,10 +37,11 @@ export function StartSession({ email }) {
     studyStatus: "",
     studySessionTitle: "",
     stage: "",
-    startDate: startDate,
+    startDate: null,
   });
 
-  console.log("inside session: " + email);
+  sessionData.startDate = startDateSession;
+  console.log("inside session: " + sessionData.startDate);
   sessionData.email = email;
 
   const [sessionError, setSessionError] = useState("");
@@ -152,8 +155,8 @@ export function StartSession({ email }) {
             <DatePicker
               name="startDate"
               label={"startDate"}
-              onChange={(newValue) => setSessionData(newValue)}
-              value={sessionData.startDate}
+              onChange={(newValue) => setStartDateSession(newValue)}
+              value={startDateSession}
               renderInput={(params) => (
                 <TextField
                   style={{ background: "white" }}
