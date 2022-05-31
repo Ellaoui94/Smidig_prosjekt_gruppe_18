@@ -49,9 +49,6 @@ export function StudySessionApi() {
       } else {
         await Session.find({ stage: "planned" }).then((result) => {
           queryResult = result;
-          // console.log(
-          //   "inside router planned session: " + JSON.stringify(result)
-          // );
         });
       }
       res.json(queryResult);

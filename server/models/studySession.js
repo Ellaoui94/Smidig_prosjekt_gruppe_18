@@ -30,8 +30,8 @@ const userSchema = new mongoose.Schema({
 const Session = mongoose.model("session", userSchema);
 
 const validateStudySession = (data) => {
-  const shema = Joi.object({
-    studyStatus: Joi.string().required().label("Study Status"),
+  const schema = Joi.object({
+    status: Joi.string().required().label("Study Status"),
     evaluation: Joi.string().required().label("Evaluation"),
     focus: Joi.string().required().label("Focus"),
     other: Joi.string().required().label("Other"),
