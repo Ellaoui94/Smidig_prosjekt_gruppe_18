@@ -99,28 +99,40 @@ function Application() {
         </header>
         <main>
           <Routes>
-            {id === undefined ?
+            {id === undefined ? (
               <>
                 <Route path={"/"} element={<FrontPage />} />
                 <Route path={"/register"} element={<NewProfile />} />
                 <Route path={"/login/*"} element={<LoginPage />} />
-                <Route path={"*"} element={<NotFound/>} />
+                <Route path={"*"} element={<NotFound />} />
               </>
-              :
+            ) : (
               <>
-                <Route path={"/main-page"} element={<MainPage firstName={firstName} />} />
-                <Route path={"/profile"} element={<Profile profile={profile}/>} />
-                <Route path={"/contactInfo"} element={<AddContactInfo id={id} />} />
+                <Route
+                  path={"/main-page"}
+                  element={<MainPage firstName={firstName} />}
+                />
+                <Route
+                  path={"/profile"}
+                  element={<Profile profile={profile} />}
+                />
+                <Route
+                  path={"/contactInfo"}
+                  element={<AddContactInfo id={id} />}
+                />
                 <Route path={"/edit"} element={<EditProfile id={id} />} />
                 <Route path={"/delete"} element={<Logout />} />
 
-                <Route path={"/session"} element={<Session email={email} />} />
+                <Route
+                  path={"/session/:sessionId"}
+                  element={<Session email={email} />}
+                />
                 <Route
                   path={"/start-session"}
                   element={<StartSession email={email} />}
                 />
                 <Route
-                  path={"/end-session"}
+                  path={"/end-session/:sessionId"}
                   element={<EndSession emailInput={email} />}
                 />
                 <Route
@@ -132,17 +144,22 @@ function Application() {
                   element={<FinishedSession />}
                 />
 
-                <Route path={"/add-new-friend"} element={<AddNewFriendPage id={id} />} />
+                <Route
+                  path={"/add-new-friend"}
+                  element={<AddNewFriendPage id={id} />}
+                />
                 <Route path={"/friend-page"} element={<FriendPage />} />
                 <Route path={"/friend-profile"} element={<FriendProfile />} />
-                <Route path={"/friends-activity"} element={<FriendsActivity />} />
+                <Route
+                  path={"/friends-activity"}
+                  element={<FriendsActivity />}
+                />
 
                 <Route path={"/map-page"} element={<MapPage />} />
                 <Route path={"/course-view/:course"} element={<CourseView />} />
-                <Route path={"*"} element={<NotFound id={id}/>} />
-
+                <Route path={"*"} element={<NotFound id={id} />} />
               </>
-            }
+            )}
           </Routes>
         </main>
 

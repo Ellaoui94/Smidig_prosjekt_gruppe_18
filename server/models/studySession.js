@@ -7,24 +7,27 @@ import Joi from "joi";
   This is all the different attributes we can put in the database.
   If you want to add more attributes to the database, just add it below.
  */
-const userSchema = new mongoose.Schema({
-  email: { type: String, required: false },
-  date: { type: Date, required: false, default: Date.now() },
-  courseTitle: { type: String, required: false },
-  location: { type: String, required: false },
-  address: { type: String, required: false },
-  todos: [
-    {
-      todo: { type: String, required: false },
-      checked: { type: Boolean, required: false, default: false },
-    },
-  ],
-  status: { type: String, required: false },
-  evaluation: { type: String, required: false },
-  focus: { type: String, required: false },
-  comment: { type: String, required: false },
-  stage: { type: String, required: false },
-});
+const userSchema = new mongoose.Schema(
+  {
+    email: { type: String, required: false },
+    date: { type: Date, required: false, default: Date.now() },
+    courseTitle: { type: String, required: false },
+    location: { type: String, required: false },
+    address: { type: String, required: false },
+    todos: [
+      {
+        todo: { type: String, required: false },
+        checked: { type: Boolean, required: false, default: false },
+      },
+    ],
+    status: { type: String, required: false },
+    evaluation: { type: String, required: false },
+    focus: { type: String, required: false },
+    comment: { type: String, required: false },
+    stage: { type: String, required: false },
+  },
+  { timestamps: true }
+);
 
 //We use this in routes so that we can put the different values in the right schema
 const Session = mongoose.model("session", userSchema);

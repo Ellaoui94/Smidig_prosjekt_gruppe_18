@@ -54,7 +54,7 @@ export function PlannedSessionsCard() {
               {new Date(session.date).toLocaleDateString("no-NO", dateFormat)}
             </Link>
             <h5>{session.courseTitle}</h5>
-            <h6>{"- " + session.todos[0].todo}</h6>
+            {/*<h6>{"- " + session.todos[0].todo}</h6>*/}
             <div className={"arrow-div"}>
               <p>></p>
             </div>

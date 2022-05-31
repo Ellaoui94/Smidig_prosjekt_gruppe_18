@@ -76,6 +76,41 @@ export function StudySessionApi() {
     }
   });
 
+  router.get("/active-session/", async (req, res) => {
+    try {
+      const { sessionId } = req.query;
+      let queryResult = "";
+      if (sessionId) {
+        await Session.find({ _id: { $eq: sessionId } }).then((result) => {
+          queryResult = result;
+        });
+      } else {
+        await Session.find({ stage: "active" }).then((result) => {
+          queryResult = result;
+        });
+      }
+      res.json(queryResult);
+    } catch {
+      res.status(404).send({ error: "Session not found" });
+    }
+  });
+
+  router.get("/new-session", async (req, res) => {
+    try {
+      await Session.find()
+        .sort({ createdAt: -1 })
+        .limit(1)
+        .then((result) => {
+          console.log(
+            "INSIDE ROUTER get last session" + JSON.stringify(result)
+          );
+          res.json(result);
+        });
+    } catch {
+      res.status(404).send({ error: "Session not found" });
+    }
+  });
+
   router.post("/new-todo/", async (req, res) => {
     try {
       const { todo, checked } = req.body;

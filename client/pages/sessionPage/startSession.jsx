@@ -5,11 +5,13 @@ import "./session.css";
 import { Link, useNavigate } from "react-router-dom";
 import { UserApiContext } from "../../userApiContext";
 import axios from "axios";
+import { MainPageApiContext } from "../../mainPageApiContext";
+import { useLoading } from "../../useLoading";
 
 const subjects = ["Math", "Religion", "Physics", "History"];
 const locations = ["Library", "Cafe"];
 const states = ["Alone", "Invisible", "Public", "Friends only"];
-const stage = ["Starte", "Planlegge"];
+const stage = ["active", "planned"];
 const colors = [
   "#C2DBE2",
   "#FFBDBD",
@@ -25,7 +27,7 @@ const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const rColors = shuffle(colors);
 
 export function StartSession({ email }) {
-  const [data, setData] = useState({
+  const [sessionData, setSessionData] = useState({
     email: "",
     courseTitle: [],
     location: "",
@@ -35,28 +37,35 @@ export function StartSession({ email }) {
   });
 
   console.log("inside session: " + email);
-  data.email = email;
+  sessionData.email = email;
 
-  const [error, setError] = useState("");
+  const [sessionError, setSessionError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
+    setSessionData({ ...sessionData, [input.name]: input.value });
   };
 
   const changeStage = ({ currentTarget: input }) => {
-    setData({ ...data, stage: "active" });
+    setSessionData({ ...sessionData, stage: "active" });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const url = `${window.location.origin}/api/session/${email}`;
-      const { data: res } = await axios.post(url, data);
-      if (data.stage === "Planned") {
+      const { data: res } = await axios.post(url, sessionData);
+
+      const addUrl = `${window.location.origin}/api/session/new-session`;
+      const { data: response } = await axios.get(addUrl);
+
+      const newSessionId = response[0]._id;
+      console.log("inside handleSubmit " + response[0]._id);
+
+      if (sessionData.stage === "planned") {
         navigate("/main-page");
       } else {
-        navigate("/session");
+        navigate("/session/" + newSessionId);
       }
 
       console.log(res.message);
@@ -66,13 +75,13 @@ export function StartSession({ email }) {
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        setError(error.response.data.message);
+        setSessionError(error.response.data.message);
       }
     }
   };
 
   return (
-    <div>
+    <div className={"new-session-div"}>
       <h1>Oprett ny studieøkt</h1>
 
       <form onSubmit={handleSubmit}>
