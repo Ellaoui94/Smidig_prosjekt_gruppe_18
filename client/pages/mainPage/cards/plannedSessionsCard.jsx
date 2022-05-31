@@ -44,11 +44,9 @@ export function PlannedSessionsCard() {
   return (
     <>
       {data.map((session, i) => (
-          <div key={i} className={"main-page-components-card"} style={{backgroundColor: rColors[i]}}>
-            <Link to={"/planned-session/" + session.sessionId}>
-              {session.day + ", " + session.date}
         <>
           <div
+            key={i}
             className={"main-page-components-card"}
             style={{ backgroundColor: rColors[i] }}
           >
