@@ -9,10 +9,10 @@ import { ListSubjects } from "./listSubjects";
 
 const user = [
   {
-    firstName: "Navn",
-    lastName: "Navnesen",
+    firstName: "Deg",
+    lastName: "Degesen",
     course: "programmering",
-    bio: "Join gjerne! Jobber med innlevering 2",
+    bio: "Join gjerne!",
   },
 ];
 
