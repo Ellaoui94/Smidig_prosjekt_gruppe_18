@@ -129,7 +129,7 @@ function Application() {
                 />
                 <Route
                   path={"/start-session"}
-                  element={<StartSession email={email} />}
+                  element={<StartSession profile={profile} />}
                 />
                 <Route
                   path={"/end-session/:sessionId"}

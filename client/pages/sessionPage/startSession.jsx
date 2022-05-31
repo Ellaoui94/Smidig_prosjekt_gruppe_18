@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IconButton, TextField } from "@mui/material";
 import "./session.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,7 +25,9 @@ const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
 const rColors = shuffle(colors);
 
-export function StartSession({ email }) {
+export function StartSession({ profile: { firstName, lastName, email, id } }) {
+  const [userSubject, setUserSubjects] = useState([]);
+
   const [startDateSession, setStartDateSession] = useState(null);
 
   const test = startDateSession;
@@ -46,6 +48,15 @@ export function StartSession({ email }) {
 
   const [sessionError, setSessionError] = useState("");
   const navigate = useNavigate();
+
+  useEffect(async () => {
+    const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`;
+    const { data: response } = axios.get(userURL);
+
+    response.map((r) => {
+      setUserSubjects(r.subjects);
+    });
+  });
 
   const handleChange = ({ currentTarget: input }) => {
     setSessionData({ ...sessionData, [input.name]: input.value });
@@ -88,7 +99,8 @@ export function StartSession({ email }) {
       <form onSubmit={handleSubmit}>
         <div className={"session-div"} style={{ backgroundColor: "white" }}>
           <h2>Hvilket emne vil du jobbe med?</h2>
-          {subjects.map((subject) => (
+
+          {userSubject.map((subject) => (
             <div className={"session-card-div"}>
               <input
                 type="radio"
@@ -97,7 +109,7 @@ export function StartSession({ email }) {
                 onChange={handleChange}
                 value={subject}
               />
-              {subject}
+              {subject.subjectName}
             </div>
           ))}
         </div>
