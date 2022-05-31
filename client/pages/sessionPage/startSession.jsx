@@ -25,7 +25,9 @@ const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
 const rColors = shuffle(colors);
 
-export function StartSession({ profile: { firstName, lastName, email, id } }) {
+export async function StartSession({
+  profile: { firstName, lastName, email, id },
+}) {
   const [userSubject, setUserSubjects] = useState([]);
 
   const [startDateSession, setStartDateSession] = useState(null);
@@ -49,14 +51,10 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
   const [sessionError, setSessionError] = useState("");
   const navigate = useNavigate();
 
-  useEffect(async () => {
-    const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`;
-    const { data: response } = axios.get(userURL);
-
-    response.map((r) => {
-      setUserSubjects(r.subjects);
-    });
-  });
+  console.log(id);
+  const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`;
+  const { data: res } = await axios.get(userURL);
+  console.log("INSIDE start session " + JSON.stringify(res));
 
   const handleChange = ({ currentTarget: input }) => {
     setSessionData({ ...sessionData, [input.name]: input.value });
@@ -100,7 +98,7 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
         <div className={"session-div"} style={{ backgroundColor: "white" }}>
           <h2>Hvilket emne vil du jobbe med?</h2>
 
-          {userSubject.map((subject) => (
+          {res.map((subject) => (
             <div className={"session-card-div"}>
               <input
                 type="radio"
