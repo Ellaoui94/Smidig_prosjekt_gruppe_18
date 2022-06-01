@@ -80,7 +80,7 @@ function Application() {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [id, setId] = useState();
-  const [registered, setRegistered] = useState(true);
+  const [registered, setRegistered] = useState(false);
 
   useEffect(async () => {
     const user = await getUser();
