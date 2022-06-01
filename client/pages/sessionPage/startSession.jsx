@@ -7,9 +7,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
 
-const subjects = ["Math", "Religion", "Physics", "History"];
-const locations = ["Library", "Cafe"];
-const states = ["Alone", "Invisible", "Public", "Friends only"];
+const subjects = ["Matematikk", "Religion", "Fysikk", "Historie"];
+const locations = ["Bibliotek", "Cafe"];
+const states = ["Alene", "Usynlig", "Offentlig", "Kun venner"];
 const stage = ["active", "planned"];
 const colors = [
   "#C2DBE2",
@@ -25,9 +25,7 @@ const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
 const rColors = shuffle(colors);
 
-export async function StartSession({
-  profile: { firstName, lastName, email, id },
-}) {
+export function StartSession({ profile: { firstName, lastName, email, id } }) {
   const [userSubject, setUserSubjects] = useState([]);
 
   const [startDateSession, setStartDateSession] = useState(null);
@@ -52,9 +50,18 @@ export async function StartSession({
   const navigate = useNavigate();
 
   console.log(id);
+  /*
   const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`;
   const { data: res } = await axios.get(userURL);
   console.log("INSIDE start session " + JSON.stringify(res));
+
+
+
+  res.map((r) => {
+    setUserSubjects(r.subjects);
+  });
+
+   */
 
   const handleChange = ({ currentTarget: input }) => {
     setSessionData({ ...sessionData, [input.name]: input.value });
@@ -98,7 +105,7 @@ export async function StartSession({
         <div className={"session-div"} style={{ backgroundColor: "white" }}>
           <h2>Hvilket emne vil du jobbe med?</h2>
 
-          {res.map((subject) => (
+          {subjects.map((subject) => (
             <div className={"session-card-div"}>
               <input
                 type="radio"
@@ -107,7 +114,7 @@ export async function StartSession({
                 onChange={handleChange}
                 value={subject}
               />
-              {subject.subjectName}
+              {subject}
             </div>
           ))}
         </div>
