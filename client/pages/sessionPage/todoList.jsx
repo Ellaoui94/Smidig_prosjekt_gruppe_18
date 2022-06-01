@@ -35,14 +35,14 @@ export function TodoList() {
     try {
       const url = `${
         window.location.origin
-      }/api/session/new-todo?${sessionId}/${encodeURIComponent(
+      }/api/session/new-todo/${sessionId}/${encodeURIComponent(
         JSON.stringify(newTodo)
       )}`;
-      const { data: res } = await axios.post(url, newTodo);
-      console.log(res.message);
-      //send data to websockets
       ws.send(JSON.stringify({ todo, checked }));
       setTodo("");
+      const { data: res } = await axios.post(url, newTodo);
+      //send data to websockets
+      console.log(res.message);
     } catch (error) {
       if (
         error.response &&
@@ -53,6 +53,8 @@ export function TodoList() {
       }
     }
   }
+
+  console.log(joiError)
 
   if (loading) {
     return <div>Loading...</div>;

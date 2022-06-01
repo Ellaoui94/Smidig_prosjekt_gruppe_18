@@ -42,7 +42,7 @@ export function FinishedSessionsCard() {
 
   return (
     <>
-      {data.map((session, i) => (
+      {data.reverse().map((session, i) => (
         <div
           key={i}
           className={"main-page-components-card"}
