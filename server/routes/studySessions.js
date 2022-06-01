@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { Session, updateValidateStudySession } from "../models/studySession.js";
+import { Session, todoValidate, updateValidateStudySession } from "../models/studySession.js";
 import * as parse from "nodemon";
+import { User } from "../models/user.js";
 
 export function StudySessionApi() {
   const router = new Router();
@@ -111,7 +112,26 @@ export function StudySessionApi() {
     }
   });
 
-  router.post("/new-todo/", async (req, res) => {
+  router.post("/new-todo/:id:/:todo", (req, res) => {
+    try {
+      const { error } = todoValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
+      const {id} = req.params
+      const  newTodo  = JSON.parse(req.params.todo)
+
+      Session.findOne({ _id: { $eq: id } }).then((record)=> {
+        record.todos.push(newTodo);
+        record.save()
+      })
+
+    }catch{
+      res.status(404).send({error: "User is not found"})
+    }
+  })
+
+/*  router.post("/new-todo/", async (req, res) => {
     try {
       const { todo, checked } = req.body;
       const { sessionId } = req.query;
@@ -127,7 +147,7 @@ export function StudySessionApi() {
     } catch {
       res.status(404).send({ error: "Session not found" });
     }
-  });
+  });*/
 
   return router;
 }

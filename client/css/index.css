@@ -5,8 +5,11 @@
     grid-template-rows: auto 1fr;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body {
-    margin: 0em 0em 17em 0em;
     background: #F5F5F5;
     font-family: sans-serif;
     text-align: center;
@@ -56,11 +59,6 @@ footer {
     margin-right: 0;
 }
 
-@media (max-width: 1080px) and (min-width: 200px) {
-    .horizontal-scroll-div{
-        max-width: 1000px;
-    }
-}
 
 .main-page-components-card {
     border-radius: 50px;

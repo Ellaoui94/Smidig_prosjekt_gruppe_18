@@ -9,6 +9,7 @@ import img2 from "./dummyPics/img_2.png";
 import img3 from "./dummyPics/img_3.png";
 import img4 from "./dummyPics/img_4.png";
 import img5 from "./dummyPics/img_5.png";
+import imgProfile from '../../imgProfile.png'
 // mock data, later to be taken from database
 const myFriends = [
   {
@@ -89,7 +90,9 @@ export function MainPage({ firstName }) {
     <>
       <div className={"main-div"}>
         <Link to="/add-new-friend">Legg til ny venn</Link>
-        <h2>Hei, {firstName}</h2>
+        <div id={"wrapper"}>
+        <h2>Hei, {firstName}</h2> <Link to={"/profile"}><img width={"100px"} style={{marginLeft: 20}} src={imgProfile}/></Link>
+        </div>
         <Feed />
       </div>
     </>

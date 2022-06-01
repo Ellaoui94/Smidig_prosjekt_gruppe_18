@@ -101,7 +101,7 @@ export default function AddSubject({ id, setNewSubject }) {
           />
         </LocalizationProvider>
 
-        <div id={"bottom"}>
+        <div>
           <Button
             type={"submit"}
             style={{

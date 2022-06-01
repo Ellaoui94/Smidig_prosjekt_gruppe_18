@@ -132,7 +132,14 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
 
         <div id={"wrapper"}>
           <h1>Aktive emner</h1>
-          <IconButton onClick={() => setClicked(!clicked)}>
+          <IconButton onClick={() => {
+            setClicked(!clicked);
+            if(!clicked){
+              scroll(0, 500)
+            }else {
+              scroll(0, -500)
+            }
+          }}>
             <SettingsIcon
               className={"addSubj"}
               style={{ fontSize: "60px", color: "#285057" }}

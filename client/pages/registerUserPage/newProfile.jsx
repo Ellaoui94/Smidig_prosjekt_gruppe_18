@@ -16,9 +16,7 @@ const schools = [
   "UIO Bergen",
 ];
 
-export function NewProfile() {
-  const [date, setDate] = useState(null);
-  const [school, setSchool] = useState("");
+export function NewProfile({setRegistered}) {
 
   const [data, setData] = useState({
     firstName: "",
@@ -38,7 +36,8 @@ export function NewProfile() {
     try {
       const url = `${window.location.origin}/api/users`;
       const { data: res } = await axios.post(url, data);
-      navigate("/login");
+      navigate("/intro/introOne");
+      setRegistered(true)
       console.log(res.message);
     } catch (error) {
       if (

@@ -26,6 +26,10 @@ import RoomIcon from "@mui/icons-material/Room";
 import imgPic from "./img.png";
 import HouseIcon from "@mui/icons-material/House";
 import imgProfile from "./imgProfile.png";
+import PageOne from "./pages/introPages/pageOne";
+import PageTwo from "./pages/introPages/pageTwo";
+import PageThree from "./pages/introPages/pageThree";
+import AnimatedRoutes from "./pages/introPages/AnimatedRoutes";
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -34,7 +38,7 @@ async function getUser() {
     id: res.data.id,
     firstName: res.data.firstName,
     lastName: res.data.lastName,
-    email: res.data.email,
+    email: res.data.email
   };
 
   return user;
@@ -76,6 +80,7 @@ function Application() {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [id, setId] = useState();
+  const [registered, setRegistered] = useState(true);
 
   useEffect(async () => {
     const user = await getUser();
@@ -94,15 +99,15 @@ function Application() {
   return (
     <>
       <BrowserRouter>
-        <header>
-          <HeaderBar />
-        </header>
         <main>
           <Routes>
             {id === undefined ? (
               <>
                 <Route path={"/"} element={<FrontPage />} />
-                <Route path={"/register"} element={<NewProfile />} />
+                <Route path={"/register"} element={<NewProfile setRegistered={setRegistered} />} />
+                {registered &&
+                   <Route path={"/intro/*"} element={<AnimatedRoutes setRegistered={setRegistered}/>}/>
+                }
                 <Route path={"/login/*"} element={<LoginPage />} />
                 <Route path={"*"} element={<NotFound />} />
               </>
@@ -163,9 +168,11 @@ function Application() {
           </Routes>
         </main>
 
-        <footer>
+        {id &&
+          <footer>
           <NavBar />
-        </footer>
+        </footer>}
+
       </BrowserRouter>
     </>
   );
