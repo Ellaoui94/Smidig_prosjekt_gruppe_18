@@ -17,7 +17,7 @@ export function TodoList() {
     []
   );
 
-  const newTodo = {todo: todo}
+  const newTodo = { todo: todo };
 
   useEffect(() => {
     const ws = new WebSocket(window.location.origin.replace(/^http/, "ws"));
@@ -33,7 +33,11 @@ export function TodoList() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const url = `${window.location.origin}/api/session/new-todo/${sessionId}/${encodeURIComponent(JSON.stringify(newTodo))}`;
+      const url = `${
+        window.location.origin
+      }/api/session/new-todo?${sessionId}/${encodeURIComponent(
+        JSON.stringify(newTodo)
+      )}`;
       const { data: res } = await axios.post(url, newTodo);
       console.log(res.message);
       //send data to websockets
