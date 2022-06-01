@@ -39,10 +39,10 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
     studyStatus: "",
     studySessionTitle: "",
     stage: "",
-    startDate: null,
+    date: null,
   });
 
-  sessionData.startDate = startDateSession;
+  sessionData.date = startDateSession;
   console.log("inside session: " + sessionData.startDate);
   sessionData.email = email;
 
@@ -170,8 +170,8 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
         <div>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              name="startDate"
-              label={"startDate"}
+              name="date"
+              label={"date"}
               onChange={(newValue) => setStartDateSession(newValue)}
               value={startDateSession}
               renderInput={(params) => (

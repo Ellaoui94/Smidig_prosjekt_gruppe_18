@@ -12,7 +12,11 @@
     "install:client": "cd client && npm install --include=dev",
     "install:server": "cd server && npm install",
     "format": "prettier --write *.{jsx,js}",
-    "format:check": "prettier --check *.{jsx,js}"
+    "format:check": "prettier --check *.{jsx,js}",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "start": "cd server && npm start"
   },
   "repository": {
     "type": "git",
