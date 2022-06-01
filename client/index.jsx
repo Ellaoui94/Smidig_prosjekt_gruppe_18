@@ -38,7 +38,7 @@ async function getUser() {
     id: res.data.id,
     firstName: res.data.firstName,
     lastName: res.data.lastName,
-    email: res.data.email
+    email: res.data.email,
   };
 
   return user;
@@ -49,13 +49,13 @@ function NavBar() {
     <>
       <div id={"nav-bar"}>
         <Link to={"/main-page"}>
-          <HouseIcon style={{ fontSize: "65px" }} />
+          <HouseIcon style={{ fontSize: "50px" }} />
         </Link>
         <Link to={"/start-session"}>
-          <img src={imgPic} />
+          <img style={{ height: "75%" }} src={imgPic} />
         </Link>
         <Link to={"/map-page"}>
-          <RoomIcon style={{ fontSize: "65px" }} />
+          <RoomIcon style={{ fontSize: "50px" }} />
         </Link>
       </div>
     </>
@@ -104,10 +104,16 @@ function Application() {
             {id === undefined ? (
               <>
                 <Route path={"/"} element={<FrontPage />} />
-                <Route path={"/register"} element={<NewProfile setRegistered={setRegistered} />} />
-                {registered &&
-                   <Route path={"/intro/*"} element={<AnimatedRoutes setRegistered={setRegistered}/>}/>
-                }
+                <Route
+                  path={"/register"}
+                  element={<NewProfile setRegistered={setRegistered} />}
+                />
+                {registered && (
+                  <Route
+                    path={"/intro/*"}
+                    element={<AnimatedRoutes setRegistered={setRegistered} />}
+                  />
+                )}
                 <Route path={"/login/*"} element={<LoginPage />} />
                 <Route path={"*"} element={<NotFound />} />
               </>
@@ -168,11 +174,11 @@ function Application() {
           </Routes>
         </main>
 
-        {id &&
+        {id && (
           <footer>
-          <NavBar />
-        </footer>}
-
+            <NavBar />
+          </footer>
+        )}
       </BrowserRouter>
     </>
   );
