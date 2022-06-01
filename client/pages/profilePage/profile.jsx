@@ -45,7 +45,7 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
       setContactId(r._id);
     });
 
-    const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`;
+    const userURL = `${window.location.origin}/api/users/getUser/${id}`;
     const { data: response } = await axios.get(userURL);
     response.map((r) => {
       setUserSubjects(r.subjects);

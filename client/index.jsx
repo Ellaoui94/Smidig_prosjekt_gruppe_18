@@ -5,7 +5,7 @@ import { FrontPage } from "./pages/frontPage/frontPage";
 import { Logout, Profile } from "./pages/profilePage/profile";
 import Session from "./pages/sessionPage/session";
 import { FriendsActivity } from "./pages/friendsActivityPage/friendsActivity";
-import { FriendPage } from "./pages/friendsPage/friendPage";
+import { FriendsPage } from "./pages/friendsPage/friendsPage";
 import { NewProfile } from "./pages/registerUserPage/newProfile";
 import { LoginPage } from "./pages/loginPage/loginPage";
 import "./css/index.css";
@@ -81,6 +81,7 @@ function Application() {
   const [email, setEmail] = useState();
   const [id, setId] = useState();
   const [registered, setRegistered] = useState(false);
+  const [friends, setFriends] = useState([]);
 
   useEffect(async () => {
     const user = await getUser();
@@ -91,9 +92,15 @@ function Application() {
     setLastName(user.lastName);
     setEmail(user.email);
     setId(user.id);
-  }, []);
 
-  const profile = { firstName, lastName, email, id };
+    const userURL = `${window.location.origin}/api/users/getUser/${id}`;
+    const { data: response } = await axios.get(userURL);
+    response.map((r) => {
+      setFriends(r.friends);
+    });
+  }, [id]);
+
+  const profile = { firstName, lastName, email, friends, id };
   const user = localStorage.getItem("token");
 
   return (
@@ -121,7 +128,7 @@ function Application() {
               <>
                 <Route
                   path={"/main-page"}
-                  element={<MainPage firstName={firstName} />}
+                  element={<MainPage profile={profile} />}
                 />
                 <Route
                   path={"/profile"}
@@ -159,7 +166,7 @@ function Application() {
                   path={"/add-new-friend"}
                   element={<AddNewFriendPage id={id} />}
                 />
-                <Route path={"/friend-page"} element={<FriendPage />} />
+                <Route path={"/friends-page"} element={<FriendsPage profile={profile} />} />
                 <Route path={"/friend-profile"} element={<FriendProfile />} />
                 <Route
                   path={"/friends-activity"}

@@ -62,7 +62,7 @@ export function UsersRoutes() {
     }
   })
 
-  router.get("/getAllUsers/:id", async (req, res) => {
+  router.get("/getUser/:id", async (req, res) => {
     try {
       const { id } = req.params;
       if (id !== `${undefined}`) {
@@ -132,6 +132,19 @@ export function UsersRoutes() {
       res.send({data: true});
     }catch{
       res.status(404).send({error: "User is not found"})
+    }
+  })
+
+  router.delete("/friendsDelete/:id/:name", async (req, res) => {
+    try {
+      const { id, name } = req.params
+
+      await User.updateOne({"_id" : id}, {"$pull" : {"friends" : { "name" : name}}}),
+        { "multi" : true }
+
+      res.send({ data: true });
+    } catch {
+      res.status(404).send({ error: "User is not found" })
     }
   })
 

@@ -4,39 +4,7 @@ import { MySubjectsCard } from "./cards/mySubjectsCard";
 import { FinishedSessionsCard } from "./cards/finishedSessionsCard";
 import { Link } from "react-router-dom";
 import img from "./dummyPics/img.png";
-import img1 from "./dummyPics/img_1.png";
-import img2 from "./dummyPics/img_2.png";
-import img3 from "./dummyPics/img_3.png";
-import img4 from "./dummyPics/img_4.png";
-import img5 from "./dummyPics/img_5.png";
 import imgProfile from '../../imgProfile.png'
-// mock data, later to be taken from database
-const myFriends = [
-  {
-    name: "Noah",
-    photo: img,
-  },
-  {
-    name: "Mia",
-    photo: img1,
-  },
-  {
-    name: "Karl",
-    photo: img2,
-  },
-  {
-    name: "Herman",
-    photo: img3,
-  },
-  {
-    name: "Casper",
-    photo: img4,
-  },
-  {
-    name: "Emma",
-    photo: img5,
-  },
-];
 
 function MyFriendsCard({ myFriends: { name, photo } }) {
   return (
@@ -49,7 +17,7 @@ function MyFriendsCard({ myFriends: { name, photo } }) {
   );
 }
 
-function Feed() {
+function Feed({profile}) {
   return (
     <>
       <div>
@@ -67,12 +35,20 @@ function Feed() {
           </div>
         </div>
 
-        <h4>Mine venner</h4>
-        <div className={"friends-container"}>
-          {myFriends.map((myFriends, key) => (
-            <MyFriendsCard key={key} myFriends={myFriends} />
-          ))}
-        </div>
+        <Link to={"/friends-page"}>Mine venner</Link>
+
+          {profile.friends.length === 0 ?
+            <div>
+            <Link to="/add-new-friend">Legg til ny venn</Link>
+            </div>
+            : (
+              <div className={"friends-container"}>
+              {profile.friends.map((myFriends, key) => (
+                <MyFriendsCard key={key} myFriends={myFriends} />
+              ))}
+              </div>
+            )
+          }
 
         <h4>Tidligere arbeidsøkter</h4>
         <div className={"horizontal-scroll-div"}>
@@ -85,15 +61,14 @@ function Feed() {
   );
 }
 
-export function MainPage({ firstName }) {
+export function MainPage({ profile }) {
   return (
     <>
       <div className={"main-div"}>
-        <Link to="/add-new-friend">Legg til ny venn</Link>
         <div id={"wrapper"}>
-        <h2>Hei, {firstName}</h2> <Link to={"/profile"}><img width={"100px"} style={{marginLeft: 20}} src={imgProfile}/></Link>
+        <h2>Hei, {profile.firstName}</h2> <Link to={"/profile"}><img width={"100px"} style={{marginLeft: 20}} src={imgProfile}/></Link>
         </div>
-        <Feed />
+        <Feed profile={profile} />
       </div>
     </>
   );
