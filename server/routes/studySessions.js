@@ -114,7 +114,7 @@ export function StudySessionApi() {
     }
   });
 
-  router.post("/new-todo/:id:/:todo", (req, res) => {
+  router.post("/new-todo/:id/:todo", (req, res) => {
     try {
       const { error } = todoValidate(req.body);
       if (error)
