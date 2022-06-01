@@ -6,6 +6,7 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import { ListSubjects } from "./listSubjects";
+import { Link } from "react-router-dom";
 
 const user = [
   {
@@ -112,8 +113,10 @@ function Map() {
             scaledSize: { width: 70, height: 70 },
             style: { backgroundColor: "red", width: "101px" },
           }}
+          onClick={() => window.location = "/friend-profile"}
           position={{ lat: 59.941481, lng: 10.767923 }}
         >
+
           <InfoWindow position={{ lat: 59.944481, lng: 10.767923 }}>
             <div className={"info-window"}>
               <div>

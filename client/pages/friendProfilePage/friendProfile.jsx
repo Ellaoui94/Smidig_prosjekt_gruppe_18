@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import img from '../mainPage/dummyPics/img_2.png'
+import { SiDiscord, SiFacebook } from "react-icons/si";
 
 const courseView = [
   {
@@ -48,7 +50,7 @@ export function FriendProfile() {
   return (
     <>
       <div className={"other-users-profile"}>
-        <p>(Profile-photo)</p>
+        <img src={img}/>
         {user.map((profile) => (
           <>
             <ProfileCard key={profile.firstName} profile={profile} />
@@ -57,7 +59,13 @@ export function FriendProfile() {
 
         <div className={"contact-userinfo"}>
           <h4>Kontakt:</h4>
-          <p>Facebook: (link) Discord: (link) Skole-mail: (link)</p>
+          <a href={`https://www.facebook.com/`}>
+            <SiFacebook style={{ fontSize: 70, color: "blue" }} />
+          </a>
+          <a href={`https://www.discord.com/`}>
+            <SiDiscord style={{ fontSize: 70, color: "#5865F2" }} />
+          </a>
+          <p>karl94@gmail.com</p>
         </div>
         <div className={"bio-userinfo"}>
           <h4>Bio:</h4>
