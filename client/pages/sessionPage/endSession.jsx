@@ -1,23 +1,30 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./session.css";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
 
 const evaluation = ["Bra", "Helt ok", "Dårlig"];
 
 export function EndSession({ emailInput }) {
+  const [endDateSession, setEndDateSession] = useState(null);
+
   const [data, setData] = useState({
     email: "",
     evaluation: "",
     focus: "",
-    other: "",
-    finished: true,
+    comment: "",
+    stage: "finished",
+    endDate: null,
   });
 
   console.log("inside startSession: " + emailInput);
 
   data.email = emailInput;
+  data.endDate = endDateSession;
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -85,12 +92,29 @@ export function EndSession({ emailInput }) {
         <div className={"session-div"} style={{ backgroundColor: "white" }}>
           <h2>Legg til kommentar</h2>
           <textarea
-            name="other"
-            label={"other"}
+            name="comment"
+            label={"comment"}
             onChange={handleChange}
-            value={data.other}
+            value={data.comment}
           />
         </div>
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            name="endDate"
+            label={"endDate"}
+            onChange={(newValue) => setEndDateSession(newValue)}
+            value={endDateSession}
+            renderInput={(params) => (
+              <TextField
+                style={{ background: "white" }}
+                margin={"normal"}
+                {...params}
+              />
+            )}
+          />
+        </LocalizationProvider>
+
         <div>
           <button className={"end-session-btn"}>Avslutt økt</button>
         </div>

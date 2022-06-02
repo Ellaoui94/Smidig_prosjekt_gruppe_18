@@ -5,6 +5,8 @@ import { useState } from "react";
 import { Box, Button, Container, IconButton, TextField } from "@mui/material";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import './login.css'
+import { motion } from "framer-motion"
+
 
 export function LoginPage() {
   const [data, setData] = useState({ email: "", password: "" });
@@ -33,7 +35,11 @@ export function LoginPage() {
   };
 
   return (
-    <form className={"loginForm"} onSubmit={handleSubmit}>
+    <motion.form
+      initial={{width: 0}}
+      animate={{width: "100%", transition: {duration: 0.5}}}
+      exit={{x: -window.innerWidth}}
+      className={"loginForm"} onSubmit={handleSubmit}>
       <IconButton component={Link} to="/" size="large" aria-label="menu" sx={{mr: 'auto'}}>
         <ArrowBackIosNew/>
       </IconButton>
@@ -85,6 +91,6 @@ export function LoginPage() {
 
         </Box>
       </Container>
-    </form>
+    </motion.form>
   );
 }

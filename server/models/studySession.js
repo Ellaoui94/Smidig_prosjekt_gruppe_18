@@ -25,6 +25,8 @@ const userSchema = new mongoose.Schema(
     focus: { type: String, required: false },
     comment: { type: String, required: false },
     stage: { type: String, required: false },
+    startDate: { type: Date, required: false },
+    endDate: { type: Date, required: false },
   },
   { timestamps: true }
 );
@@ -54,9 +56,17 @@ const updateValidateStudySession = (data) => {
     focus: Joi.string().label("focus"),
     comment: Joi.string().label("comment"),
     stage: Joi.string(),
+    endDate: Joi.string(),
+  });
+  return schema.validate(data);
+};
+
+const todoValidate = (data) => {
+  const schema = Joi.object({
+    todo: Joi.string().required().label("Gjøremål"),
   });
   return schema.validate(data);
 };
 
 //Here we export the consts. We use them in routes.
-export { Session, updateValidateStudySession };
+export { Session, updateValidateStudySession, todoValidate };

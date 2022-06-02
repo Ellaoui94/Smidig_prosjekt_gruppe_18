@@ -133,6 +133,8 @@ export function EditProfile({ id }) {
             required
           />
 
+          {error && <div>{error}</div>}
+
           <Button
             type={"submit"}
             style={{

@@ -5,7 +5,7 @@ import { FrontPage } from "./pages/frontPage/frontPage";
 import { Logout, Profile } from "./pages/profilePage/profile";
 import Session from "./pages/sessionPage/session";
 import { FriendsActivity } from "./pages/friendsActivityPage/friendsActivity";
-import { FriendPage } from "./pages/friendsPage/friendPage";
+import { FriendsPage } from "./pages/friendsPage/friendsPage";
 import { NewProfile } from "./pages/registerUserPage/newProfile";
 import { LoginPage } from "./pages/loginPage/loginPage";
 import "./css/index.css";
@@ -26,6 +26,11 @@ import RoomIcon from "@mui/icons-material/Room";
 import imgPic from "./img.png";
 import HouseIcon from "@mui/icons-material/House";
 import imgProfile from "./imgProfile.png";
+import PageOne from "./pages/introPages/pageOne";
+import PageTwo from "./pages/introPages/pageTwo";
+import PageThree from "./pages/introPages/pageThree";
+import AnimatedRoutes from "./pages/introPages/AnimatedRoutes";
+import EditContactInfo from "./pages/profilePage/editContactInfo";
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -45,13 +50,13 @@ function NavBar() {
     <>
       <div id={"nav-bar"}>
         <Link to={"/main-page"}>
-          <HouseIcon style={{ fontSize: "65px" }} />
+          <HouseIcon style={{ fontSize: "50px" }} />
         </Link>
         <Link to={"/start-session"}>
-          <img src={imgPic} />
+          <img style={{ height: "75%" }} src={imgPic} />
         </Link>
         <Link to={"/map-page"}>
-          <RoomIcon style={{ fontSize: "65px" }} />
+          <RoomIcon style={{ fontSize: "50px" }} />
         </Link>
       </div>
     </>
@@ -76,6 +81,10 @@ function Application() {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [id, setId] = useState();
+  const [friends, setFriends] = useState([]);
+  const [profileImg, setProfileImg] = useState("");
+  const [registered, setRegistered] = useState(false);
+
 
   useEffect(async () => {
     const user = await getUser();
@@ -86,23 +95,40 @@ function Application() {
     setLastName(user.lastName);
     setEmail(user.email);
     setId(user.id);
-  }, []);
 
-  const profile = { firstName, lastName, email, id };
+    const userURL = `${window.location.origin}/api/users/getUser/${id}`;
+    const { data: response } = await axios.get(userURL);
+    response.map((r) => {
+      setFirstName(r.firstName);
+      setLastName(r.lastName);
+      setEmail(r.email);
+      setId(r._id);
+      setFriends(r.friends);
+      setProfileImg(r.profileImg)
+    });
+  }, [id]);
+
+  const profile = { firstName, lastName, email, friends, id, profileImg };
   const user = localStorage.getItem("token");
 
   return (
     <>
       <BrowserRouter>
-        <header>
-          <HeaderBar />
-        </header>
         <main>
           <Routes>
             {id === undefined ? (
               <>
-                <Route path={"/"} element={<FrontPage />} />
-                <Route path={"/register"} element={<NewProfile />} />
+                <Route path={"/"} element={<FrontPage/>} />
+                <Route
+                  path={"/register"}
+                  element={<NewProfile setRegistered={setRegistered} />}
+                />
+                {registered && (
+                  <Route
+                    path={"/intro/*"}
+                    element={<AnimatedRoutes setRegistered={setRegistered} />}
+                  />
+                )}
                 <Route path={"/login/*"} element={<LoginPage />} />
                 <Route path={"*"} element={<NotFound />} />
               </>
@@ -110,7 +136,7 @@ function Application() {
               <>
                 <Route
                   path={"/main-page"}
-                  element={<MainPage firstName={firstName} />}
+                  element={<MainPage profile={profile} />}
                 />
                 <Route
                   path={"/profile"}
@@ -120,6 +146,7 @@ function Application() {
                   path={"/contactInfo"}
                   element={<AddContactInfo id={id} />}
                 />
+                <Route path={"/editContactInfo"} element={<EditContactInfo id={id}/>}/>
                 <Route path={"/edit"} element={<EditProfile id={id} />} />
                 <Route path={"/delete"} element={<Logout />} />
 
@@ -129,7 +156,7 @@ function Application() {
                 />
                 <Route
                   path={"/start-session"}
-                  element={<StartSession email={email} />}
+                  element={<StartSession profile={profile} />}
                 />
                 <Route
                   path={"/end-session/:sessionId"}
@@ -148,7 +175,7 @@ function Application() {
                   path={"/add-new-friend"}
                   element={<AddNewFriendPage id={id} />}
                 />
-                <Route path={"/friend-page"} element={<FriendPage />} />
+                <Route path={"/friends-page"} element={<FriendsPage profile={profile} />} />
                 <Route path={"/friend-profile"} element={<FriendProfile />} />
                 <Route
                   path={"/friends-activity"}
@@ -163,9 +190,11 @@ function Application() {
           </Routes>
         </main>
 
-        <footer>
-          <NavBar />
-        </footer>
+        {id && (
+          <footer>
+            <NavBar />
+          </footer>
+        )}
       </BrowserRouter>
     </>
   );

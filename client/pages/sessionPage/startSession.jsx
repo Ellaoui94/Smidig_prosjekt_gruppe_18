@@ -1,16 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IconButton, TextField } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import "./session.css";
 import { Link, useNavigate } from "react-router-dom";
-import { UserApiContext } from "../../userApiContext";
 import axios from "axios";
-import { MainPageApiContext } from "../../mainPageApiContext";
-import { useLoading } from "../../useLoading";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
 
-const subjects = ["Math", "Religion", "Physics", "History"];
-const locations = ["Library", "Cafe"];
-const states = ["Alone", "Invisible", "Public", "Friends only"];
+const subjects = ["Matematikk", "Religion", "Fysikk", "Historie"];
+const locations = ["Bibliotek", "Cafe"];
+const states = ["Alene", "Usynlig", "Offentlig", "Kun venner"];
 const stage = ["active", "planned"];
 const colors = [
   "#C2DBE2",
@@ -26,7 +25,13 @@ const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
 const rColors = shuffle(colors);
 
-export function StartSession({ email }) {
+export function StartSession({ profile: { firstName, lastName, email, id } }) {
+  const [userSubject, setUserSubjects] = useState([]);
+
+  const [startDateSession, setStartDateSession] = useState(null);
+
+  const test = startDateSession;
+
   const [sessionData, setSessionData] = useState({
     email: "",
     courseTitle: [],
@@ -34,20 +39,32 @@ export function StartSession({ email }) {
     studyStatus: "",
     studySessionTitle: "",
     stage: "",
+    date: null,
   });
 
-  console.log("inside session: " + email);
+  sessionData.date = startDateSession;
+  console.log("inside session: " + sessionData.startDate);
   sessionData.email = email;
 
   const [sessionError, setSessionError] = useState("");
   const navigate = useNavigate();
 
+  console.log(id);
+  /*
+  const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`;
+  const { data: res } = await axios.get(userURL);
+  console.log("INSIDE start session " + JSON.stringify(res));
+
+
+
+  res.map((r) => {
+    setUserSubjects(r.subjects);
+  });
+
+   */
+
   const handleChange = ({ currentTarget: input }) => {
     setSessionData({ ...sessionData, [input.name]: input.value });
-  };
-
-  const changeStage = ({ currentTarget: input }) => {
-    setSessionData({ ...sessionData, stage: "active" });
   };
 
   const handleSubmit = async (e) => {
@@ -87,16 +104,17 @@ export function StartSession({ email }) {
       <form onSubmit={handleSubmit}>
         <div className={"session-div"} style={{ backgroundColor: "white" }}>
           <h2>Hvilket emne vil du jobbe med?</h2>
+
           {subjects.map((subject) => (
             <div className={"session-card-div"}>
-              {subject}
               <input
-                type="checkbox"
+                type="radio"
                 name="courseTitle"
                 label={"courseTitle"}
                 onChange={handleChange}
                 value={subject}
               />
+              {subject}
             </div>
           ))}
         </div>
@@ -105,14 +123,14 @@ export function StartSession({ email }) {
           <h2>Hvor vil du jobbe</h2>
           {locations.map((location) => (
             <div className={"session-card-div"}>
-              {location}
               <input
-                type="checkbox"
+                type="radio"
                 name="location"
                 label={"location"}
                 onChange={handleChange}
                 value={location}
               />
+              {location}
             </div>
           ))}
         </div>
@@ -121,14 +139,14 @@ export function StartSession({ email }) {
           <h2>Sett arbeidstatus for denne økten</h2>
           {states.map((status) => (
             <div className={"session-card-div"}>
-              {status}
               <input
-                type="checkbox"
+                type="radio"
                 name="studyStatus"
                 label={"studyStatus"}
                 onChange={handleChange}
                 value={status}
               />
+              {status}
             </div>
           ))}
         </div>
@@ -137,16 +155,34 @@ export function StartSession({ email }) {
           <h2>Ønsker du å planlegge eller starte økten</h2>
           {stage.map((stages) => (
             <div className={"session-card-div"}>
-              {stages}
               <input
-                type="checkbox"
+                type="radio"
                 name="stage"
                 label={"stage"}
                 onChange={handleChange}
                 value={stages}
               />
+              {stages}
             </div>
           ))}
+        </div>
+
+        <div>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              name="date"
+              label={"date"}
+              onChange={(newValue) => setStartDateSession(newValue)}
+              value={startDateSession}
+              renderInput={(params) => (
+                <TextField
+                  style={{ background: "white" }}
+                  margin={"normal"}
+                  {...params}
+                />
+              )}
+            />
+          </LocalizationProvider>
         </div>
 
         <button style={{ backgroundColor: "green" }}>Start økt</button>

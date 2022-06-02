@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  profileImg: {type: String, required: false},
   subjects: { type: [subjectSchema], required: false},
   friends: { type: [friendsSchema], required: false},
 });
@@ -73,4 +74,12 @@ const friendValidate = (data) => {
   return schema.validate(data);
 };
 
-export { User, validate, updateValidate, subjectValidate, friendValidate };
+
+const pictureValidate = (data) => {
+  const schema = Joi.object({
+    profileImg: Joi.string().required().label("Bilde"),
+  });
+  return schema.validate(data);
+};
+
+export { User, validate, updateValidate, subjectValidate, friendValidate, pictureValidate };

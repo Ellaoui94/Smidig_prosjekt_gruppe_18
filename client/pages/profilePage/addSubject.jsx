@@ -56,7 +56,7 @@ export default function AddSubject({ id, setNewSubject }) {
           <TextField
             type="text"
             name="subjectName"
-            style={{ background: "white" }}
+            style={{ background: "#F3F1F1" }}
             label={"Emne Navn"}
             onChange={(e) => setSubjectName(e.target.value)}
             value={subjectName}
@@ -67,7 +67,7 @@ export default function AddSubject({ id, setNewSubject }) {
           <TextField
             type="text"
             name="subjectCode"
-            style={{ background: "white" }}
+            style={{ background: "#F3F1F1" }}
             label={"Emne kode"}
             margin="normal"
             onChange={(e) => setSubjectCode(e.target.value)}
@@ -81,7 +81,7 @@ export default function AddSubject({ id, setNewSubject }) {
             value={startDate}
             renderInput={(params) => (
               <TextField
-                style={{ background: "white" }}
+                style={{ background: "#F3F1F1" }}
                 margin={"normal"}
                 {...params}
               />
@@ -93,7 +93,7 @@ export default function AddSubject({ id, setNewSubject }) {
             value={endDate}
             renderInput={(params) => (
               <TextField
-                style={{ background: "white" }}
+                style={{ background: "#F3F1F1" }}
                 margin={"normal"}
                 {...params}
               />
@@ -101,15 +101,15 @@ export default function AddSubject({ id, setNewSubject }) {
           />
         </LocalizationProvider>
 
-        <div id={"bottom"}>
+        <div>
           <Button
             type={"submit"}
             style={{
               top: "10px",
-              background: "#3E989C",
-              fontSize: "25px",
+              background: "#E0E4DA",
+              fontSize: "20px",
               fontWeight: "bold",
-              color: "white",
+              color: "#2E7713",
               borderRadius: "50px"
             }}
           >Start emne

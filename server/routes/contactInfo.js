@@ -7,11 +7,24 @@ export function ContactInfoApi() {
   router.post("/", async (req, res) => {
     try {
       await new ContactDetails(req.body).save();
-      res.status(201).send({ message: "Session created successfully" });
+      res.status(201).send({ message: "Details created successfully" });
     } catch (error) {
       res.status(400).json({ message: "Du har allerede lagt til informasjon" });
     }
   });
+
+  router.post("/update/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const userContact = await  ContactDetails.findOne({ _id: { $eq: id } });
+      Object.assign(userContact, req.body);
+      userContact.save();
+
+      res.send({ data: userContact });
+    } catch {
+      res.status(404).send({ error: "Details is not found" });
+    }
+  })
 
   router.get("/userInfo/:id", async (req, res) => {
     try {

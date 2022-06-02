@@ -11,6 +11,7 @@ export function PlannedSession() {
     async () => await showPlannedSession({ sessionId: sessionId }),
     []
   );
+
   const dateFormat = {
     weekday: "long",
     month: "long",
