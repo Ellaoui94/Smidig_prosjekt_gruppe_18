@@ -30,6 +30,7 @@ import PageOne from "./pages/introPages/pageOne";
 import PageTwo from "./pages/introPages/pageTwo";
 import PageThree from "./pages/introPages/pageThree";
 import AnimatedRoutes from "./pages/introPages/AnimatedRoutes";
+import EditContactInfo from "./pages/profilePage/editContactInfo";
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -145,6 +146,7 @@ function Application() {
                   path={"/contactInfo"}
                   element={<AddContactInfo id={id} />}
                 />
+                <Route path={"/editContactInfo"} element={<EditContactInfo id={id}/>}/>
                 <Route path={"/edit"} element={<EditProfile id={id} />} />
                 <Route path={"/delete"} element={<Logout />} />
 

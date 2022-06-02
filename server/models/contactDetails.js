@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { ObjectId } from "mongodb";
+import Joi from "joi";
 
 const userSchema = new mongoose.Schema({
   _id:{ type: ObjectId, required: true },
@@ -11,4 +12,4 @@ const userSchema = new mongoose.Schema({
 const ContactDetails = mongoose.model("ContactDetails", userSchema);
 
 
-export { ContactDetails };
+export { ContactDetails};

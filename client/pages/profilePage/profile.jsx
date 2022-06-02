@@ -6,7 +6,7 @@ import img from "./img.png";
 import { SiDiscord, SiFacebook } from "react-icons/si";
 import FileBase64 from 'react-file-base64';
 
-import { Backdrop, Box, Button, Fade, IconButton, Modal, Typography } from "@mui/material";
+import { Backdrop, Box, Button, Fade, IconButton, Modal } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddSubject from "./addSubject";
 import { CSSTransition } from "react-transition-group";
@@ -164,7 +164,7 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
 
             <Button
               component={Link}
-              to={"/"}
+              to={"/editContactInfo"}
               style={{
                 background: "#5D7C8D",
                 fontSize: "10px",
