@@ -66,7 +66,9 @@ export function MainPage({ profile }) {
     <>
       <div className={"main-div"}>
         <div id={"wrapper"}>
-        <h2>Hei, {profile.firstName}</h2> <Link to={"/profile"}><img width={"100px"} style={{marginLeft: 20}} src={profile.profileImg}/></Link>
+        <h2>Hei, {profile.firstName}</h2> <Link to={"/profile"}>{profile.profileImg ?
+          <img width={"100px"} style={{marginLeft: 20}} src={profile.profileImg}/> :
+          <img width={"100px"} style={{marginLeft: 20}} src={imgProfile}/>}</Link>
         </div>
         <Feed profile={profile} />
       </div>
