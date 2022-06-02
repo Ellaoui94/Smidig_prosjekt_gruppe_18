@@ -84,7 +84,7 @@ function Application() {
   const [friends, setFriends] = useState([]);
   const [profileImg, setProfileImg] = useState("");
   const [registered, setRegistered] = useState(false);
-
+  const [subjects, setSubjects] = useState([]);
 
   useEffect(async () => {
     const user = await getUser();
@@ -104,11 +104,20 @@ function Application() {
       setEmail(r.email);
       setId(r._id);
       setFriends(r.friends);
-      setProfileImg(r.profileImg)
+      setProfileImg(r.profileImg);
+      setSubjects(r.subjects);
     });
   }, [id]);
 
-  const profile = { firstName, lastName, email, friends, id, profileImg };
+  const profile = {
+    firstName,
+    lastName,
+    email,
+    friends,
+    id,
+    profileImg,
+    subjects,
+  };
   const user = localStorage.getItem("token");
 
   return (
@@ -118,7 +127,7 @@ function Application() {
           <Routes>
             {id === undefined ? (
               <>
-                <Route path={"/"} element={<FrontPage/>} />
+                <Route path={"/"} element={<FrontPage />} />
                 <Route
                   path={"/register"}
                   element={<NewProfile setRegistered={setRegistered} />}
@@ -146,7 +155,10 @@ function Application() {
                   path={"/contactInfo"}
                   element={<AddContactInfo id={id} />}
                 />
-                <Route path={"/editContactInfo"} element={<EditContactInfo id={id}/>}/>
+                <Route
+                  path={"/editContactInfo"}
+                  element={<EditContactInfo id={id} />}
+                />
                 <Route path={"/edit"} element={<EditProfile id={id} />} />
                 <Route path={"/delete"} element={<Logout />} />
 
@@ -175,7 +187,10 @@ function Application() {
                   path={"/add-new-friend"}
                   element={<AddNewFriendPage id={id} />}
                 />
-                <Route path={"/friends-page"} element={<FriendsPage profile={profile} />} />
+                <Route
+                  path={"/friends-page"}
+                  element={<FriendsPage profile={profile} />}
+                />
                 <Route path={"/friend-profile"} element={<FriendProfile />} />
                 <Route
                   path={"/friends-activity"}
