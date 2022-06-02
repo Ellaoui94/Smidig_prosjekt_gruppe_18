@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { friendValidate, subjectValidate, updateValidate, User, validate } from "../models/user.js";
+import { friendValidate, pictureValidate, subjectValidate, updateValidate, User, validate } from "../models/user.js";
 import bcrypt from "bcrypt";
 import { ContactDetails } from "../models/contactDetails.js";
+import Joi from "joi";
 
 const maxAge = 3 * 24 * 60 * 60;
 
@@ -81,9 +82,35 @@ export function UsersRoutes() {
 
   router.post("/update/:id", async (req, res) => {
     try {
+
       const { error } = updateValidate(req.body);
       if (error)
         return res.status(400).send({ message: error.details[0].message });
+
+
+      const { id } = req.params;
+      const user = await  User.findOne({ _id: { $eq: id } });
+      Object.assign(user, req.body);
+      user.save();
+
+      res.cookie("jwt", user, {
+        httpOnly: false,
+        maxAge: maxAge * 1000,
+        signed: true,
+      });
+      res.send({ data: user });
+    } catch {
+      res.status(404).send({ error: "User is not found" });
+    }
+  });
+
+  router.post("/pictureUpdate/:id", async (req, res) => {
+    try {
+
+      const { error } = pictureValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
 
       const { id } = req.params;
       const user = await  User.findOne({ _id: { $eq: id } });

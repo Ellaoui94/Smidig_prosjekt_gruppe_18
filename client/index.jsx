@@ -80,8 +80,10 @@ function Application() {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [id, setId] = useState();
-  const [registered, setRegistered] = useState(false);
   const [friends, setFriends] = useState([]);
+  const [profileImg, setProfileImg] = useState("");
+  const [registered, setRegistered] = useState(false);
+
 
   useEffect(async () => {
     const user = await getUser();
@@ -96,11 +98,16 @@ function Application() {
     const userURL = `${window.location.origin}/api/users/getUser/${id}`;
     const { data: response } = await axios.get(userURL);
     response.map((r) => {
+      setFirstName(r.firstName);
+      setLastName(r.lastName);
+      setEmail(r.email);
+      setId(r._id);
       setFriends(r.friends);
+      setProfileImg(r.profileImg)
     });
   }, [id]);
 
-  const profile = { firstName, lastName, email, friends, id };
+  const profile = { firstName, lastName, email, friends, id, profileImg };
   const user = localStorage.getItem("token");
 
   return (
@@ -110,7 +117,7 @@ function Application() {
           <Routes>
             {id === undefined ? (
               <>
-                <Route path={"/"} element={<FrontPage />} />
+                <Route path={"/"} element={<FrontPage/>} />
                 <Route
                   path={"/register"}
                   element={<NewProfile setRegistered={setRegistered} />}

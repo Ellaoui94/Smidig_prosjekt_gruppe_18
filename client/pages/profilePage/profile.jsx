@@ -4,11 +4,25 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import img from "./img.png";
 import { SiDiscord, SiFacebook } from "react-icons/si";
+import FileBase64 from 'react-file-base64';
 
-import { Button, IconButton } from "@mui/material";
+import { Backdrop, Box, Button, Fade, IconButton, Modal, Typography } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddSubject from "./addSubject";
 import { CSSTransition } from "react-transition-group";
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export function Logout() {
   const { endSession } = useContext(UserApiContext);
@@ -19,16 +33,24 @@ export function Logout() {
   return <h1>Please wait...</h1>;
 }
 
-function ProfileCard({ profile: { firstName, lastName, email, id } }) {
+function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }) {
   const [faceBook, setFaceBook] = useState();
   const [discord, setDiscord] = useState();
   const [bio, setBio] = useState();
   const [contactId, setContactId] = useState();
+  const [imgString, setImgString] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const [clicked, setClicked] = useState(false);
 
   const [userSubjects, setUserSubjects] = useState([]);
   const [newSubject, setNewSubject] = useState([]);
+
+  const [error, setError] = useState("");
+
 
   useEffect(async () => {
     const url = `${window.location.origin}/api/contactInfo/userInfo/${id}`;
@@ -47,11 +69,75 @@ function ProfileCard({ profile: { firstName, lastName, email, id } }) {
     });
   }, [id]);
 
+  const handleSubmit = async (e) => {
+    try {
+      const url = `${window.location.origin}/api/users/pictureUpdate/${id}`;
+      const { data: res } = await axios.post(url, imgString);
+      localStorage.setItem("token", res.data);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
+
   return (
     <>
       <div className={"profile-card"}>
         <div>
-          <img src={img} />
+          {profileImg ?
+            <>
+            <div>Klikk på bilde for å endre profil bilde</div>
+            <a onClick={handleOpen}><img src={profileImg} /></a>
+            </>
+            :
+            <>
+            <div>Klikk på bilde for å legge til profil bilde</div>
+            <a onClick={handleOpen}><img src={img} /></a>
+            </>
+          }
+
+          <div>
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={open}
+              onClose={handleClose}
+              closeAfterTransition
+              BackdropComponent={Backdrop}
+              BackdropProps={{
+                timeout: 500,
+              }}
+            >
+              <Fade in={open}>
+                <Box sx={style}>
+                  <form onSubmit={handleSubmit}>
+                    {error && <div>{error}</div>}
+                    <FileBase64
+                      type="file"
+                      multiple={false}
+                      onDone={({ base64 }) => setImgString({ ...imgString, profileImg: base64 })}
+                    />
+                    <Button
+                      type={"submit"}
+                      style={{
+                        background: "#5D7C8D",
+                        fontSize: "10px",
+                        fontWeight: "bold",
+                        color: "white",
+                        borderRadius: "50px"
+                      }}
+                    >Last opp</Button>
+                  </form>
+                </Box>
+              </Fade>
+            </Modal>
+          </div>
+
           <h3>
             {firstName}, {lastName}
           </h3>
@@ -193,9 +279,9 @@ export function DeleteButton({ label, id }) {
 }
 
 
-export function Profile({ profile: { firstName, lastName, email, id } }) {
+export function Profile({ profile: { firstName, lastName, email, id, profileImg } }) {
 
-  const profile = { firstName, lastName, email, id };
+  const profile = { firstName, lastName, email, id, profileImg };
 
   return (
     <>
