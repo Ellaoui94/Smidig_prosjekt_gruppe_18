@@ -25,7 +25,8 @@ export function FrontPage() {
       <ButtonInfo text="Registrer deg" href="/register" />
 
       <Button component={Link} to="/login" style={{
-        top: "10px",
+        padding: "1vh",
+        top: "2vh",
         background: "#326683",
         fontSize: "25px",
         fontWeight: "bold",

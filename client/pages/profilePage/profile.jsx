@@ -33,7 +33,7 @@ export function Logout() {
   return <h1>Please wait...</h1>;
 }
 
-function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }) {
+function ProfileCard({ profile: { firstName, lastName, email, subjects, id, profileImg } }) {
   const [faceBook, setFaceBook] = useState();
   const [discord, setDiscord] = useState();
   const [bio, setBio] = useState();
@@ -46,7 +46,6 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
 
   const [clicked, setClicked] = useState(false);
 
-  const [userSubjects, setUserSubjects] = useState([]);
   const [newSubject, setNewSubject] = useState([]);
 
   const [error, setError] = useState("");
@@ -61,19 +60,15 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
       setBio(r.bio);
       setContactId(r._id);
     });
-
-    const userURL = `${window.location.origin}/api/users/getUser/${id}`;
-    const { data: response } = await axios.get(userURL);
-    response.map((r) => {
-      setUserSubjects(r.subjects);
-    });
   }, [id]);
 
   const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       const url = `${window.location.origin}/api/users/pictureUpdate/${id}`;
       const { data: res } = await axios.post(url, imgString);
       localStorage.setItem("token", res.data);
+      location.reload()
     } catch (error) {
       if (
         error.response &&
@@ -129,7 +124,8 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
                         fontSize: "10px",
                         fontWeight: "bold",
                         color: "white",
-                        borderRadius: "50px"
+                        borderRadius: "50px",
+                        boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
                       }}
                     >Last opp</Button>
                   </form>
@@ -146,6 +142,7 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
         <h2>Kontakt Info:</h2>
         {contactId === id ? (
           <>
+            <div className={"contact-wrapper"}>
             <div>
               <a href={`${faceBook}`}>
                 <SiFacebook style={{ fontSize: 70, color: "blue" }} />
@@ -166,11 +163,13 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
               component={Link}
               to={"/editContactInfo"}
               style={{
+                padding: "20px",
+                fontSize: "40px",
                 background: "#5D7C8D",
-                fontSize: "10px",
                 fontWeight: "bold",
                 color: "white",
-                borderRadius: "50px"
+                borderRadius: "50px",
+                boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
               }}
             >
               Endre kontakt info
@@ -180,17 +179,20 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
               <h2>Bio:</h2>
               <h4>{bio}</h4>
             </div>
+            </div>
           </>
         ) : (
           <Button
             component={Link}
             to={"/contactInfo"}
             style={{
+              padding: "20px",
+              fontSize: "40px",
               background: "#5D7C8D",
-              fontSize: "10px",
               fontWeight: "bold",
               color: "white",
-              borderRadius: "50px"
+              borderRadius: "50px",
+              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
             }}
           >
             Legg til kontakt info
@@ -201,11 +203,14 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
             component={Link}
             to={"/delete"}
             style={{
+              marginTop: "20px",
+              padding: "20px",
+              fontSize: "40px",
               background: "#5D7C8D",
-              fontSize: "10px",
               fontWeight: "bold",
               color: "white",
-              borderRadius: "50px"
+              borderRadius: "50px",
+              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
             }}
           >
             Logg ut
@@ -230,12 +235,15 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
           </IconButton>
         </div>
 
-        {userSubjects.map((subject, key) => (
+
+        <div style={{padding: "5px"}}>
+        {subjects.map((subject, key) => (
           <div key={key} className={"subjectDiv"}>{subject.subjectName}</div>
         ))}
         {newSubject.map((subject, key) => (
           <div key={key} className={"subjectDiv"}>{subject.subjectName}</div>
         ))}
+        </div>
 
         <CSSTransition
           in={clicked}
@@ -251,13 +259,12 @@ function ProfileCard({ profile: { firstName, lastName, email, id, profileImg } }
 }
 
 export function DeleteButton({ label, id }) {
-  const navigate = useNavigate();
   const { endSession } = useContext(UserApiContext);
 
   async function deleteUser() {
     await axios.delete(`${window.location.origin}/api/users/delete/${id}`);
     await endSession();
-    navigate("/");
+    window.location = "/";
   }
 
   return (
@@ -269,7 +276,8 @@ export function DeleteButton({ label, id }) {
           fontSize: "10px",
           fontWeight: "bold",
           color: "white",
-          borderRadius: "50px"
+          borderRadius: "50px",
+          boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
         }}
       >
         {label}
@@ -279,25 +287,26 @@ export function DeleteButton({ label, id }) {
 }
 
 
-export function Profile({ profile: { firstName, lastName, email, id, profileImg } }) {
+export function Profile({profile} ) {
 
-  const profile = { firstName, lastName, email, id, profileImg };
 
   return (
     <>
-      <h1>Profile</h1>
       <Button
         component={Link}
         to={"/edit"}
         style={{
+          marginTop: "100px",
           background: "#5D7C8D",
-          fontSize: "10px",
+          padding: "20px",
+          fontSize: "40px",
           fontWeight: "bold",
           color: "white",
-          borderRadius: "50px"
+          borderRadius: "50px",
+          boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
         }}
       >
-        Endre bruker
+        Endre på bruker
       </Button>
 
       <ProfileCard profile={profile} />

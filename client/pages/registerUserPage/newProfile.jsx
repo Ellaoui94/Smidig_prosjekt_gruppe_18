@@ -62,12 +62,13 @@ export function NewProfile({setRegistered}) {
         <ArrowBackIosNew />
       </IconButton>
 
-      <Container maxWidth="md">
+
         <h1 style={{ color: "#023F4A" }}>Registrer deg her</h1>
 
         <Box
           sx={{
             display: "flex",
+            alignItems: "center",
             flexDirection: "column",
             "& .MuiTextField-root": { width: "25ch" },
             select: { width: "55ch", display: "flex" },
@@ -141,7 +142,6 @@ export function NewProfile({setRegistered}) {
             {isPending && <button disabled>loading</button>}
             {error && <p>{error}</p>}*/}
         </Box>
-      </Container>
     </form>
   );
 }

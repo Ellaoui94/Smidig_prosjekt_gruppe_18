@@ -5,6 +5,8 @@ function ButtonInfo({text, icon, click, href}) {
     return (
         <div>
             <Button  style={{
+              top: "1vh",
+              padding: "1vh",
               background: "#D6DFE3",
                 fontSize: "25px",
                 fontWeight: "bold",

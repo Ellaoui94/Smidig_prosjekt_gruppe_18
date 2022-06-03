@@ -82,15 +82,15 @@ function Application() {
   const [email, setEmail] = useState();
   const [id, setId] = useState();
   const [friends, setFriends] = useState([]);
+  const [location, setLocation] = useState();
   const [profileImg, setProfileImg] = useState("");
   const [registered, setRegistered] = useState(false);
   const [subjects, setSubjects] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+
 
   useEffect(async () => {
     const user = await getUser();
-
-    console.log(user);
-
     setFirstName(user.firstName);
     setLastName(user.lastName);
     setEmail(user.email);
@@ -104,9 +104,17 @@ function Application() {
       setEmail(r.email);
       setId(r._id);
       setFriends(r.friends);
-      setProfileImg(r.profileImg);
+      setLocation(r.subjects[0].location)
+      setProfileImg(r.profileImg)
       setSubjects(r.subjects);
     });
+
+
+    /*const allUsers = `${window.location.origin}/api/users/getAllUsers`;
+    const { data: res } = await axios.get(allUsers);
+    res.map((r) => {
+      setAllUsers(r)
+    });*/
   }, [id]);
 
   const profile = {
@@ -117,6 +125,7 @@ function Application() {
     id,
     profileImg,
     subjects,
+    location
   };
   const user = localStorage.getItem("token");
 
@@ -197,7 +206,7 @@ function Application() {
                   element={<FriendsActivity />}
                 />
 
-                <Route path={"/map-page"} element={<MapPage />} />
+                <Route path={"/map-page"} element={<MapPage profile={profile} />} />
                 <Route path={"/course-view/:course"} element={<CourseView />} />
                 <Route path={"*"} element={<NotFound id={id} />} />
               </>

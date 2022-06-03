@@ -11,12 +11,29 @@ export default function AddSubject({ id, setNewSubject }) {
   const [endDate, setEndDate] = useState(null);
   const [subjectName, setSubjectName] = useState("");
   const [subjectCode, setSubjectCode] = useState("");
-
+  const [lat, setLat] = useState(0);
+  const [long, setLong] = useState(0);
   const [error, setError] = useState("");
 
   const [ws, setWs] = useState("");
 
-  const subjectObj = { subjectName, subjectCode, startDate, endDate };
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      setLat(position.coords.latitude);
+      setLong(position.coords.longitude);
+    },
+    function(error) {
+      console.error("Error Code = " + error.code + " - " + error.message);
+    }
+  );
+
+  let subjectObj;
+  if (lat > 0 && long > 0) {
+    const location = { lat, long };
+    subjectObj = { subjectName, subjectCode, startDate, endDate, location };
+  } else {
+    subjectObj = { subjectName, subjectCode, startDate, endDate };
+  }
 
   useEffect(() => {
     const ws = new WebSocket(window.location.origin.replace(/^http/, "ws"));
@@ -32,7 +49,7 @@ export default function AddSubject({ id, setNewSubject }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      ws.send(JSON.stringify(subjectObj))
+      ws.send(JSON.stringify(subjectObj));
       const url = `${window.location.origin}/api/users/subject/${id}/${encodeURIComponent(JSON.stringify(subjectObj))}`;
       const { data: res } = await axios.post(url, subjectObj);
       console.log(res.message);
@@ -110,13 +127,14 @@ export default function AddSubject({ id, setNewSubject }) {
               fontSize: "20px",
               fontWeight: "bold",
               color: "#2E7713",
-              borderRadius: "50px"
+              borderRadius: "50px",
+              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
             }}
           >Start emne
           </Button>
         </div>
       </form>
-      <div style={{marginTop: 20}}>
+      <div style={{ marginTop: 20 }}>
         <DeleteButton label={"Slett bruker"} id={id} />
       </div>
     </div>

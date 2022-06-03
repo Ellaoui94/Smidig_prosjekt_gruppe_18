@@ -4,17 +4,24 @@ import Joi from "joi";
 import passwordComplexity from "joi-password-complexity";
 
 
+const locationSchema = new mongoose.Schema({
+  lat: {type: Number, required: true},
+  long: {type: Number, required: true}
+})
+
 const subjectSchema = new mongoose.Schema({
   subjectName: { type: String, required: true },
   subjectCode: { type: String, required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
+  location: {type: [locationSchema], required: false}
 })
 
 const friendsSchema = new mongoose.Schema({
   name: {type: String, required: true},
   photo: {type: String, required: true},
 })
+
 
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
@@ -61,7 +68,8 @@ const subjectValidate = (data) => {
     subjectName: Joi.string().required().label("Emne navn"),
     subjectCode: Joi.string().required().label("Emne kode"),
     startDate: Joi.date().required().label("Emne start"),
-    endDate: Joi.date().required().label("Emne slutt")
+    endDate: Joi.date().required().label("Emne slutt"),
+    location: Joi.object().optional().label("Lokasjon")
   });
   return schema.validate(data);
 };

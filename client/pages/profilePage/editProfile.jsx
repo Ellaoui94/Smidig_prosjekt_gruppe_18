@@ -89,13 +89,13 @@ export function EditProfile({ id }) {
         <ArrowBackIosNew />
       </IconButton>
 
-      <Container maxWidth="md">
         <h1 style={{ color: "#023F4A" }}>Endre informasjon om din bruker</h1>
 
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
+            alignItems: "center",
             "& .MuiTextField-root": { width: "25ch" },
             select: { width: "55ch", display: "flex" },
           }}
@@ -139,7 +139,7 @@ export function EditProfile({ id }) {
             type={"submit"}
             style={{
               top: "10px",
-              background: "#3E989C",
+              background: "#5D7C8D",
               fontSize: "25px",
               fontWeight: "bold",
               color: "white",
@@ -159,7 +159,6 @@ export function EditProfile({ id }) {
             {isPending && <button disabled>loading</button>}
             {error && <p>{error}</p>}*/}
         </Box>
-      </Container>
     </form>
   );
 }

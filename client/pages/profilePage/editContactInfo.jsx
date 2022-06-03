@@ -60,6 +60,7 @@ export default function EditContactInfo({ id }) {
           sx={{
             display: "flex",
             flexDirection: "column",
+            alignItems: "center",
             "& .MuiTextField-root": { width: "25ch" },
             select: { width: "55ch", display: "flex" }
           }}
@@ -102,11 +103,12 @@ export default function EditContactInfo({ id }) {
             type={"submit"}
             style={{
               top: "10px",
-              background: "#3E989C",
+              background: "#5D7C8D",
               fontSize: "25px",
               fontWeight: "bold",
               color: "white",
-              borderRadius: "50px"
+              borderRadius: "50px",
+              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
             }}
           >
             Endre Info

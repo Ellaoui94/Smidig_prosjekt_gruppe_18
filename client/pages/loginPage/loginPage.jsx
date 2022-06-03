@@ -52,6 +52,7 @@ export function LoginPage() {
         <Box
           sx={{
             display: 'flex',
+            alignItems: "center",
             flexDirection: 'column',
             '& .MuiTextField-root': {width: '25ch'},
           }}

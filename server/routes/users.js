@@ -80,6 +80,16 @@ export function UsersRoutes() {
     }
   });
 
+  router.get("/getAllUsers", async (req, res) => {
+    try {
+      await User.find().then((result) => {
+          res.json(result);
+      });
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  });
+
   router.post("/update/:id", async (req, res) => {
     try {
 
@@ -156,6 +166,7 @@ export function UsersRoutes() {
         await userDetails.remove();
       }
       await user.remove();
+      res.clearCookie("jwt");
       res.send({data: true});
     }catch{
       res.status(404).send({error: "User is not found"})

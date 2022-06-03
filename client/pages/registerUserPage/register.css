@@ -1,13 +1,7 @@
 .registerForm{
+    margin-top: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     font-size: calc(10px + 2vmin);
-}
-
-.registerForm select{
-    margin-top: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border-color: lightgrey;
 }
