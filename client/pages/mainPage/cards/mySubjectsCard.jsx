@@ -37,6 +37,21 @@ export function MySubjectsCard({ profile }) {
 
   return (
     <>
+      {data.map((mySubjects, i) => (
+        <div
+          key={i}
+          className={"main-page-components-card"}
+          style={{ backgroundColor: rColors[i] }}
+        >
+          <Link to={"/course-view/" + mySubjects.subject}>
+            {mySubjects.subject}
+          </Link>
+          <h6>{mySubjects.code}</h6>
+          <div className={"arrow-div"}>
+            <p>></p>
+          </div>
+        </div>
+      ))}
       {profile.subjects.map((mySubjects, i) => (
         <div
           key={i}
