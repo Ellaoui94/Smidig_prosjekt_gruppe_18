@@ -33,16 +33,7 @@ export function MapPage({profile}) {
 
 function Map({profile}) {
   //const center = useMemo(() => ({ lat: 59.911491, lng: 10.757933 }), []);
-  const [selected, setSelected] = useState(null);
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
 
-  useEffect(() => {
-    setLat(profile.location[0].lat)
-    setLng(profile.location[0].long)
-  }, [])
-
-  console.log(lat, lng)
   /*
   GoogleMap is the dependency where we get the map from and can edit zoom and center. map-container the size adjusted in the CSS-file
   Marker is the position for the marker (duh), it is hardcoded to be in Oslo sentrum.*/
@@ -89,9 +80,9 @@ function Map({profile}) {
             url: `${profile.profileImg}`,
             scaledSize: { width: 70, height: 70 },
           }}
-          position={{ lat, lng }}
+          position={{ lat: 0, lng: 0 }}
         >
-          <InfoWindow position={{lat, lng}}>
+          <InfoWindow position={{lat: 0, lng: 0}}>
             <div className={"info-window"}>
               <div>
                 <div>

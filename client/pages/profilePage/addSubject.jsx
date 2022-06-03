@@ -11,29 +11,11 @@ export default function AddSubject({ id, setNewSubject }) {
   const [endDate, setEndDate] = useState(null);
   const [subjectName, setSubjectName] = useState("");
   const [subjectCode, setSubjectCode] = useState("");
-  const [lat, setLat] = useState(0);
-  const [long, setLong] = useState(0);
   const [error, setError] = useState("");
 
   const [ws, setWs] = useState("");
 
-  navigator.geolocation.getCurrentPosition(
-    function(position) {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-    },
-    function(error) {
-      console.error("Error Code = " + error.code + " - " + error.message);
-    }
-  );
-
-  let subjectObj;
-  if (lat > 0 && long > 0) {
-    const location = { lat, long };
-    subjectObj = { subjectName, subjectCode, startDate, endDate, location };
-  } else {
-    subjectObj = { subjectName, subjectCode, startDate, endDate };
-  }
+  const subjectObj = { subjectName, subjectCode, startDate, endDate }
 
   useEffect(() => {
     const ws = new WebSocket(window.location.origin.replace(/^http/, "ws"));

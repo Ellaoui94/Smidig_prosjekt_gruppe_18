@@ -10,23 +10,23 @@ import { DatePicker } from "@mui/x-date-pickers";
 const subjects = ["Matematikk", "Religion", "Fysikk", "Historie"];
 const locations = ["Bibliotek", "Cafe"];
 const states = ["Alene", "Usynlig", "Offentlig", "Kun venner"];
-const stage = ["active", "planned"];
-const colors = [
-  "#C2DBE2",
-  "#FFBDBD",
-  "#9FB8B5",
-  "#FF8042",
-  "#4C7D99",
-  "#FFC76D",
-  "#CFDBC1",
-  "#9FB8B5",
-];
-const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
-
-const rColors = shuffle(colors);
+const stage = ["active", "planned"];;
 
 export function StartSession({ profile: { firstName, lastName, email, id } }) {
   const [userSubject, setUserSubjects] = useState([]);
+
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
+
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      setLat(position.coords.latitude);
+      setLng(position.coords.longitude);
+    },
+    function(error) {
+      console.error("Error Code = " + error.code + " - " + error.message);
+    }
+  );
 
   const [startDateSession, setStartDateSession] = useState(null);
 
@@ -40,9 +40,11 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
     studySessionTitle: "",
     stage: "",
     date: null,
+    position: {lat, lng},
   });
 
   sessionData.date = startDateSession;
+  sessionData.position = {lat, lng}
   console.log("inside session: " + sessionData.startDate);
   sessionData.email = email;
 

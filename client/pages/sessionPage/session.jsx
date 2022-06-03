@@ -20,7 +20,7 @@ const user = [
   },
 ];
 
-function MapView() {
+function MapView({position, profile}) {
   return (
     <>
       <GoogleMap
@@ -29,18 +29,13 @@ function MapView() {
         mapContainerClassName="mini-map-container"
       >
         <Marker
-          style={{
-            backgroundColor: "red",
-            width: "101px",
-          }}
           icon={{
-            url: "http://localhost:3000/imgProfile.a4698995.png?1653992732689",
+            url: `${profile.profileImg}`,
             scaledSize: { width: 70, height: 70 },
-            style: { backgroundColor: "red", width: "101px" },
           }}
-          position={{ lat: 59.911481, lng: 10.757923 }}
+          position={{ lat: position.lat, lng: position.lng }}
         >
-          <InfoWindow position={{ lat: 59.914551, lng: 10.757863 }}>
+          <InfoWindow position={{ lat: position.lat, lng: position.lng }}>
             <div className={"info-window"}>
               {user.map((userInfo) => (
                 <div>
@@ -59,7 +54,7 @@ function MapView() {
   );
 }
 
-export default function Session() {
+export default function Session({profile}) {
   const { showPlannedSession } = useContext(MainPageApiContext);
   const navigate = useNavigate();
   const { sessionId } = useParams();
@@ -96,10 +91,11 @@ export default function Session() {
     );
   }
 
+  const position = data[0].position
   return (
     <div>
       <h1>{data[0].courseTitle}</h1>
-      <MapView />
+      <MapView position={position} profile={profile}/>
       <p>Endre arbeidsstatus</p>
       <div>
         <input type={"radio"} name={"set-status"} />

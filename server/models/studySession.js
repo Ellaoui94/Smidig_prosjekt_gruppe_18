@@ -7,6 +7,7 @@ import Joi from "joi";
   This is all the different attributes we can put in the database.
   If you want to add more attributes to the database, just add it below.
  */
+
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: false },
@@ -27,6 +28,7 @@ const userSchema = new mongoose.Schema(
     stage: { type: String, required: false },
     startDate: { type: Date, required: false },
     endDate: { type: Date, required: false },
+    position: {lat: {type: Number, required: true}, lng: {type: Number, required: true}, required: false}
   },
   { timestamps: true }
 );

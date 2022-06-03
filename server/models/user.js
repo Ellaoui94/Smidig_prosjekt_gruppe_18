@@ -3,18 +3,11 @@ import jwt from "jsonwebtoken";
 import Joi from "joi";
 import passwordComplexity from "joi-password-complexity";
 
-
-const locationSchema = new mongoose.Schema({
-  lat: {type: Number, required: true},
-  long: {type: Number, required: true}
-})
-
 const subjectSchema = new mongoose.Schema({
   subjectName: { type: String, required: true },
   subjectCode: { type: String, required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
-  location: {type: [locationSchema], required: false}
 })
 
 const friendsSchema = new mongoose.Schema({

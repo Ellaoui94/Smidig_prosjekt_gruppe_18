@@ -82,7 +82,6 @@ function Application() {
   const [email, setEmail] = useState();
   const [id, setId] = useState();
   const [friends, setFriends] = useState([]);
-  const [location, setLocation] = useState();
   const [profileImg, setProfileImg] = useState("");
   const [registered, setRegistered] = useState(false);
   const [subjects, setSubjects] = useState([]);
@@ -103,10 +102,10 @@ function Application() {
       setEmail(r.email);
       setId(r._id);
       setFriends(r.friends);
-      setLocation(r.subjects[0].location);
-      setProfileImg(r.profileImg);
+      setProfileImg(r.profileImg)
       setSubjects(r.subjects);
     });
+
 
     /*const allUsers = `${window.location.origin}/api/users/getAllUsers`;
     const { data: res } = await axios.get(allUsers);
@@ -123,7 +122,6 @@ function Application() {
     id,
     profileImg,
     subjects,
-    location,
   };
   const user = localStorage.getItem("token");
 
@@ -171,7 +169,7 @@ function Application() {
 
                 <Route
                   path={"/session/:sessionId"}
-                  element={<Session email={email} />}
+                  element={<Session profile={profile} />}
                 />
                 <Route
                   path={"/start-session"}
