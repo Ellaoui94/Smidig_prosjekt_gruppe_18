@@ -4,7 +4,7 @@ import { MySubjectsCard } from "./cards/mySubjectsCard";
 import { FinishedSessionsCard } from "./cards/finishedSessionsCard";
 import { Link } from "react-router-dom";
 import img from "./dummyPics/img.png";
-import imgProfile from '../../imgProfile.png'
+import imgProfile from "../../imgProfile.png";
 
 function MyFriendsCard({ myFriends: { name, photo } }) {
   return (
@@ -17,14 +17,14 @@ function MyFriendsCard({ myFriends: { name, photo } }) {
   );
 }
 
-function Feed({profile}) {
+function Feed({ profile }) {
   return (
     <>
       <div>
         <h4>Mine emner</h4>
         <div className={"horizontal-scroll-div"}>
           <div className={"cards-div"}>
-            <MySubjectsCard />
+            <MySubjectsCard profile={profile} />
           </div>
         </div>
 
@@ -37,18 +37,17 @@ function Feed({profile}) {
 
         <Link to={"/friends-page"}>Mine venner</Link>
 
-          {profile.friends.length === 0 ?
-            <div>
+        {profile.friends.length === 0 ? (
+          <div>
             <Link to="/add-new-friend">Legg til ny venn</Link>
-            </div>
-            : (
-              <div className={"friends-container"}>
-              {profile.friends.map((myFriends, key) => (
-                <MyFriendsCard key={key} myFriends={myFriends} />
-              ))}
-              </div>
-            )
-          }
+          </div>
+        ) : (
+          <div className={"friends-container"}>
+            {profile.friends.map((myFriends, key) => (
+              <MyFriendsCard key={key} myFriends={myFriends} />
+            ))}
+          </div>
+        )}
 
         <h4>Tidligere arbeidsøkter</h4>
         <div className={"horizontal-scroll-div"}>
@@ -66,9 +65,22 @@ export function MainPage({ profile }) {
     <>
       <div className={"main-div"}>
         <div id={"wrapper"}>
-        <h2>Hei, {profile.firstName}</h2> <Link to={"/profile"}>{profile.profileImg ?
-          <img width={"100px"} style={{marginLeft: 20}} src={profile.profileImg}/> :
-          <img width={"100px"} style={{marginLeft: 20}} src={imgProfile}/>}</Link>
+          <h2>Hei, {profile.firstName}</h2>{" "}
+          <Link to={"/profile"}>
+            {profile.profileImg ? (
+              <img
+                width={"100px"}
+                style={{ marginLeft: 20 }}
+                src={profile.profileImg}
+              />
+            ) : (
+              <img
+                width={"100px"}
+                style={{ marginLeft: 20 }}
+                src={imgProfile}
+              />
+            )}
+          </Link>
         </div>
         <Feed profile={profile} />
       </div>
