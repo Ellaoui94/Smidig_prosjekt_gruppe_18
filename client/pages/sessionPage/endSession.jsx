@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -11,6 +11,7 @@ const evaluation = ["Bra", "Helt ok", "Dårlig"];
 
 export function EndSession({ emailInput }) {
   const [endDateSession, setEndDateSession] = useState(null);
+  const { sessionId } = useParams();
 
   const [data, setData] = useState({
     email: "",
@@ -41,6 +42,13 @@ export function EndSession({ emailInput }) {
       const { data: res } = await axios.post(url, data);
       console.log("inside handelSubmit try: " + data.email);
       navigate("/main-page");
+
+      //change session stage from active to finished
+      const setStageUrl = `${window.location.origin}/api/session/set-session-to-finished/${sessionId}`;
+      const { data: result } = await axios.post(setStageUrl, {
+        stage: "finished",
+      });
+      console.log(result.data);
       console.log(res.message);
     } catch (error) {
       if (

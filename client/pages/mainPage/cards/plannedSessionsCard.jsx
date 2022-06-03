@@ -28,8 +28,6 @@ export function PlannedSessionsCard() {
     day: "numeric",
   };
 
-  console.log("inside planned session card: " + JSON.stringify(data));
-
   if (loading) {
     return <div>Loading...</div>;
   }

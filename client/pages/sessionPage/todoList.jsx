@@ -54,8 +54,6 @@ export function TodoList() {
     }
   }
 
-  console.log(joiError)
-
   if (loading) {
     return <div>Loading...</div>;
   }

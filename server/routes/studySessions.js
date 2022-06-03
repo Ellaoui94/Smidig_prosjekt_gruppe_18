@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   Session,
+  updateStageValidate,
   todoValidate,
   updateValidateStudySession,
 } from "../models/studySession.js";
@@ -37,6 +38,40 @@ export function StudySessionApi() {
       res.send({ data: studySession });
     } catch {
       res.status(404).send({ error: "User is not found" });
+    }
+  });
+
+  router.post("/set-session-to-active/:id", async (req, res) => {
+    try {
+      const { error } = updateStageValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
+      const { id } = req.params;
+      const session = await Session.findOne({ _id: { $eq: id } });
+      Object.assign(session, req.body);
+      console.log(req.body);
+      console.log(session.stage);
+      res.send({ data: session });
+      session.save();
+    } catch {
+      res.status(404).send({ error: "Session is not found" });
+    }
+  });
+
+  router.post("/set-session-to-finished/:id", async (req, res) => {
+    try {
+      const { error } = updateStageValidate(req.body);
+      if (error)
+        return res.status(400).send({ message: error.details[0].message });
+
+      const { id } = req.params;
+      const session = await Session.findOne({ _id: { $eq: id } });
+      Object.assign(session, req.body);
+      res.send({ data: session });
+      session.save();
+    } catch {
+      res.status(404).send({ error: "Session is not found" });
     }
   });
 

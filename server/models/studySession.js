@@ -68,5 +68,17 @@ const todoValidate = (data) => {
   return schema.validate(data);
 };
 
+const updateStageValidate = (data) => {
+  const schema = Joi.object({
+    stage: Joi.string().required().label("stage"),
+  });
+  return schema.validate(data);
+};
+
 //Here we export the consts. We use them in routes.
-export { Session, updateValidateStudySession, todoValidate };
+export {
+  Session,
+  updateValidateStudySession,
+  todoValidate,
+  updateStageValidate,
+};
