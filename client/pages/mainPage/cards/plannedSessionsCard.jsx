@@ -22,6 +22,7 @@ export function PlannedSessionsCard() {
     async () => await showPlannedSession(),
     []
   );
+
   const dateFormat = {
     weekday: "long",
     month: "long",

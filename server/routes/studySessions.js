@@ -75,17 +75,25 @@ export function StudySessionApi() {
     }
   });
 
-  router.get("/planned-session/", async (req, res) => {
+  router.get("/planned-session", async (req, res) => {
     try {
-      const { sessionId } = req.query;
+      const { sessionId } = req.params;
+      const emailCookie = req.signedCookies.jwt.email;
+
+      console.log("email is " + emailCookie);
       console.log("sessionId is " + sessionId);
       let queryResult = "";
       if (sessionId) {
-        await Session.find({ _id: { $eq: sessionId } }).then((result) => {
+        await Session.find({
+          _id: { $eq: sessionId },
+        }).then((result) => {
           queryResult = result;
         });
       } else {
-        await Session.find({ stage: "planned" }).then((result) => {
+        await Session.find({
+          stage: "planned",
+          $or: [{ email: "mock@data.no" }, { email: emailCookie }],
+        }).then((result) => {
           queryResult = result;
         });
       }
@@ -98,13 +106,18 @@ export function StudySessionApi() {
   router.get("/finished-session/", async (req, res) => {
     try {
       const { sessionId } = req.query;
+      const emailCookie = req.signedCookies.jwt.email;
+
       let queryResult = "";
       if (sessionId) {
         await Session.find({ _id: { $eq: sessionId } }).then((result) => {
           queryResult = result;
         });
       } else {
-        await Session.find({ stage: "finished" }).then((result) => {
+        await Session.find({
+          stage: "finished",
+          $or: [{ email: "mock@data.no" }, { email: emailCookie }],
+        }).then((result) => {
           queryResult = result;
         });
       }

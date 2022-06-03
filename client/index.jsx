@@ -88,7 +88,6 @@ function Application() {
   const [subjects, setSubjects] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
 
-
   useEffect(async () => {
     const user = await getUser();
     setFirstName(user.firstName);
@@ -104,11 +103,10 @@ function Application() {
       setEmail(r.email);
       setId(r._id);
       setFriends(r.friends);
-      setLocation(r.subjects[0].location)
-      setProfileImg(r.profileImg)
+      setLocation(r.subjects[0].location);
+      setProfileImg(r.profileImg);
       setSubjects(r.subjects);
     });
-
 
     /*const allUsers = `${window.location.origin}/api/users/getAllUsers`;
     const { data: res } = await axios.get(allUsers);
@@ -125,7 +123,7 @@ function Application() {
     id,
     profileImg,
     subjects,
-    location
+    location,
   };
   const user = localStorage.getItem("token");
 
@@ -206,7 +204,10 @@ function Application() {
                   element={<FriendsActivity />}
                 />
 
-                <Route path={"/map-page"} element={<MapPage profile={profile} />} />
+                <Route
+                  path={"/map-page"}
+                  element={<MapPage profile={profile} />}
+                />
                 <Route path={"/course-view/:course"} element={<CourseView />} />
                 <Route path={"*"} element={<NotFound id={id} />} />
               </>

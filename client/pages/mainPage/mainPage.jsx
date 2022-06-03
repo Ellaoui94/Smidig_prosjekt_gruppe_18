@@ -36,18 +36,16 @@ function Feed({ profile }) {
         <Link to={"/friends-page"}>Mine venner</Link>
 
         {profile.friends.length === 0 ? (
-            <div>
-              <Link to="/add-new-friend">Legg til ny venn</Link>
-            </div>
-          )
-          :
-
+          <div>
+            <Link to="/add-new-friend">Legg til ny venn</Link>
+          </div>
+        ) : (
           <div className={"friends-container"}>
             {profile.friends.slice(0, 9).map((myFriends, key) => (
               <MyFriendsCard key={key} myFriends={myFriends} />
             ))}
           </div>
-        }
+        )}
 
         <h4>Tidligere arbeidsøkter</h4>
         <div className={"horizontal-scroll-div"}>

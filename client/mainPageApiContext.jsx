@@ -31,9 +31,4 @@ export const MainPageApiContext = React.createContext({
       todos
     );
   },
-  async setSessionToActive(sessionId) {
-    return await postJSON(
-      "/api/session/set-session-to-active" + new URLSearchParams(sessionId)
-    );
-  },
 });
