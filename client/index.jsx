@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { FrontPage } from "./pages/frontPage/frontPage";
@@ -31,6 +31,8 @@ import PageTwo from "./pages/introPages/pageTwo";
 import PageThree from "./pages/introPages/pageThree";
 import AnimatedRoutes from "./pages/introPages/AnimatedRoutes";
 import EditContactInfo from "./pages/profilePage/editContactInfo";
+import { MainPageApiContext } from "./mainPageApiContext";
+import { useLoading } from "./useLoading";
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -46,15 +48,41 @@ async function getUser() {
 }
 
 function NavBar() {
+  const { showActiveSession } = useContext(MainPageApiContext);
+  const { loading, error, data } = useLoading(
+    async () => await showActiveSession(),
+    []
+  );
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <div id="error-text">{error.toString()}</div>
+      </div>
+    );
+  }
+  console.log(data.length);
+
   return (
     <>
       <div id={"nav-bar"}>
         <Link to={"/main-page"}>
           <HouseIcon style={{ fontSize: "50px" }} />
         </Link>
-        <Link to={"/start-session"}>
-          <img style={{ height: "75%" }} src={imgPic} />
-        </Link>
+        {data.length === 0 ? (
+          <Link to={"/start-session"}>
+            <img style={{ height: "75%" }} src={imgPic} />
+          </Link>
+        ) : (
+          <Link to={"/session/" + data[0]._id}>
+            <img style={{ height: "75%" }} src={imgPic} />
+          </Link>
+        )}
+
         <Link to={"/map-page"}>
           <RoomIcon style={{ fontSize: "50px" }} />
         </Link>
@@ -102,10 +130,9 @@ function Application() {
       setEmail(r.email);
       setId(r._id);
       setFriends(r.friends);
-      setProfileImg(r.profileImg)
+      setProfileImg(r.profileImg);
       setSubjects(r.subjects);
     });
-
 
     /*const allUsers = `${window.location.origin}/api/users/getAllUsers`;
     const { data: res } = await axios.get(allUsers);

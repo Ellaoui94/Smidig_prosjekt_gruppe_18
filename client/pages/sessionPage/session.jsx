@@ -110,7 +110,7 @@ export default function Session({ profile }) {
         <input type={"radio"} name={"set-status"} />
         <label>Usynlig</label>
       </div>
-      <TodoList />
+      <TodoList sessionId={sessionId} />
       <button>
         <Link to={"/end-session/" + sessionId}>Vurder økten og avslutt</Link>
       </button>
