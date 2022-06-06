@@ -28,22 +28,17 @@ const userSchema = new mongoose.Schema(
     stage: { type: String, required: false },
     startDate: { type: Date, required: false },
     endDate: { type: Date, required: false },
-    position: {lat: {type: Number, required: true}, lng: {type: Number, required: true}, required: false}
+    position: {
+      lat: { type: Number, required: true },
+      lng: { type: Number, required: true },
+      required: false,
+    },
   },
   { timestamps: true }
 );
 
 //We use this in routes so that we can put the different values in the right schema
 const Session = mongoose.model("session", userSchema);
-
-const validateStudySession = (data) => {
-  const schema = Joi.object({
-    status: Joi.string().required().label("Study Status"),
-    evaluation: Joi.string().required().label("Evaluation"),
-    focus: Joi.string().required().label("Focus"),
-    other: Joi.string().required().label("Other"),
-  });
-};
 
 /*
   In this const we change the values that already is are in the database.

@@ -7,6 +7,10 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
 
+/*
+   Here is the code for when you want to end an active session
+ */
+
 const evaluation = ["Bra", "Helt ok", "Dårlig"];
 
 export function EndSession({ emailInput }) {

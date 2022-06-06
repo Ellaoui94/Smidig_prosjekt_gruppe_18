@@ -9,6 +9,7 @@ import {
 export function StudySessionApi() {
   const router = new Router();
 
+  //Saving data to session collection in the database
   router.post("/:email", async (req, res) => {
     try {
       //Here we save the values in the right schema.
@@ -198,6 +199,8 @@ export function StudySessionApi() {
     }
   });*/
 
+  //Here we tried to delete a session that already existed, but this we failed.
+  //We chose not to delete this if some of us found a way to fix it
   router.delete("/delete/:id", async (req, res) => {
     try {
       const { sessionId } = req.params;
