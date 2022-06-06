@@ -63,7 +63,6 @@ export function CourseRoutes() {
   router.get("/", (req, res) => {
     const { course } = req.query;
     let queryResult = "";
-    console.log("inside course site " + course);
     mySubjects.map((subject) => {
       if (subject.subject === course) {
         queryResult = mySubjects.filter(

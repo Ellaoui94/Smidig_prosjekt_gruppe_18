@@ -1,13 +1,11 @@
 import React from "react";
 import { fetchJSON } from "./fetchJSON";
-import { postJSON } from "./postJSON";
 
 export const MainPageApiContext = React.createContext({
   async showCourse(course) {
     return await fetchJSON("/api/course?" + new URLSearchParams(course));
   },
   async showPlannedSession(sessionId) {
-    console.log("inside api cntxt " + JSON.stringify(sessionId));
     return await fetchJSON(
       "/api/session/planned-session?" + new URLSearchParams(sessionId)
     );
@@ -23,13 +21,13 @@ export const MainPageApiContext = React.createContext({
     );
   },
   /*async endPlannedSession() {
-    const res = await fetch("/api/session/planned-session", {
-      method: "DELETE",
-    });
-    if (!res.ok) {
-      throw new Error(`Failed to post ${res.status}: ${res.statusText}`);
-    }
-  },*/
+      const res = await fetch("/api/session/planned-session", {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        throw new Error(`Failed to post ${res.status}: ${res.statusText}`);
+      }
+    },*/
   async getLatestAddedSession() {
     return await fetchJSON("/api/session/new-session");
   },
