@@ -181,7 +181,7 @@ function Application() {
                 />
                 <Route
                   path={"/planned-session/:sessionId"}
-                  element={<PlannedSession />}
+                  element={<PlannedSession id={id} />}
                 />
                 <Route
                   path={"/finished-session/:sessionId"}

@@ -1,11 +1,27 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useContext } from "react";
 import { MainPageApiContext } from "../../mainPageApiContext";
 import { useLoading } from "../../useLoading";
 import { TodoList } from "./todoList";
 import axios from "axios";
 
-export function PlannedSession() {
+function DeleteButton({ label, id }) {
+  const navigate = useNavigate();
+  //const { endPlannedSession } = useContext(MainPageApiContext);
+
+  async function deletePlannedSession() {
+    await axios.delete(`${window.location.origin}/api/session/delete/${id}`);
+    //await endPlannedSession();
+    navigate("/");
+  }
+  return (
+    <div>
+      <button onClick={deletePlannedSession}>{label}</button>
+    </div>
+  );
+}
+
+export function PlannedSession({ id }) {
   const { showPlannedSession } = useContext(MainPageApiContext);
   const navigate = useNavigate();
   const { sessionId } = useParams();
@@ -49,6 +65,7 @@ export function PlannedSession() {
       <h6>{data[0].address}</h6>
       <TodoList />
       <button onClick={onClickHandler}>Start økt</button>
+      <DeleteButton label={"Slett økt"} id={id} />
     </>
   );
 }

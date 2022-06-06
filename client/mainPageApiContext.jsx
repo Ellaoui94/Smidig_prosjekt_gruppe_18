@@ -21,6 +21,14 @@ export const MainPageApiContext = React.createContext({
       "/api/session/active-session?" + new URLSearchParams(sessionId)
     );
   },
+  /*async endPlannedSession() {
+    const res = await fetch("/api/session/planned-session", {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to post ${res.status}: ${res.statusText}`);
+    }
+  },*/
   async getLatestAddedSession() {
     return await fetchJSON("/api/session/new-session");
   },

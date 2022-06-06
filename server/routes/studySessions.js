@@ -198,5 +198,18 @@ export function StudySessionApi() {
     }
   });*/
 
+  router.delete("/delete/:id", async (req, res) => {
+    try {
+      const { sessionId } = req.params;
+      const session = await Session.findOne({ _id: { $eq: sessionId } });
+
+      await session.remove();
+      res.send({ data: true });
+    } catch (error) {
+      console.log(error);
+      res.status(404).send({ error: "Session is not found" });
+    }
+  });
+
   return router;
 }
