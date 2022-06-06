@@ -91,23 +91,7 @@ function MyGroups() {
 export function CourseView() {
   const [showPeople, setShowPeople] = useState(true);
   const [showMyGroups, setShowMyGroups] = useState(false);
-  const { showCourse } = useContext(MainPageApiContext);
   const { course } = useParams();
-  const { loading, error, data } = useLoading(
-    async () => await showCourse({ course: course }),
-    []
-  );
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return (
-      <div>
-        <h1>Error</h1>
-        <div id="error-text">{error.toString()}</div>
-      </div>
-    );
-  }
 
   // keeps track of which button is active, so the right component is displayed when clicking a button
   function onClickHandlerPeople() {
