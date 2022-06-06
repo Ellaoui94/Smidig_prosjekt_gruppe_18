@@ -33,11 +33,4 @@ export const MainPageApiContext = React.createContext({
   async getLatestAddedSession() {
     return await fetchJSON("/api/session/new-session");
   },
-  async addNewTodo(todos, sessionId) {
-    console.log("inside api: " + JSON.stringify(todos));
-    return await postJSON(
-      "/api/session/new-todo?" + new URLSearchParams(sessionId),
-      todos
-    );
-  },
 });

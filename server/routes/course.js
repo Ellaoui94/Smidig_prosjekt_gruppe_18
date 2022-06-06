@@ -63,14 +63,16 @@ export function CourseRoutes() {
   router.get("/", (req, res) => {
     const { course } = req.query;
     let queryResult = "";
-
-    if (course) {
-      queryResult = mySubjects.filter(
-        (mySubject) => mySubject.subject === course
-      );
-    } else {
-      queryResult = mySubjects;
-    }
+    console.log("inside course site " + course);
+    mySubjects.map((subject) => {
+      if (subject.subject === course) {
+        queryResult = mySubjects.filter(
+          (mySubject) => mySubject.subject === course
+        );
+      } else {
+        queryResult = mySubjects;
+      }
+    });
 
     res.json(queryResult);
   });

@@ -3,6 +3,8 @@ import { MainPageApiContext } from "../../mainPageApiContext";
 import { useLoading } from "../../useLoading";
 import { useParams } from "react-router-dom";
 
+// code for when youre inside a course page
+
 function MyGroupsCard({ assignments: { type, assignmentStudents } }) {
   return (
     <>
@@ -73,8 +75,6 @@ function MyGroups() {
     );
   }
 
-  console.log(data[0].assignments[0].assignmentStudents);
-
   return (
     <>
       <div className={"upcoming-div"}>
@@ -113,36 +113,24 @@ export function CourseView() {
   function onClickHandlerPeople() {
     // if button is already active, do nothing. else, switch.
     if (showPeople === true) {
-      return;
     } else {
       setShowPeople((current) => !current);
       setShowMyGroups((current) => !current);
     }
-    console.log(showPeople.toString());
-    console.log(showMyGroups.toString());
   }
 
   function onClickHandlerMyGroups() {
     if (showMyGroups === true) {
-      return;
     } else {
       setShowPeople((current) => !current);
       setShowMyGroups((current) => !current);
     }
-    console.log(showPeople.toString());
-    console.log(showMyGroups.toString());
   }
 
   return (
     <>
       <div className={"main-div"}>
-        <div>
-          {data.map((course) => (
-            <>
-              <p>{course.subject}</p>
-            </>
-          ))}
-        </div>
+        <div>{course}</div>
         <div className={"choose-user-diary-buttons-div"}>
           <button onClick={onClickHandlerPeople}>Personer</button>
           <button onClick={onClickHandlerMyGroups}>Mine grupper</button>

@@ -1,12 +1,15 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React, { useContext } from "react";
 import { MainPageApiContext } from "../../mainPageApiContext";
 import { useLoading } from "../../useLoading";
 import { TodoList } from "./todoList";
 import axios from "axios";
 
+// code for when youre inside a planned session
+
 function DeleteButton({ label, id }) {
   const navigate = useNavigate();
+
   //const { endPlannedSession } = useContext(MainPageApiContext);
 
   async function deletePlannedSession() {
@@ -14,6 +17,7 @@ function DeleteButton({ label, id }) {
     //await endPlannedSession();
     navigate("/");
   }
+
   return (
     <div>
       <button onClick={deletePlannedSession}>{label}</button>
