@@ -7,6 +7,7 @@ export const MainPageApiContext = React.createContext({
     return await fetchJSON("/api/course?" + new URLSearchParams(course));
   },
   async showPlannedSession(sessionId) {
+    console.log("inside api cntxt " + JSON.stringify(sessionId));
     return await fetchJSON(
       "/api/session/planned-session?" + new URLSearchParams(sessionId)
     );

@@ -59,6 +59,7 @@ export function CourseRoutes() {
     },
   ];
 
+  //Getting data from const above
   router.get("/", (req, res) => {
     const { course } = req.query;
     let queryResult = "";

@@ -7,30 +7,29 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
 
+/*
+  Here is the code for when you start a new session
+ */
 const subjects = ["Matematikk", "Religion", "Fysikk", "Historie"];
 const locations = ["Bibliotek", "Cafe"];
 const states = ["Alene", "Usynlig", "Offentlig", "Kun venner"];
-const stage = ["active", "planned"];;
+const stage = ["active", "planned"];
 
 export function StartSession({ profile: { firstName, lastName, email, id } }) {
-  const [userSubject, setUserSubjects] = useState([]);
-
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
 
   navigator.geolocation.getCurrentPosition(
-    function(position) {
+    function (position) {
       setLat(position.coords.latitude);
       setLng(position.coords.longitude);
     },
-    function(error) {
+    function (error) {
       console.error("Error Code = " + error.code + " - " + error.message);
     }
   );
 
   const [startDateSession, setStartDateSession] = useState(null);
-
-  const test = startDateSession;
 
   const [sessionData, setSessionData] = useState({
     email: "",
@@ -40,30 +39,16 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
     studySessionTitle: "",
     stage: "",
     date: null,
-    position: {lat, lng},
+    position: { lat, lng },
   });
 
   sessionData.date = startDateSession;
-  sessionData.position = {lat, lng}
+  sessionData.position = { lat, lng };
   console.log("inside session: " + sessionData.startDate);
   sessionData.email = email;
 
   const [sessionError, setSessionError] = useState("");
   const navigate = useNavigate();
-
-  console.log(id);
-  /*
-  const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`;
-  const { data: res } = await axios.get(userURL);
-  console.log("INSIDE start session " + JSON.stringify(res));
-
-
-
-  res.map((r) => {
-    setUserSubjects(r.subjects);
-  });
-
-   */
 
   const handleChange = ({ currentTarget: input }) => {
     setSessionData({ ...sessionData, [input.name]: input.value });

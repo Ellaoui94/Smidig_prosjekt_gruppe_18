@@ -4,14 +4,15 @@ import { useParams } from "react-router-dom";
 import { useLoading } from "../../useLoading";
 import axios from "axios";
 
-export function TodoList() {
+export function TodoList({ sessionId }) {
   const { showPlannedSession, addNewTodo } = useContext(MainPageApiContext);
   const [todo, setTodo] = useState("");
   const [checked, setChecked] = useState("false");
   const [ws, setWs] = useState("");
   const [todoList, setTodoList] = useState([]);
   const [joiError, setJoiError] = useState("");
-  const { sessionId } = useParams();
+  //const { sessionId } = useParams();
+  console.log("inside todo" + sessionId);
   const { loading, error, data } = useLoading(
     async () => await showPlannedSession({ sessionId: sessionId }),
     []

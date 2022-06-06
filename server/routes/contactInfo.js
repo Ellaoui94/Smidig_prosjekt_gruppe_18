@@ -4,6 +4,7 @@ import { ContactDetails } from "../models/contactDetails.js";
 export function ContactInfoApi() {
   const router = new Router();
 
+  //Save contact info to database
   router.post("/", async (req, res) => {
     try {
       await new ContactDetails(req.body).save();
@@ -13,10 +14,11 @@ export function ContactInfoApi() {
     }
   });
 
+  //Updates data in the database by finding the right data by id.
   router.post("/update/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      const userContact = await  ContactDetails.findOne({ _id: { $eq: id } });
+      const userContact = await ContactDetails.findOne({ _id: { $eq: id } });
       Object.assign(userContact, req.body);
       userContact.save();
 
@@ -24,7 +26,7 @@ export function ContactInfoApi() {
     } catch {
       res.status(404).send({ error: "Details is not found" });
     }
-  })
+  });
 
   router.get("/userInfo/:id", async (req, res) => {
     try {
@@ -36,8 +38,6 @@ export function ContactInfoApi() {
       } else {
         console.log("subjectId", id);
       }
-
-
     } catch (error) {
       res.status(400).json({ message: error.message });
     }

@@ -11,6 +11,9 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 
+/*
+  Here is the code for when you have an active session
+ */
 const user = [
   {
     firstName: "Deg",
@@ -20,7 +23,7 @@ const user = [
   },
 ];
 
-function MapView({position, profile}) {
+function MapView({ position, profile }) {
   return (
     <>
       <GoogleMap
@@ -54,7 +57,7 @@ function MapView({position, profile}) {
   );
 }
 
-export default function Session({profile}) {
+export default function Session({ profile }) {
   const { showPlannedSession } = useContext(MainPageApiContext);
   const navigate = useNavigate();
   const { sessionId } = useParams();
@@ -91,11 +94,11 @@ export default function Session({profile}) {
     );
   }
 
-  const position = data[0].position
+  const position = data[0].position;
   return (
     <div>
       <h1>{data[0].courseTitle}</h1>
-      <MapView position={position} profile={profile}/>
+      <MapView position={position} profile={profile} />
       <p>Endre arbeidsstatus</p>
       <div>
         <input type={"radio"} name={"set-status"} />
@@ -107,7 +110,7 @@ export default function Session({profile}) {
         <input type={"radio"} name={"set-status"} />
         <label>Usynlig</label>
       </div>
-      <TodoList />
+      <TodoList sessionId={sessionId} />
       <button>
         <Link to={"/end-session/" + sessionId}>Vurder økten og avslutt</Link>
       </button>

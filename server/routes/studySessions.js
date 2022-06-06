@@ -9,6 +9,7 @@ import {
 export function StudySessionApi() {
   const router = new Router();
 
+  //Saving data to session collection in the database
   router.post("/:email", async (req, res) => {
     try {
       //Here we save the values in the right schema.
@@ -77,7 +78,7 @@ export function StudySessionApi() {
 
   router.get("/planned-session", async (req, res) => {
     try {
-      const { sessionId } = req.params;
+      const { sessionId } = req.query;
       const emailCookie = req.signedCookies.jwt.email;
 
       console.log("email is " + emailCookie);
@@ -130,16 +131,19 @@ export function StudySessionApi() {
   router.get("/active-session/", async (req, res) => {
     try {
       const { sessionId } = req.query;
+      const emailCookie = req.signedCookies.jwt.email;
       let queryResult = "";
-      if (sessionId) {
-        await Session.find({ _id: { $eq: sessionId } }).then((result) => {
-          queryResult = result;
-        });
-      } else {
-        await Session.find({ stage: "active" }).then((result) => {
-          queryResult = result;
-        });
-      }
+      // if (sessionId) {
+      //   await Session.find({ _id: { $eq: sessionId } }).then((result) => {
+      //     queryResult = result;
+      //   });
+      // } else {
+      await Session.find({
+        $and: [{ stage: "active" }, { email: emailCookie }],
+      }).then((result) => {
+        queryResult = result;
+      });
+      //}
       res.json(queryResult);
     } catch {
       res.status(404).send({ error: "Session not found" });
@@ -198,6 +202,8 @@ export function StudySessionApi() {
     }
   });*/
 
+  //Here we tried to delete a session that already existed, but this we failed.
+  //We chose not to delete this if some of us found a way to fix it
   router.delete("/delete/:id", async (req, res) => {
     try {
       const { sessionId } = req.params;
