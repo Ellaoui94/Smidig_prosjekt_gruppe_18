@@ -70,8 +70,6 @@ function MyGroups() {
   const [ws, setWs] = useState("");
   const [groupsList, setGroupsList] = useState([]);
   const groupObject = { type, assignmentStudents };
-  console.log("assignment students: " + assignmentStudents);
-  console.log("group ws: " + JSON.stringify(groupsList));
 
   const onChange = (e) => {
     setAssignmentStudents([...assignmentStudents, e.target.value]);
@@ -93,9 +91,10 @@ function MyGroups() {
       document
         .querySelectorAll("input[type=checkbox]")
         .forEach((el) => (el.checked = false));
+
       ws.send(JSON.stringify(groupObject));
       setType("");
-      setAssignmentStudents("");
+      setAssignmentStudents([]);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);

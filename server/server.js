@@ -33,7 +33,6 @@ wsServer.on("connection", (socket) => {
     const { todo, checked } = JSON.parse(data);
     const { location } = JSON.parse(data);
     const { type, assignmentStudents } = JSON.parse(data);
-    console.log(assignmentStudents);
     for (const recipient of sockets) {
       if (subjectName) {
         recipient.send(JSON.stringify({ subjectName }));
