@@ -25,7 +25,6 @@ import NotFound from "./notFound";
 import RoomIcon from "@mui/icons-material/Room";
 import imgPic from "./img.png";
 import HouseIcon from "@mui/icons-material/House";
-import imgProfile from "./imgProfile.png";
 import PageOne from "./pages/introPages/pageOne";
 import PageTwo from "./pages/introPages/pageTwo";
 import PageThree from "./pages/introPages/pageThree";
@@ -71,7 +70,7 @@ function NavBar() {
     <>
       <div id={"nav-bar"}>
         <Link to={"/main-page"}>
-          <HouseIcon style={{ fontSize: "50px" }} />
+          <HouseIcon style={{ fontSize: "4vh" }} />
         </Link>
         {data.length === 0 ? (
           <Link to={"/start-session"}>
@@ -84,20 +83,7 @@ function NavBar() {
         )}
 
         <Link to={"/map-page"}>
-          <RoomIcon style={{ fontSize: "50px" }} />
-        </Link>
-      </div>
-    </>
-  );
-}
-
-//Please change the function name. I suck at this.
-function HeaderBar() {
-  return (
-    <>
-      <div id={"header"}>
-        <Link to={"/profile"}>
-          <img src={imgProfile} />
+          <RoomIcon style={{ fontSize: "4vh" }} />
         </Link>
       </div>
     </>
@@ -113,7 +99,6 @@ function Application() {
   const [profileImg, setProfileImg] = useState("");
   const [registered, setRegistered] = useState(false);
   const [subjects, setSubjects] = useState([]);
-  const [allUsers, setAllUsers] = useState([]);
 
   useEffect(async () => {
     const user = await getUser();

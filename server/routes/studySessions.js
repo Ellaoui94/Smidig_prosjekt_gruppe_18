@@ -1,8 +1,8 @@
 import { Router } from "express";
 import {
   Session,
-  updateStageValidate,
   todoValidate,
+  updateStageValidate,
   updateValidateStudySession,
 } from "../models/studySession.js";
 
@@ -21,8 +21,8 @@ export function StudySessionApi() {
   });
 
   /*
-    Here we update the schema. But we need to find the right schema to update.
-   */
+      Here we update the schema. But we need to find the right schema to update.
+     */
   router.post("/update/:email", async (req, res) => {
     try {
       //We need to know if there is some problems. Maybe a value is not set, that we said need to be required
@@ -51,8 +51,6 @@ export function StudySessionApi() {
       const { id } = req.params;
       const session = await Session.findOne({ _id: { $eq: id } });
       Object.assign(session, req.body);
-      console.log(req.body);
-      console.log(session.stage);
       res.send({ data: session });
       session.save();
     } catch {
@@ -80,10 +78,8 @@ export function StudySessionApi() {
     try {
       const { sessionId } = req.query;
       const emailCookie = req.signedCookies.jwt.email;
-
-      console.log("email is " + emailCookie);
-      console.log("sessionId is " + sessionId);
       let queryResult = "";
+
       if (sessionId) {
         await Session.find({
           _id: { $eq: sessionId },
@@ -93,11 +89,12 @@ export function StudySessionApi() {
       } else {
         await Session.find({
           stage: "planned",
-          $or: [{ email: "mock@data.no" }, { email: emailCookie }],
+          $or: [{ email: "mock@data.no" }, { email: `${emailCookie}` }],
         }).then((result) => {
           queryResult = result;
         });
       }
+
       res.json(queryResult);
     } catch {
       res.status(404).send({ error: "Session not found" });
@@ -122,6 +119,7 @@ export function StudySessionApi() {
           queryResult = result;
         });
       }
+
       res.json(queryResult);
     } catch {
       res.status(404).send({ error: "Session not found" });
@@ -130,21 +128,28 @@ export function StudySessionApi() {
 
   router.get("/active-session/", async (req, res) => {
     try {
-      const { sessionId } = req.query;
       const emailCookie = req.signedCookies.jwt.email;
       let queryResult = "";
-      // if (sessionId) {
-      //   await Session.find({ _id: { $eq: sessionId } }).then((result) => {
-      //     queryResult = result;
-      //   });
-      // } else {
+
       await Session.find({
         $and: [{ stage: "active" }, { email: emailCookie }],
       }).then((result) => {
         queryResult = result;
       });
-      //}
+
       res.json(queryResult);
+    } catch {
+      res.status(404).send({ error: "Session not found" });
+    }
+  });
+
+  router.get("/active-session/:email", async (req, res) => {
+    try {
+      const { email } = req.params;
+      console.log("dd",email)
+      await Session.find({ stage: "active", $and: [{ email }] }).then((result) => {
+        res.json(result);
+      });
     } catch {
       res.status(404).send({ error: "Session not found" });
     }
@@ -156,9 +161,6 @@ export function StudySessionApi() {
         .sort({ createdAt: -1 })
         .limit(1)
         .then((result) => {
-          console.log(
-            "INSIDE ROUTER get last session" + JSON.stringify(result)
-          );
           res.json(result);
         });
     } catch {
@@ -183,24 +185,6 @@ export function StudySessionApi() {
       res.status(404).send({ error: "User is not found" });
     }
   });
-
-  /*  router.post("/new-todo/", async (req, res) => {
-    try {
-      const { todo, checked } = req.body;
-      const { sessionId } = req.query;
-      console.log("inside new todo " + sessionId);
-
-      await Session.findOne({ _id: { $eq: sessionId } }).then((session) => {
-        console.log("INSIDE ROUTER NEW TODO" + JSON.stringify(session));
-        session.todos.todo.push(todo);
-        session.todos.checked.push(checked);
-        session.save();
-        res.sendStatus(200);
-      });
-    } catch {
-      res.status(404).send({ error: "Session not found" });
-    }
-  });*/
 
   //Here we tried to delete a session that already existed, but this we failed.
   //We chose not to delete this if some of us found a way to fix it

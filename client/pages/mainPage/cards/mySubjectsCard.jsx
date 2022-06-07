@@ -3,6 +3,7 @@ import { MainPageApiContext } from "../../../mainPageApiContext";
 import { useLoading } from "../../../useLoading";
 import { Link } from "react-router-dom";
 
+// code for each subject card on the front page
 const colors = [
   "#C2DBE2",
   "#FFBDBD",
@@ -37,21 +38,7 @@ export function MySubjectsCard({ profile }) {
 
   return (
     <>
-      {data.map((mySubjects, i) => (
-        <div
-          key={i}
-          className={"main-page-components-card"}
-          style={{ backgroundColor: rColors[i] }}
-        >
-          <Link to={"/course-view/" + mySubjects.subject}>
-            {mySubjects.subject}
-          </Link>
-          <h6>{mySubjects.code}</h6>
-          <div className={"arrow-div"}>
-            <p>></p>
-          </div>
-        </div>
-      ))}
+      {/* Subjects from profile. User has added these themselves */}
       {profile.subjects.map((mySubjects, i) => (
         <div
           key={i}
@@ -62,6 +49,22 @@ export function MySubjectsCard({ profile }) {
             {mySubjects.subjectName}
           </Link>
           <h6>{mySubjects.subjectCode}</h6>
+          <div className={"arrow-div"}>
+            <p>></p>
+          </div>
+        </div>
+      ))}
+      {/* Subjects from mock data */}
+      {data.map((mySubjects, i) => (
+        <div
+          key={i}
+          className={"main-page-components-card"}
+          style={{ backgroundColor: rColors[i] }}
+        >
+          <Link to={"/course-view/" + mySubjects.subject}>
+            {mySubjects.subject}
+          </Link>
+          <h6>{mySubjects.code}</h6>
           <div className={"arrow-div"}>
             <p>></p>
           </div>

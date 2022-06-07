@@ -1,18 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MainPageApiContext } from "../../mainPageApiContext";
-import { useParams } from "react-router-dom";
 import { useLoading } from "../../useLoading";
 import axios from "axios";
 
+// code for the to-do-list inside planned session and active session
+
 export function TodoList({ sessionId }) {
-  const { showPlannedSession, addNewTodo } = useContext(MainPageApiContext);
+  const { showPlannedSession } = useContext(MainPageApiContext);
   const [todo, setTodo] = useState("");
   const [checked, setChecked] = useState("false");
   const [ws, setWs] = useState("");
   const [todoList, setTodoList] = useState([]);
   const [joiError, setJoiError] = useState("");
-  //const { sessionId } = useParams();
-  console.log("inside todo" + sessionId);
   const { loading, error, data } = useLoading(
     async () => await showPlannedSession({ sessionId: sessionId }),
     []

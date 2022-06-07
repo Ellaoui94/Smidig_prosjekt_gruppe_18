@@ -3,6 +3,8 @@ import { MainPageApiContext } from "../../../mainPageApiContext";
 import { useLoading } from "../../../useLoading";
 import { Link } from "react-router-dom";
 
+// code for all planned sessions card on the front page
+
 const colors = [
   "#C2DBE2",
   "#FFBDBD",

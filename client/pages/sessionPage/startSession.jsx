@@ -15,7 +15,7 @@ const locations = ["Bibliotek", "Cafe"];
 const states = ["Alene", "Usynlig", "Offentlig", "Kun venner"];
 const stage = ["active", "planned"];
 
-export function StartSession({ profile: { firstName, lastName, email, id } }) {
+export function StartSession({ profile: {email, firstName, profileImg, id, subjects } }) {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
 
@@ -39,16 +39,30 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
     studySessionTitle: "",
     stage: "",
     date: null,
-    position: { lat, lng },
+    position: {lat, lng},
+    userName: firstName,
+    profileImg: profileImg,
   });
 
   sessionData.date = startDateSession;
-  sessionData.position = { lat, lng };
-  console.log("inside session: " + sessionData.startDate);
+  sessionData.position = {lat, lng}
   sessionData.email = email;
 
   const [sessionError, setSessionError] = useState("");
   const navigate = useNavigate();
+
+  /*
+  const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`;
+  const { data: res } = await axios.get(userURL);
+  console.log("INSIDE start session " + JSON.stringify(res));
+
+
+
+  res.map((r) => {
+    setUserSubjects(r.subjects);
+  });
+
+   */
 
   const handleChange = ({ currentTarget: input }) => {
     setSessionData({ ...sessionData, [input.name]: input.value });
@@ -64,7 +78,6 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
       const { data: response } = await axios.get(addUrl);
 
       const newSessionId = response[0]._id;
-      console.log("inside handleSubmit " + response[0]._id);
 
       if (sessionData.stage === "planned") {
         navigate("/main-page");
@@ -99,9 +112,9 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
                 name="courseTitle"
                 label={"courseTitle"}
                 onChange={handleChange}
-                value={subject}
+                value={subject.subjectName}
               />
-              {subject}
+              {subject.subjectName}
             </div>
           ))}
         </div>
@@ -172,7 +185,7 @@ export function StartSession({ profile: { firstName, lastName, email, id } }) {
           </LocalizationProvider>
         </div>
 
-        <button style={{ backgroundColor: "green" }}>Start økt</button>
+        <button style={{ backgroundColor: "green", fontSize: "2vh" }}>Start økt</button>
       </form>
     </div>
   );

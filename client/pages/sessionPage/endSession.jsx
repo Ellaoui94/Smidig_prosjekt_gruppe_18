@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./session.css";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -41,12 +41,10 @@ export function EndSession({ emailInput }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("testing: " + data.evaluate);
       const url = `${window.location.origin}/api/session/update/${emailInput}`;
       const { data: res } = await axios.post(url, data);
-      console.log("inside handelSubmit try: " + data.email);
-      navigate("/main-page");
-
+      await navigate("/main-page");
+      window.location.reload(false);
       //change session stage from active to finished
       const setStageUrl = `${window.location.origin}/api/session/set-session-to-finished/${sessionId}`;
       const { data: result } = await axios.post(setStageUrl, {
@@ -128,7 +126,7 @@ export function EndSession({ emailInput }) {
         </LocalizationProvider>
 
         <div>
-          <button className={"end-session-btn"}>Avslutt økt</button>
+          <button className="btn">Avslutt økt</button>
         </div>
 
         {error && <div>{error}</div>}
