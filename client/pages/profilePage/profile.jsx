@@ -4,22 +4,21 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import img from "../../imgProfile.png";
 import { SiDiscord, SiFacebook } from "react-icons/si";
-import FileBase64 from 'react-file-base64';
+import FileBase64 from "react-file-base64";
 
 import { Backdrop, Box, Button, Fade, IconButton, Modal } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddSubject from "./addSubject";
 import { CSSTransition } from "react-transition-group";
 
-
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -33,7 +32,10 @@ export function Logout() {
   return <h1>Please wait...</h1>;
 }
 
-function ProfileCard({ profile: { firstName, lastName, email, subjects, id, profileImg } }) {
+function ProfileCard({
+  profile: { firstName, lastName, email, subjects, id, profileImg },
+}) {
+  const mockSubjects = ["Filosofi", "Programmering", "Design"];
   const [faceBook, setFaceBook] = useState();
   const [discord, setDiscord] = useState();
   const [bio, setBio] = useState();
@@ -50,7 +52,6 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
 
   const [error, setError] = useState("");
 
-
   useEffect(async () => {
     const url = `${window.location.origin}/api/contactInfo/userInfo/${id}`;
     const { data: res } = await axios.get(url);
@@ -63,12 +64,12 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
   }, [id]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const url = `${window.location.origin}/api/users/pictureUpdate/${id}`;
       const { data: res } = await axios.post(url, imgString);
       localStorage.setItem("token", res.data);
-      location.reload()
+      location.reload();
     } catch (error) {
       if (
         error.response &&
@@ -84,17 +85,21 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
     <>
       <div className={"profile-card"}>
         <div>
-          {profileImg ?
+          {profileImg ? (
             <>
-            <div>Klikk på bilde for å endre profil bilde</div>
-            <a onClick={handleOpen}><img src={profileImg} /></a>
+              <div>Klikk på bilde for å endre profil bilde</div>
+              <a onClick={handleOpen}>
+                <img src={profileImg} />
+              </a>
             </>
-            :
+          ) : (
             <>
-            <div>Klikk på bilde for å legge til profil bilde</div>
-            <a onClick={handleOpen}><img src={img} /></a>
+              <div>Klikk på bilde for å legge til profil bilde</div>
+              <a onClick={handleOpen}>
+                <img src={img} />
+              </a>
             </>
-          }
+          )}
 
           <div>
             <Modal
@@ -115,7 +120,9 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
                     <FileBase64
                       type="file"
                       multiple={false}
-                      onDone={({ base64 }) => setImgString({ ...imgString, profileImg: base64 })}
+                      onDone={({ base64 }) =>
+                        setImgString({ ...imgString, profileImg: base64 })
+                      }
                     />
                     <Button
                       type={"submit"}
@@ -125,9 +132,12 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
                         fontWeight: "bold",
                         color: "white",
                         borderRadius: "50px",
-                        boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+                        boxShadow:
+                          "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
                       }}
-                    >Last opp</Button>
+                    >
+                      Last opp
+                    </Button>
                   </form>
                 </Box>
               </Fade>
@@ -143,42 +153,43 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
         {contactId === id ? (
           <>
             <div className={"contact-wrapper"}>
-            <div>
-              <a href={`${faceBook}`}>
-                <SiFacebook style={{ fontSize: 70, color: "blue" }} />
-              </a>
-            </div>
-            <div>
-              <a href={`${discord}`}>
-                <SiDiscord style={{ fontSize: 70, color: "#5865F2" }} />
-              </a>
-            </div>
-            <div>
-              <a style={{ color: "#4211b2" }} href={`mailto:${email}`}>
-                <h4>{email}</h4>
-              </a>
-            </div>
+              <div>
+                <a href={`${faceBook}`}>
+                  <SiFacebook style={{ fontSize: 70, color: "blue" }} />
+                </a>
+              </div>
+              <div>
+                <a href={`${discord}`}>
+                  <SiDiscord style={{ fontSize: 70, color: "#5865F2" }} />
+                </a>
+              </div>
+              <div>
+                <a style={{ color: "#4211b2" }} href={`mailto:${email}`}>
+                  <h4>{email}</h4>
+                </a>
+              </div>
 
-            <Button
-              component={Link}
-              to={"/editContactInfo"}
-              style={{
-                padding: "20px",
-                fontSize: "40px",
-                background: "#5D7C8D",
-                fontWeight: "bold",
-                color: "white",
-                borderRadius: "50px",
-                boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-              }}
-            >
-              Endre kontakt info
-            </Button>
+              <Button
+                component={Link}
+                to={"/editContactInfo"}
+                style={{
+                  padding: "20px",
+                  fontSize: "40px",
+                  background: "#5D7C8D",
+                  fontWeight: "bold",
+                  color: "white",
+                  borderRadius: "50px",
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                }}
+              >
+                Endre kontakt info
+              </Button>
 
-            <div>
-              <h2>Bio:</h2>
-              <h4>{bio}</h4>
-            </div>
+              <div>
+                <h2>Bio:</h2>
+                <h4>{bio}</h4>
+              </div>
             </div>
           </>
         ) : (
@@ -192,7 +203,8 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
               fontWeight: "bold",
               color: "white",
               borderRadius: "50px",
-              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+              boxShadow:
+                "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
             }}
           >
             Legg til kontakt info
@@ -210,7 +222,8 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
               fontWeight: "bold",
               color: "white",
               borderRadius: "50px",
-              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+              boxShadow:
+                "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
             }}
           >
             Logg ut
@@ -218,16 +231,18 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
         </div>
         <div id={"wrapper"}>
           <h1>Aktive emner</h1>
-          <IconButton onClick={() => {
-            setClicked(!clicked);
-            if (!clicked && !contactId) {
-              scroll(0, 500);
-            } else if (!clicked && contactId) {
-              setTimeout(() => scroll(0,800), 400)
-            } else {
-              scroll(0, -300)
-            }
-          }}>
+          <IconButton
+            onClick={() => {
+              setClicked(!clicked);
+              if (!clicked && !contactId) {
+                scroll(0, 500);
+              } else if (!clicked && contactId) {
+                setTimeout(() => scroll(0, 800), 400);
+              } else {
+                scroll(0, -300);
+              }
+            }}
+          >
             <SettingsIcon
               className={"addSubj"}
               style={{ fontSize: "60px", color: "#285057" }}
@@ -235,14 +250,22 @@ function ProfileCard({ profile: { firstName, lastName, email, subjects, id, prof
           </IconButton>
         </div>
 
-
-        <div style={{padding: "5px"}}>
-        {subjects.map((subject, key) => (
-          <div key={key} className={"subjectDiv"}>{subject.subjectName}</div>
-        ))}
-        {newSubject.map((subject, key) => (
-          <div key={key} className={"subjectDiv"}>{subject.subjectName}</div>
-        ))}
+        <div style={{ padding: "5px" }}>
+          {mockSubjects.map((subject, key) => (
+            <div key={key} className={"subjectDiv"}>
+              {subject}
+            </div>
+          ))}
+          {subjects.map((subject, key) => (
+            <div key={key} className={"subjectDiv"}>
+              {subject.subjectName}
+            </div>
+          ))}
+          {newSubject.map((subject, key) => (
+            <div key={key} className={"subjectDiv"}>
+              {subject.subjectName}
+            </div>
+          ))}
         </div>
 
         <CSSTransition
@@ -277,7 +300,8 @@ export function DeleteButton({ label, id }) {
           fontWeight: "bold",
           color: "white",
           borderRadius: "50px",
-          boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+          boxShadow:
+            "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
         }}
       >
         {label}
@@ -286,10 +310,7 @@ export function DeleteButton({ label, id }) {
   );
 }
 
-
-export function Profile({profile} ) {
-
-
+export function Profile({ profile }) {
   return (
     <>
       <Button
@@ -303,7 +324,8 @@ export function Profile({profile} ) {
           fontWeight: "bold",
           color: "white",
           borderRadius: "50px",
-          boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+          boxShadow:
+            "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
         }}
       >
         Endre på bruker

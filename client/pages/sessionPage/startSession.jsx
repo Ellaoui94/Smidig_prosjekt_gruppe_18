@@ -10,14 +10,41 @@ import { DatePicker } from "@mui/x-date-pickers";
 /*
   Here is the code for when you start a new session
  */
-const subjects = ["Matematikk", "Religion", "Fysikk", "Historie"];
+const mockSubjects = ["Filosofi", "Programmering", "Design"];
 const locations = ["Bibliotek", "Cafe"];
 const states = ["Alene", "Usynlig", "Offentlig", "Kun venner"];
 const stage = ["active", "planned"];
 
-export function StartSession({ profile: {email, firstName, profileImg, id, subjects } }) {
+export function StartSession({
+  profile: { email, firstName, profileImg, id, subjects },
+}) {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
+  const [ws, setWs] = useState("");
+  const [location, setLocation] = useState("");
+  const [locationList, setLocationList] = useState([]);
+
+  useEffect(() => {
+    const ws = new WebSocket(window.location.origin.replace(/^http/, "ws"));
+    setWs(ws);
+
+    ws.onmessage = (locations) => {
+      const { location } = JSON.parse(locations.data);
+      setLocationList((oldState) => [...oldState, { location }]);
+    };
+  }, []);
+
+  async function handleAddNewLocation(event) {
+    event.preventDefault();
+    try {
+      ws.send(JSON.stringify({ location }));
+      setLocation("");
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      }
+    }
+  }
 
   navigator.geolocation.getCurrentPosition(
     function (position) {
@@ -39,13 +66,13 @@ export function StartSession({ profile: {email, firstName, profileImg, id, subje
     studySessionTitle: "",
     stage: "",
     date: null,
-    position: {lat, lng},
+    position: { lat, lng },
     userName: firstName,
     profileImg: profileImg,
   });
 
   sessionData.date = startDateSession;
-  sessionData.position = {lat, lng}
+  sessionData.position = { lat, lng };
   sessionData.email = email;
 
   const [sessionError, setSessionError] = useState("");
@@ -83,6 +110,7 @@ export function StartSession({ profile: {email, firstName, profileImg, id, subje
         navigate("/main-page");
       } else {
         navigate("/session/" + newSessionId);
+        window.location.reload(false);
       }
 
       console.log(res.message);
@@ -117,6 +145,18 @@ export function StartSession({ profile: {email, firstName, profileImg, id, subje
               {subject.subjectName}
             </div>
           ))}
+          {mockSubjects.map((subject) => (
+            <div className={"session-card-div"}>
+              <input
+                type="radio"
+                name="courseTitle"
+                label={"courseTitle"}
+                onChange={handleChange}
+                value={subject}
+              />
+              {subject}
+            </div>
+          ))}
         </div>
 
         <div className={"session-div"} style={{ backgroundColor: "white" }}>
@@ -133,6 +173,28 @@ export function StartSession({ profile: {email, firstName, profileImg, id, subje
               {location}
             </div>
           ))}
+          {[...locationList].map((location) => (
+            <div className={"session-card-div"}>
+              <input
+                type="radio"
+                name="location"
+                label={"location"}
+                onChange={handleChange}
+                value={location.location}
+              />
+              {location.location}
+            </div>
+          ))}
+          <div>
+            <input
+              type="text"
+              id="location-input"
+              onChange={(e) => setLocation(e.target.value)}
+              value={location}
+              placeholder="Legg til nytt arbeidssted.."
+            />
+            <button onClick={handleAddNewLocation}>Legg til</button>
+          </div>
         </div>
 
         <div className={"session-div"} style={{ backgroundColor: "white" }}>
@@ -185,7 +247,9 @@ export function StartSession({ profile: {email, firstName, profileImg, id, subje
           </LocalizationProvider>
         </div>
 
-        <button style={{ backgroundColor: "green", fontSize: "2vh" }}>Start økt</button>
+        <button style={{ backgroundColor: "green", fontSize: "2vh" }}>
+          Start økt
+        </button>
       </form>
     </div>
   );

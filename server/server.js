@@ -31,11 +31,18 @@ wsServer.on("connection", (socket) => {
   socket.on("message", (data) => {
     const { subjectName } = JSON.parse(data);
     const { todo, checked } = JSON.parse(data);
+    const { location } = JSON.parse(data);
+    const { type, assignmentStudents } = JSON.parse(data);
+    console.log(assignmentStudents);
     for (const recipient of sockets) {
-      if (!subjectName) {
-        recipient.send(JSON.stringify({ todo, checked }));
-      } else {
+      if (subjectName) {
         recipient.send(JSON.stringify({ subjectName }));
+      } else if (todo) {
+        recipient.send(JSON.stringify({ todo, checked }));
+      } else if (location) {
+        recipient.send(JSON.stringify({ location }));
+      } else if (type) {
+        recipient.send(JSON.stringify({ type, assignmentStudents }));
       }
     }
   });

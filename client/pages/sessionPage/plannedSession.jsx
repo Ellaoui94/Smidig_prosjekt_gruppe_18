@@ -67,7 +67,7 @@ export function PlannedSession({ id }) {
       <h5>{new Date(data[0].date).toLocaleDateString("no-NO", dateFormat)}</h5>
       <h3>{data[0].location}</h3>
       <h6>{data[0].address}</h6>
-      <TodoList />
+      <TodoList sessionId={sessionId} />
       <button onClick={onClickHandler}>Start økt</button>
       <DeleteButton label={"Slett økt"} id={id} />
     </>
