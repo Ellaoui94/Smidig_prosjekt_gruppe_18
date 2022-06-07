@@ -89,7 +89,7 @@ export function StudySessionApi() {
       } else {
         await Session.find({
           stage: "planned",
-          $or: [{ email: "mock@data.no" }, { email: emailCookie }],
+          $or: [{ email: "mock@data.no" }, { email: `${emailCookie}` }],
         }).then((result) => {
           queryResult = result;
         });
@@ -138,6 +138,18 @@ export function StudySessionApi() {
       });
 
       res.json(queryResult);
+    } catch {
+      res.status(404).send({ error: "Session not found" });
+    }
+  });
+
+  router.get("/active-session/:email", async (req, res) => {
+    try {
+      const { email } = req.params;
+      console.log("dd",email)
+      await Session.find({ stage: "active", $and: [{ email }] }).then((result) => {
+        res.json(result);
+      });
     } catch {
       res.status(404).send({ error: "Session not found" });
     }

@@ -29,6 +29,7 @@ body {
 }
 
 footer {
+    height: 8vh;
     width: 100vw;
     left: 0;
     bottom: 0;
@@ -107,7 +108,7 @@ footer {
     margin-bottom: 4em;
     padding-left: 1em;
     color: black;
-    font-size: 15px;
+    font-size: 2vh;
     text-align: left;
 }
 
@@ -116,8 +117,15 @@ footer {
     height: auto;
     padding: 2px 0 2px 0;
     margin-bottom: 1em;
-    background-color: gray;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
+
+.view-friends-card button{
+margin-left: 10vh;
+}
+
 
 /* other users profile */
 .other-users-profile {
@@ -186,6 +194,9 @@ footer {
     flex: 1;
     height: fit-content;
     font-size: small;
+}
+.flex-item button{
+    font-size: 1.5vh;
 }
 /* Info window in map */
 .info-window {

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserApiContext } from "../../userApiContext";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import img from "./img.png";
+import img from "../../imgProfile.png";
 import { SiDiscord, SiFacebook } from "react-icons/si";
 import FileBase64 from 'react-file-base64';
 

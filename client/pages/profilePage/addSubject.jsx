@@ -55,7 +55,7 @@ export default function AddSubject({ id, setNewSubject }) {
           <TextField
             type="text"
             name="subjectName"
-            style={{ background: "#F3F1F1" }}
+            style={{ background: "#F3F1F1"}}
             label={"Emne Navn"}
             onChange={(e) => setSubjectName(e.target.value)}
             value={subjectName}

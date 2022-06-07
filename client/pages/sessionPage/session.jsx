@@ -38,7 +38,10 @@ function MapView({ position, profile }) {
           }}
           position={{ lat: position.lat, lng: position.lng }}
         >
-          <InfoWindow position={{ lat: position.lat, lng: position.lng }}>
+          <InfoWindow
+            options={{ pixelOffset: new window.google.maps.Size(0, -40) }}
+            position={{ lat: position.lat, lng: position.lng }}
+          >
             <div className={"info-window"}>
               {user.map((userInfo) => (
                 <div>
@@ -58,11 +61,11 @@ function MapView({ position, profile }) {
 }
 
 export default function Session({ profile }) {
-  const { showPlannedSession } = useContext(MainPageApiContext);
+  const { getLatestAddedSession } = useContext(MainPageApiContext);
   const navigate = useNavigate();
   const { sessionId } = useParams();
   const { loading, error, data } = useLoading(
-    async () => await showPlannedSession({ sessionId: sessionId }),
+    async () => await getLatestAddedSession(),
     []
   );
   const { isLoaded } = useLoadScript({
@@ -96,7 +99,7 @@ export default function Session({ profile }) {
 
   const position = data[0].position;
   return (
-    <div>
+    <div style={{marginBottom: "9vh"}}>
       <h1>{data[0].courseTitle}</h1>
       <MapView position={position} profile={profile} />
       <p>Endre arbeidsstatus</p>

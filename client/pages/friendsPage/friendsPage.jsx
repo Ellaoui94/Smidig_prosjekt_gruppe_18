@@ -16,10 +16,11 @@ function DeleteFriend({ name, id }) {
         onClick={deleteFriend}
         style={{
           background: "#3E989C",
-          fontSize: "10px",
+          fontSize: "35px",
           fontWeight: "bold",
           color: "white",
           borderRadius: "50px",
+          boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
         }}
       >
         Slett venn
@@ -32,8 +33,8 @@ function ViewFriendCard({ id ,friend: { name, photo } } ) {
   return (
     <>
       <div className={"view-friends-card"}>
-        <h2>{name}</h2>
         <img src={photo}/>
+        <h2>{name}</h2>
         <DeleteFriend id={id} name={name}/>
       </div>
     </>
