@@ -10,6 +10,7 @@ import { StartSession } from "../pages/sessionPage/startSession";
 jest.mock("axios");
 
 describe("adding to database", () => {
+  // I dont think this test work in the way I want it to
   it("create a session", () => {
     const session = [{ email: "bla@bla.com", day: "mandag" }];
     const response = { data: session };

@@ -10,9 +10,17 @@ import { StartSession } from "../pages/sessionPage/startSession";
 jest.mock("axios");
 
 describe("get from database", () => {
-  it("list out sessions", async () => {
-    const response = await axios.get("/");
-
+  it("get one planned sessions", async () => {
+    const response = await axios.get(
+      "http://localhost:8080/session/planned-session",
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response.data);
+    expect(response.status).toEqual(200);
     //expect.assertions(1);
     /*const session = {
       email: "bla@bla.com",

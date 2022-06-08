@@ -1,4 +1,4 @@
-/*.borderLine {
+.borderLine {
     border: 1px solid black;
     margin: 10px
 }
@@ -21,4 +21,4 @@ footer {
     bottom: 0;
     position: fixed;
     background-color: #D7DDD7;
-}*/
+}
