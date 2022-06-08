@@ -51,17 +51,20 @@ export function PlannedSessionsCard() {
             className={"main-page-components-card"}
             style={{ backgroundColor: rColors[i] }}
           >
-            <Link to={"/planned-session/" + session._id}>
-              {new Date(session.date).toLocaleDateString("no-NO", dateFormat)}
-            </Link>
-            <h5>{session.courseTitle}</h5>
-            {session.todos.length === 0 ? (
-              <h6></h6>
-            ) : (
-              <h6>{"- " + session.todos[0].todo}</h6>
-            )}{" "}
-            <div className={"arrow-div"}>
-              <p>></p>
+            <div className={"inner-main-page-card"}>
+              <h5>
+                {new Date(session.date).toLocaleDateString("no-NO", dateFormat)}
+              </h5>
+              <h2 className={"sessions-card-header"}>
+                <Link to={"/planned-session/" + session._id}>
+                  {session.courseTitle}
+                </Link>
+              </h2>
+              {session.todos.length === 0 ? (
+                <h6></h6>
+              ) : (
+                <h6>{"- " + session.todos[0].todo}</h6>
+              )}
             </div>
           </div>
         </>

@@ -37,10 +37,9 @@ footer {
     background-color: #D7DDD7;
 }
 
-/* diary */
+/* main page */
 .main-div {
     margin-bottom: 4em;
-    color: darkslategrey;
 }
 
 .cards-div {
@@ -59,14 +58,30 @@ footer {
 
 
 .main-page-components-card {
+    text-align: left;
     border-radius: 50px;
     width: 500px;
     height: 200px;
-    padding-bottom: 1em;
     margin-bottom: 1em;
     margin-right: 1em;
-    background-color: lavender;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.inner-main-page-card {
+    padding-top: 1em;
+    padding-left: 3em;
+}
+
+.sessions-card-header {
+    margin-top: -0.7em;
+}
+
+.subject-card-headline {
+    margin-bottom: -0.5em;
+}
+
+a {
+    color: #24393a;
 }
 
 .my-groups-card {
@@ -171,6 +186,43 @@ hr {
     align-items: center;
     padding-left: max(80px, 5%);
 /*    padding-top: max(10px);  fix later with mediaQuery*/
+}
+
+.friends-card-div {
+    background-color: white;
+    padding: 1em 0 1em 0;
+    width: 85vw;
+    margin-bottom: 3em;
+    margin-left: 10vw;
+    border-radius: 30px;
+}
+
+.friends-headline-div {
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    margin-bottom: -10px;
+}
+
+.frontpage-card-headlines {
+    margin-bottom: 10px;
+    margin-left: 10vw;
+    text-align: left;
+    font-size: x-large;
+}
+
+
+.friends-headline {
+    flex: 1;
+    text-align: left;
+    padding-left: 10vw;
+    font-size: x-large;
+}
+
+.see-all-friends-link {
+    flex: 1;
+    text-align: right;
+    padding-right: 10vw;
 }
 
 /* list friends page */
@@ -317,8 +369,8 @@ margin-left: 10vh;
 }
 
 #wrapper{
-    display: flex;
-    justify-content: center;
+/*    display: flex;
+    justify-content: center;*/
 }
 
 .subjectDiv{

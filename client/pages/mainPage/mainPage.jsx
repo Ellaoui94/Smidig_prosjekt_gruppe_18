@@ -21,35 +21,44 @@ function Feed({ profile }) {
   return (
     <>
       <div>
-        <h4>Mine emner</h4>
+        <h4 className={"frontpage-card-headlines"}>Mine emner</h4>
         <div className={"horizontal-scroll-div"}>
           <div className={"cards-div"}>
             <MySubjectsCard profile={profile} />
           </div>
         </div>
 
-        <h4>Planlagte arbeidsøkter</h4>
+        <h4 className={"frontpage-card-headlines"}>Planlagte arbeidsøkter</h4>
         <div className={"horizontal-scroll-div"}>
           <div className={"cards-div"}>
             <PlannedSessionsCard />
           </div>
         </div>
 
-        <Link to={"/friends-page"}>Mine venner</Link>
+        <div className={"friends-headline-div"}>
+          <h4 className={"friends-headline"}>Mine venner</h4>
+          <h6 className={"see-all-friends-link"}>
+            <Link to={"/friends-page"}>Se alle</Link>
+          </h6>
+        </div>
+        <div className={"friends-card-div"}>
+          {profile.friends.length === 0 ? (
+            <div>
+              <p>Du har ingen venner ennå!</p>
+              <p>
+                Finn nye venner <Link to="/add-new-friend">her</Link>.
+              </p>
+            </div>
+          ) : (
+            <div className={"friends-container"}>
+              {profile.friends.slice(0, 9).map((myFriends, key) => (
+                <MyFriendsCard key={key} myFriends={myFriends} />
+              ))}
+            </div>
+          )}
+        </div>
 
-        {profile.friends.length === 0 ? (
-          <div>
-            <Link to="/add-new-friend">Legg til ny venn</Link>
-          </div>
-        ) : (
-          <div className={"friends-container"}>
-            {profile.friends.slice(0, 9).map((myFriends, key) => (
-              <MyFriendsCard key={key} myFriends={myFriends} />
-            ))}
-          </div>
-        )}
-
-        <h4>Tidligere arbeidsøkter</h4>
+        <h4 className={"frontpage-card-headlines"}>Tidligere arbeidsøkter</h4>
         <div className={"horizontal-scroll-div"}>
           <div className={"cards-div"}>
             <FinishedSessionsCard />
@@ -65,7 +74,6 @@ export function MainPage({ profile }) {
     <>
       <div className={"main-div"}>
         <div id={"wrapper"}>
-          <h2>Hei, {profile.firstName}</h2>{" "}
           <Link to={"/profile"}>
             {profile.profileImg ? (
               <img
@@ -81,6 +89,9 @@ export function MainPage({ profile }) {
               />
             )}
           </Link>
+          <div>
+            <h2>Hei, {profile.firstName}</h2>
+          </div>
         </div>
         <Feed profile={profile} />
       </div>

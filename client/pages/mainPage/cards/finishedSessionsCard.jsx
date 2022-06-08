@@ -49,17 +49,20 @@ export function FinishedSessionsCard() {
           className={"main-page-components-card"}
           style={{ backgroundColor: rColors[i] }}
         >
-          <Link to={"/finished-session/" + session._id}>
-            {new Date(session.date).toLocaleDateString("no-NO", dateFormat)}
-          </Link>
-          <h5>{session.courseTitle}</h5>
-          {session.todos.length === 0 ? (
-            <h6></h6>
-          ) : (
-            <h6>{"- " + session.todos[0].todo}</h6>
-          )}
-          <div className={"arrow-div"}>
-            <p>></p>
+          <div className={"inner-main-page-card"}>
+            <h5>
+              {new Date(session.date).toLocaleDateString("no-NO", dateFormat)}
+            </h5>
+
+            <Link to={"/finished-session/" + session._id}>
+              <h2 className={"sessions-card-header"}>{session.courseTitle}</h2>
+            </Link>
+
+            {session.todos.length === 0 ? (
+              <h6>Ingen todo's lagt til.</h6>
+            ) : (
+              <h6>{"- " + session.todos[0].todo}</h6>
+            )}
           </div>
         </div>
       ))}

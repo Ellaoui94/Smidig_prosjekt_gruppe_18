@@ -45,12 +45,14 @@ export function MySubjectsCard({ profile }) {
           className={"main-page-components-card"}
           style={{ backgroundColor: rColors[i] }}
         >
-          <Link to={"/course-view/" + mySubjects.subjectName}>
-            {mySubjects.subjectName}
-          </Link>
-          <h6>{mySubjects.subjectCode}</h6>
-          <div className={"arrow-div"}>
-            <p>></p>
+          <div className={"inner-main-page-card"}>
+            <Link to={"/course-view/" + mySubjects.subjectName}>
+              <h2 className={"subject-card-headline"}>
+                {mySubjects.subjectName}
+              </h2>
+            </Link>
+
+            <h4>{mySubjects.subjectCode}</h4>
           </div>
         </div>
       ))}
@@ -61,12 +63,12 @@ export function MySubjectsCard({ profile }) {
           className={"main-page-components-card"}
           style={{ backgroundColor: rColors[i] }}
         >
-          <Link to={"/course-view/" + mySubjects.subject}>
-            {mySubjects.subject}
-          </Link>
-          <h6>{mySubjects.code}</h6>
-          <div className={"arrow-div"}>
-            <p>></p>
+          <div className={"inner-main-page-card"}>
+            <Link to={"/course-view/" + mySubjects.subject}>
+              <h2 className={"subject-card-headline"}>{mySubjects.subject}</h2>
+            </Link>
+
+            <h4>{mySubjects.code}</h4>
           </div>
         </div>
       ))}
