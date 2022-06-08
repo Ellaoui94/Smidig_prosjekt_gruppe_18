@@ -10,8 +10,8 @@ import { StartSession } from "../pages/sessionPage/startSession";
 jest.mock("axios");
 
 describe("adding to database", () => {
-  // I dont think this test work in the way I want it to, but it works!
-  //it may not work with CSS
+  // This test only passes if we remove the CSS-file in session :)
+  // This test might also be moved to server_test, since it tests server-things..
   it("create a session", () => {
     const session = [{ email: "bla@bla.com", day: "mandag" }];
     const response = { data: session };
