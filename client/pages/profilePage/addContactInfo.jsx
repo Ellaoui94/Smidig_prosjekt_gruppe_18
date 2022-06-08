@@ -45,7 +45,7 @@ export default function AddContactInfo({ id }) {
     <form className="registerForm" onSubmit={handleSubmit}>
       <IconButton
         component={Link}
-        to="/"
+        to="/profile"
         size="large"
         aria-label="menu"
         sx={{ mr: "auto" }}
@@ -54,7 +54,7 @@ export default function AddContactInfo({ id }) {
       </IconButton>
 
       <Container maxWidth="md">
-        <h1 style={{ color: "#023F4A" }}>Endre informasjon om din bruker</h1>
+        <h1 style={{ color: "#023F4A" }}>Legg til kontaktinfo til din bruker</h1>
 
         <Box
           sx={{

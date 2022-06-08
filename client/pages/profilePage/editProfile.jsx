@@ -81,7 +81,7 @@ export function EditProfile({ id }) {
     <form className="registerForm" onSubmit={handleSubmit}>
       <IconButton
         component={Link}
-        to="/"
+        to="/profile"
         size="large"
         aria-label="menu"
         sx={{ mr: "auto" }}
@@ -96,14 +96,19 @@ export function EditProfile({ id }) {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            "& .MuiTextField-root": { width: "25ch" },
-            select: { width: "55ch", display: "flex" },
+            "& .MuiTextField-root": { width: "50ch" },
           }}
         >
           <TextField
             type="text"
             name="firstName"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Fornavn"}
             margin="normal"
             onChange={handleChange}
@@ -115,6 +120,12 @@ export function EditProfile({ id }) {
             type="text"
             name="lastName"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Etternavn"}
             margin="normal"
             onChange={handleChange}
@@ -126,6 +137,12 @@ export function EditProfile({ id }) {
             type="email"
             name="email"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Email"}
             margin="normal"
             onChange={handleChange}
@@ -140,10 +157,12 @@ export function EditProfile({ id }) {
             style={{
               top: "10px",
               background: "#5D7C8D",
-              fontSize: "25px",
+              fontSize: "60px",
               fontWeight: "bold",
               color: "white",
               borderRadius: "50px",
+              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+
             }}
           >
             Endre bruker

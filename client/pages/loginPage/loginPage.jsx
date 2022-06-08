@@ -44,9 +44,6 @@ export function LoginPage() {
         <ArrowBackIosNew/>
       </IconButton>
 
-
-      <Container maxWidth="md">
-
         <h1 style={{color: "#023F4A"}}>Logg In</h1>
 
         <Box
@@ -54,13 +51,19 @@ export function LoginPage() {
             display: 'flex',
             alignItems: "center",
             flexDirection: 'column',
-            '& .MuiTextField-root': {width: '25ch'},
+            '& .MuiTextField-root': {width: '50ch'},
           }}
         >
           <TextField
             type="email"
             name="email"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Email"}
             margin="normal"
             onChange={handleChange}
@@ -72,6 +75,12 @@ export function LoginPage() {
             type="password"
             name="password"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Passord"}
             margin="normal"
             onChange={handleChange}
@@ -84,14 +93,13 @@ export function LoginPage() {
           <Button type={"submit"} style={{
             top: "10px",
             background: "#326683",
-            fontSize: "25px",
+            fontSize: "60px",
             fontWeight: "bold",
             color: "white",
             borderRadius: "50px"
           }} > Logg inn</Button>
 
         </Box>
-      </Container>
     </motion.form>
   );
 }

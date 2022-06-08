@@ -45,7 +45,7 @@ export default function EditContactInfo({ id }) {
     <form className="registerForm" onSubmit={handleSubmit}>
       <IconButton
         component={Link}
-        to="/"
+        to="/profile"
         size="large"
         aria-label="menu"
         sx={{ mr: "auto" }}
@@ -54,21 +54,26 @@ export default function EditContactInfo({ id }) {
       </IconButton>
 
       <Container maxWidth="md">
-        <h1 style={{ color: "#023F4A" }}>Endre informasjon om din bruker</h1>
+        <h1 style={{ color: "#023F4A" }}>Endre kontakt info</h1>
 
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            "& .MuiTextField-root": { width: "25ch" },
-            select: { width: "55ch", display: "flex" }
+            "& .MuiTextField-root": { width: "50ch" },
           }}
         >
           <TextField
             type="text"
             name="faceBook"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Facebook link"}
             margin="normal"
             onChange={handleChange}
@@ -79,6 +84,12 @@ export default function EditContactInfo({ id }) {
             type="text"
             name="discord"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Discord link"}
             margin="normal"
             onChange={handleChange}
@@ -89,6 +100,12 @@ export default function EditContactInfo({ id }) {
             type="text"
             name="bio"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Selvbiografi"}
             margin="normal"
             onChange={handleChange}
@@ -104,7 +121,7 @@ export default function EditContactInfo({ id }) {
             style={{
               top: "10px",
               background: "#5D7C8D",
-              fontSize: "25px",
+              fontSize: "60px",
               fontWeight: "bold",
               color: "white",
               borderRadius: "50px",

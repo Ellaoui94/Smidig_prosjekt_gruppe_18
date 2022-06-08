@@ -55,7 +55,13 @@ export default function AddSubject({ id, setNewSubject }) {
           <TextField
             type="text"
             name="subjectName"
-            style={{ background: "#F3F1F1"}}
+            style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "2vh", fontSize: "1.5vh" }
+            }}
             label={"Emne Navn"}
             onChange={(e) => setSubjectName(e.target.value)}
             value={subjectName}
@@ -66,7 +72,13 @@ export default function AddSubject({ id, setNewSubject }) {
           <TextField
             type="text"
             name="subjectCode"
-            style={{ background: "#F3F1F1" }}
+            style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "2vh", fontSize: "1.5vh" }
+            }}
             label={"Emne kode"}
             margin="normal"
             onChange={(e) => setSubjectCode(e.target.value)}
@@ -75,12 +87,19 @@ export default function AddSubject({ id, setNewSubject }) {
         </div>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
+            inputFormat="dd/MM/yyyy"
             label={"Emne start"}
             onChange={(newValue) => setStartDate(newValue)}
             value={startDate}
             renderInput={(params) => (
               <TextField
-                style={{ background: "#F3F1F1" }}
+                style={{ background: "white" }}
+                InputLabelProps={{
+                  style: { fontSize: "1.1vh" }
+                }}
+                inputProps={{
+                  style: { width: "2vh", fontSize: "2vh" }
+                }}
                 margin={"normal"}
                 {...params}
               />
@@ -88,11 +107,18 @@ export default function AddSubject({ id, setNewSubject }) {
           />
           <DatePicker
             label={"Emne slutt"}
+            inputFormat="dd/MM/yyyy"
             onChange={(newValue) => setEndDate(newValue)}
             value={endDate}
             renderInput={(params) => (
               <TextField
-                style={{ background: "#F3F1F1" }}
+                style={{ background: "white" }}
+                InputLabelProps={{
+                  style: { fontSize: "1.1vh" }
+                }}
+                inputProps={{
+                  style: { width: "2vh", fontSize: "2vh" }
+                }}
                 margin={"normal"}
                 {...params}
               />
@@ -106,7 +132,7 @@ export default function AddSubject({ id, setNewSubject }) {
             style={{
               top: "10px",
               background: "#E0E4DA",
-              fontSize: "20px",
+              fontSize: "30px",
               fontWeight: "bold",
               color: "#2E7713",
               borderRadius: "50px",

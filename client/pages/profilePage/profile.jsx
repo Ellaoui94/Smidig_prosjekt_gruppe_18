@@ -16,11 +16,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 800,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  borderRadius: "50px"
 };
 
 export function Logout() {
@@ -117,6 +118,7 @@ function ProfileCard({
                 <Box sx={style}>
                   <form onSubmit={handleSubmit}>
                     {error && <div>{error}</div>}
+                    <div className={"input-file"}>
                     <FileBase64
                       type="file"
                       multiple={false}
@@ -128,7 +130,7 @@ function ProfileCard({
                       type={"submit"}
                       style={{
                         background: "#5D7C8D",
-                        fontSize: "10px",
+                        fontSize: "30px",
                         fontWeight: "bold",
                         color: "white",
                         borderRadius: "50px",
@@ -138,6 +140,7 @@ function ProfileCard({
                     >
                       Last opp
                     </Button>
+                    </div>
                   </form>
                 </Box>
               </Fade>
@@ -155,12 +158,12 @@ function ProfileCard({
             <div className={"contact-wrapper"}>
               <div>
                 <a href={`${faceBook}`}>
-                  <SiFacebook style={{ fontSize: 70, color: "blue" }} />
+                  <SiFacebook style={{ fontSize: 100, color: "blue" }} />
                 </a>
               </div>
               <div>
                 <a href={`${discord}`}>
-                  <SiDiscord style={{ fontSize: 70, color: "#5865F2" }} />
+                  <SiDiscord style={{ fontSize: 100, color: "#5865F2" }} />
                 </a>
               </div>
               <div>
@@ -237,7 +240,7 @@ function ProfileCard({
               if (!clicked && !contactId) {
                 scroll(0, 500);
               } else if (!clicked && contactId) {
-                setTimeout(() => scroll(0, 800), 400);
+                setTimeout(() => scroll(0, window.innerHeight), 1);
               } else {
                 scroll(0, -300);
               }
@@ -296,7 +299,7 @@ export function DeleteButton({ label, id }) {
         onClick={deleteUser}
         style={{
           background: "#3E989C",
-          fontSize: "10px",
+          fontSize: "30px",
           fontWeight: "bold",
           color: "white",
           borderRadius: "50px",

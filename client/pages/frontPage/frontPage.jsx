@@ -28,7 +28,7 @@ export function FrontPage() {
         padding: "1vh",
         top: "2vh",
         background: "#326683",
-        fontSize: "25px",
+        fontSize: "60px",
         fontWeight: "bold",
         color: "white",
         borderRadius: "50px"
