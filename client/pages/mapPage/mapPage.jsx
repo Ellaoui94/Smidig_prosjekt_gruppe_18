@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  InfoWindow,
+  Marker,
+  useLoadScript,
+} from "@react-google-maps/api";
 import { ListSubjects } from "./listSubjects";
 import axios from "axios";
 import imgProfile from "../../imgProfile.png";
@@ -9,14 +14,14 @@ const user = [
     firstName: "Deg",
     lastName: "Degesen",
     course: "programmering",
-    bio: "Join gjerne!"
-  }
+    bio: "Join gjerne!",
+  },
 ];
 
 export function MapPage({ profile }) {
   //connects to .env file
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     //to view map properly: make a new .env file in client and paste this line below:
     //NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyCBa-5tK7ycBCJwSEXvhaAy9q_pfN4f8Ww
   });
@@ -34,7 +39,6 @@ function Map({ profile }) {
     setSessions(response);
   }, []);
 
-
   //const center = useMemo(() => ({ lat: 59.911491, lng: 10.757933 }), []);
 
   /*
@@ -51,7 +55,7 @@ function Map({ profile }) {
 
   return (
     <>
-      <ListSubjects />
+      {/*<ListSubjects />*/}
       <GoogleMap
         zoom={14}
         center={{ lat: 59.911491, lng: 10.757933 }}
@@ -61,33 +65,31 @@ function Map({ profile }) {
           <Marker
             icon={{
               url: `${userInfo.photo}`,
-              scaledSize: { width: 70, height: 70 }
+              scaledSize: { width: 70, height: 70 },
             }}
             position={{ lat: 59.911481, lng: 10.757923 }}
             onClick={() => setShowingInfoWindow(!showingInfoWindow)}
           >
-            {showingInfoWindow &&
+            {showingInfoWindow && (
               <InfoWindow
                 options={{ pixelOffset: new window.google.maps.Size(0, -1) }}
                 position={{ lat: 59.911481, lng: 10.757923 }}
-                onCloseClick={() => setShowingInfoWindow(false)}>
+                onCloseClick={() => setShowingInfoWindow(false)}
+              >
                 <div className={"info-window"}>
                   <div>
-                    <h1>
-                      {userInfo.name}
-                    </h1>
+                    <h1>{userInfo.name}</h1>
                   </div>
                 </div>
               </InfoWindow>
-            }
+            )}
           </Marker>
-        ))
-        }
+        ))}
 
         <Marker
           icon={{
             url: `${profile.profileImg}`,
-            scaledSize: { width: 70, height: 70 }
+            scaledSize: { width: 70, height: 70 },
           }}
           position={{ lat: 0, lng: 0 }}
         >
@@ -106,17 +108,16 @@ function Map({ profile }) {
         <Marker
           style={{
             backgroundColor: "red",
-            width: "101px"
+            width: "101px",
           }}
           icon={{
             url: "https://www.linkpicture.com/q/img_2.112eb9c4-2.png",
             scaledSize: { width: 70, height: 70 },
-            style: { backgroundColor: "red", width: "101px" }
+            style: { backgroundColor: "red", width: "101px" },
           }}
-          onClick={() => window.location = "/friend-profile"}
+          onClick={() => (window.location = "/friend-profile")}
           position={{ lat: 59.941481, lng: 10.767923 }}
         >
-
           <InfoWindow position={{ lat: 59.944481, lng: 10.767923 }}>
             <div className={"info-window"}>
               <div>

@@ -146,23 +146,37 @@ export function StudySessionApi() {
   router.get("/active-session/:email", async (req, res) => {
     try {
       const { email } = req.params;
-      console.log("dd",email)
-      await Session.find({ stage: "active", $and: [{ email }] }).then((result) => {
-        res.json(result);
-      });
+      console.log("dd", email);
+      await Session.find({ stage: "active", $and: [{ email }] }).then(
+        (result) => {
+          res.json(result);
+        }
+      );
     } catch {
       res.status(404).send({ error: "Session not found" });
     }
   });
 
-  router.get("/new-session", async (req, res) => {
+  router.get("/new-session/", async (req, res) => {
     try {
-      await Session.find()
-        .sort({ createdAt: -1 })
-        .limit(1)
-        .then((result) => {
-          res.json(result);
+      const { sessionId } = req.query;
+      const emailCookie = req.signedCookies.jwt.email;
+      console.log("sessionid " + sessionId);
+      let queryResult = "";
+      if (sessionId) {
+        await Session.find({ _id: { $eq: sessionId } }).then((result) => {
+          console.log(result);
+          queryResult = result;
         });
+      } else {
+        await Session.find({ email: emailCookie })
+          .sort({ createdAt: -1 })
+          .limit(1)
+          .then((result) => {
+            queryResult = result;
+          });
+      }
+      res.json(queryResult);
     } catch {
       res.status(404).send({ error: "Session not found" });
     }

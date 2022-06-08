@@ -28,7 +28,9 @@ export const MainPageApiContext = React.createContext({
         throw new Error(`Failed to post ${res.status}: ${res.statusText}`);
       }
     },*/
-  async getLatestAddedSession() {
-    return await fetchJSON("/api/session/new-session");
+  async getPlannedOrActiveSession(sessionId) {
+    return await fetchJSON(
+      "/api/session/new-session?" + new URLSearchParams(sessionId)
+    );
   },
 });

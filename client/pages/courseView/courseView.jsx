@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MainPageApiContext } from "../../mainPageApiContext";
 import { useLoading } from "../../useLoading";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../../css/index.css";
+import { ArrowBackIosNew } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 
 // code for when youre inside a course page
 
@@ -43,7 +45,7 @@ function People() {
 
   return (
     <>
-      <div className={"people-in-course-div"}>
+      <div className={"my-groups-card"}>
         <ul>
           {data[0].students.map((students) => (
             <>
@@ -70,8 +72,6 @@ function MyGroups() {
   const [ws, setWs] = useState("");
   const [groupsList, setGroupsList] = useState([]);
   const groupObject = { type, assignmentStudents };
-  console.log("assignment students: " + assignmentStudents);
-  console.log("group ws: " + JSON.stringify(groupsList));
 
   const onChange = (e) => {
     setAssignmentStudents([...assignmentStudents, e.target.value]);
@@ -93,9 +93,10 @@ function MyGroups() {
       document
         .querySelectorAll("input[type=checkbox]")
         .forEach((el) => (el.checked = false));
+
       ws.send(JSON.stringify(groupObject));
       setType("");
-      setAssignmentStudents("");
+      setAssignmentStudents([]);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
@@ -121,41 +122,47 @@ function MyGroups() {
 
   return (
     <>
-      <button onClick={showForm}>Legg til ny gruppe</button>
+      <button onClick={showForm} className={"add-new-group-btn"}>
+        + Legg til ny gruppe
+      </button>
       {display ? (
-        <form onSubmit={handleSubmit} id={"add-group-form"}>
-          <div>
-            <label>Type gruppe</label>
-            <div>
-              <input
-                type="text"
-                id="type-input"
-                onChange={(e) => setType(e.target.value)}
-                value={type}
-                placeholder="Hva er gruppen for?.."
-              />
+        <div className={"add-new-group-div"}>
+          <form onSubmit={handleSubmit} id={"add-group-form"}>
+            <div className={"input-div"}>
+              <label className={"group-input-label"}>Hva er gruppen for?</label>
+              <div>
+                <input
+                  type="text"
+                  id="type-input"
+                  onChange={(e) => setType(e.target.value)}
+                  value={type}
+                  placeholder="Skriv gruppetype her..."
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Gruppemedlemmer</label>
-            <div>
-              {data[0].students.map((students) => (
-                <div className={"session-card-div"}>
-                  <input
-                    className={"assignmentStudents"}
-                    type="checkbox"
-                    name="assignmentStudents"
-                    label={"assignmentStudents"}
-                    onChange={onChange}
-                    value={students}
-                  />
-                  {students}
-                </div>
-              ))}
+            <div className={"input-div"}>
+              <label className={"group-input-label"}>
+                Hvilke av dine klassekamerater er med?
+              </label>
+              <div>
+                {data[0].students.map((students) => (
+                  <div className={"session-card-div"}>
+                    <input
+                      className={"assignmentStudents"}
+                      type="checkbox"
+                      name="assignmentStudents"
+                      label={"assignmentStudents"}
+                      onChange={onChange}
+                      value={students}
+                    />
+                    {students}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-          <button>Legg til</button>
-        </form>
+            <button className={"add-group-btn"}>Legg til</button>
+          </form>
+        </div>
       ) : null}
       <div className={"upcoming-div"}>
         {groupsList.map((assignments) => (
@@ -199,10 +206,32 @@ export function CourseView() {
   return (
     <>
       <div className={"main-div"}>
-        <div>{course}</div>
+        <div className={"headline-div"}>
+          <IconButton
+            className={"arrow-back"}
+            component={Link}
+            to="/main-page"
+            size="large"
+            aria-label="menu"
+            sx={{ mr: "auto" }}
+          >
+            <ArrowBackIosNew />
+          </IconButton>
+          <p className={"subject-headline"}>{course}</p>
+        </div>
         <div className={"choose-user-diary-buttons-div"}>
-          <button onClick={onClickHandlerMyGroups}>Mine grupper</button>
-          <button onClick={onClickHandlerPeople}>Klassekamerater</button>
+          <button
+            onClick={onClickHandlerMyGroups}
+            className={"change-display-btn"}
+          >
+            Mine grupper
+          </button>
+          <button
+            onClick={onClickHandlerPeople}
+            className={"change-display-btn"}
+          >
+            Klassekamerater
+          </button>
         </div>
 
         {/* if Groups-button is active, show MyGroups-component. Else, show People-component */}

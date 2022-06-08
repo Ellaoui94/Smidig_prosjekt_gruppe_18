@@ -61,11 +61,11 @@ function MapView({ position, profile }) {
 }
 
 export default function Session({ profile }) {
-  const { getLatestAddedSession } = useContext(MainPageApiContext);
+  const { getPlannedOrActiveSession } = useContext(MainPageApiContext);
   const navigate = useNavigate();
   const { sessionId } = useParams();
   const { loading, error, data } = useLoading(
-    async () => await getLatestAddedSession(),
+    async () => await getPlannedOrActiveSession({ sessionId }),
     []
   );
   const { isLoaded } = useLoadScript({
@@ -99,7 +99,7 @@ export default function Session({ profile }) {
 
   const position = data[0].position;
   return (
-    <div style={{marginBottom: "9vh"}}>
+    <div style={{ marginBottom: "9vh" }}>
       <h1>{data[0].courseTitle}</h1>
       <MapView position={position} profile={profile} />
       <p>Endre arbeidsstatus</p>

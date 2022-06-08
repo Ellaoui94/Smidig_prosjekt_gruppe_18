@@ -70,21 +70,84 @@ footer {
 }
 
 .my-groups-card {
-    width: 500px;
+    width: 600px;
     height: fit-content;
+    border-radius: 15px;
+    padding: 0.1em;
     margin-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
-    background-color: lavender;
+    background-color: white;
+}
+
+.add-new-group-div {
+    background-color: #d8ddd8;
+    width: 600px;
+    padding: 0.5em;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 15px;
+    margin-bottom: 1em;
+}
+
+.add-new-group-btn {
+    margin-bottom: 1em;
+    background-color: #d8ddd8;
+    border: 0;
+    border-radius: 13px;
+    padding: 5px 10px 5px 10px;
+}
+
+.add-group-btn {
+    background-color: #859585;
+    padding: 5px 10px 5px 10px;
+    border-radius: 13px;
+    border: 0;
+    color: white;
+}
+
+.arrow-back {
+    float: left;
+}
+
+.group-input-label {
+    font-weight: 600;
+}
+
+.input-div {
+    margin-bottom: 1em;
+}
+
+#type-input {
+    width: 300px
 }
 
 .people-in-course-div {
     width: 500px;
     height: fit-content;
     margin-bottom: 1em;
-    margin-left: auto;
-    margin-right: auto;
     background-color: lavender;
+}
+
+.change-display-btn {
+    background-color: #d8ddd8;
+    margin: 10px;
+    font-size: large;
+    border-radius: 20px;
+    border: 0;
+    padding: 10px 15px 10px 15px;
+}
+
+.headline-div {
+    margin-top: -20px;
+    margin-left: 1.5em;
+}
+
+.subject-headline {
+    font-size: xx-large;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    margin-right: 100px;
 }
 
 .choose-user-diary-buttons-div {
