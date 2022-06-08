@@ -187,13 +187,14 @@ export function StartSession({
           ))}
           <div>
             <input
+              style={{fontSize: "1.1vh"}}
               type="text"
               id="location-input"
               onChange={(e) => setLocation(e.target.value)}
               value={location}
               placeholder="Legg til nytt arbeidssted.."
             />
-            <button onClick={handleAddNewLocation}>Legg til</button>
+            <button style={{fontSize: "1.3vh"}} onClick={handleAddNewLocation}>Legg til</button>
           </div>
         </div>
 
@@ -233,12 +234,15 @@ export function StartSession({
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               name="date"
-              label={"date"}
+              label={"Når vil du starte økten"}
               onChange={(newValue) => setStartDateSession(newValue)}
               value={startDateSession}
               renderInput={(params) => (
                 <TextField
-                  style={{ background: "white" }}
+                  style={{width: "20vh" ,background: "white" }}
+                  InputLabelProps={{
+                    style: { fontSize: "1.5vh" }
+                  }}
                   margin={"normal"}
                   {...params}
                 />

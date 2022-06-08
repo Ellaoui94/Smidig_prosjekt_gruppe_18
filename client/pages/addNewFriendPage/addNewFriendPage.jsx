@@ -88,7 +88,7 @@ export function AddNewFriendPage({ id }) {
       <h1>Legg til venner</h1>
       <div className={"add-friend-search-container"}>
         <form className={"add-friend-form"} onSubmit={handleSearch}>
-          <input type="search" placeholder="Search" className="search-field"
+          <input type="search" placeholder="Søk på navn" className="search-field"
                  onChange={(e) => setInput(e.target.value)} />
           <button type="submit" className="search-button">
             <SearchIcon />

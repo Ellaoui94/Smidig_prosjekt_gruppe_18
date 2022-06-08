@@ -8,7 +8,7 @@ function ButtonInfo({text, icon, click, href}) {
               top: "1vh",
               padding: "1vh",
               background: "#D6DFE3",
-                fontSize: "25px",
+                fontSize: "60px",
                 fontWeight: "bold",
                 color: "#1D4B65",
                 borderRadius: "50px",

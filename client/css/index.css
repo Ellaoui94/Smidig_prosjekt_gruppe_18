@@ -222,8 +222,9 @@ margin-left: 10vh;
 .bottomSheet{
     background: #5D7C8D;
     color: white;
-    height: 25em;
+    height: 18em;
     border-radius: 20px 20px 0 0;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 
 
@@ -231,7 +232,7 @@ margin-left: 10vh;
     opacity: 0;
 }
 .alert-enter-active {
-    margin-top: 90px;
+    margin-top: 100px;
     opacity: 1;
     transform: translateY(-100px);
     transition: opacity 700ms, transform 2s;
@@ -265,6 +266,10 @@ margin-left: 10vh;
     padding: 20px;
     margin: 20px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.input-file input[type=file] {
+font-size: 30px;
 }
 
 /**

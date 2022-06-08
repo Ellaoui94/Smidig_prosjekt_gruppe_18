@@ -63,21 +63,26 @@ export function NewProfile({setRegistered}) {
       </IconButton>
 
 
-        <h1 style={{ color: "#023F4A" }}>Registrer deg her</h1>
+        <h1 style={{ color: "#023F4A", fontSize: 60 }}>Registrer deg her</h1>
 
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
-            "& .MuiTextField-root": { width: "25ch" },
-            select: { width: "55ch", display: "flex" },
+            "& .MuiTextField-root": { width: "50ch" },
           }}
         >
           <TextField
             type="text"
             name="firstName"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Fornavn"}
             margin="normal"
             onChange={handleChange}
@@ -89,6 +94,12 @@ export function NewProfile({setRegistered}) {
             type="text"
             name="lastName"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Etternavn"}
             margin="normal"
             onChange={handleChange}
@@ -100,6 +111,12 @@ export function NewProfile({setRegistered}) {
             type="email"
             name="email"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Email"}
             margin="normal"
             onChange={handleChange}
@@ -111,6 +128,12 @@ export function NewProfile({setRegistered}) {
             type="password"
             name="password"
             style={{ background: "white" }}
+            InputLabelProps={{
+              style: { fontSize: "1.5vh" }
+            }}
+            inputProps={{
+              style: { height: "4vh", fontSize: "2vh" }
+            }}
             label={"Passord"}
             margin="normal"
             onChange={handleChange}
@@ -121,9 +144,9 @@ export function NewProfile({setRegistered}) {
           <Button
             type={"submit"}
             style={{
-              top: "10px",
+              top: "60px",
               background: "#326683",
-              fontSize: "25px",
+              fontSize: "60px",
               fontWeight: "bold",
               color: "white",
               borderRadius: "50px",
