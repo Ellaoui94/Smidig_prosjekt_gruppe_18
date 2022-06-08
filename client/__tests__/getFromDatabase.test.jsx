@@ -10,6 +10,7 @@ import { StartSession } from "../pages/sessionPage/startSession";
 jest.mock("axios");
 
 describe("get from database", () => {
+  //this doesnt work, but maybe it should be in server, instead of client
   it("get one planned sessions", async () => {
     const response = await axios.get(
       "http://localhost:8080/session/planned-session",
