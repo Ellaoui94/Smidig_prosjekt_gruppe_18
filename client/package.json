@@ -11,7 +11,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel-jest": "^28.1.0",
     "buffer": "^6.0.3",
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
     "parcel": "^2.5.0",
     "process": "^0.11.10"
   },
@@ -35,5 +40,21 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
     "react-transition-group": "^4.4.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }
