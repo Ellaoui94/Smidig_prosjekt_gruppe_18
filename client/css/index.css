@@ -47,6 +47,7 @@ footer {
     width: fit-content;
     overflow: hidden;
     display: inline-flex;
+    float: left;
 }
 
 .horizontal-scroll-div {
@@ -60,16 +61,16 @@ footer {
 .main-page-components-card {
     text-align: left;
     border-radius: 50px;
-    width: 500px;
-    height: 200px;
+    width: 23em;
+    height: 10em;
     margin-bottom: 1em;
     margin-right: 1em;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .inner-main-page-card {
-    padding-top: 1em;
-    padding-left: 3em;
+    padding-top: 0.7em;
+    padding-left: 2em;
 }
 
 .sessions-card-header {
