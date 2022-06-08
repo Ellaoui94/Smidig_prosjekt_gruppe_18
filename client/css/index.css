@@ -73,21 +73,28 @@ footer {
     width: 600px;
     height: fit-content;
     border-radius: 15px;
-    padding: 0.1em;
     margin-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
     background-color: white;
+    text-align: left;
+    padding: 10px 1em 10px 1em;
+}
+
+hr {
+    border-top: 1px solid #d8ddd8;
+    margin-top: -10px;
 }
 
 .add-new-group-div {
     background-color: #d8ddd8;
     width: 600px;
-    padding: 0.5em;
+    padding: 1em;
     margin-right: auto;
     margin-left: auto;
     border-radius: 15px;
     margin-bottom: 1em;
+    text-align: left;
 }
 
 .add-new-group-btn {
@@ -115,11 +122,12 @@ footer {
 }
 
 .input-div {
-    margin-bottom: 1em;
+    margin-top: 1em;
 }
 
 #type-input {
-    width: 300px
+    width: 300px;
+    margin-bottom: 10px;
 }
 
 .people-in-course-div {
@@ -130,7 +138,6 @@ footer {
 }
 
 .change-display-btn {
-    background-color: #d8ddd8;
     margin: 10px;
     font-size: large;
     border-radius: 20px;
@@ -150,7 +157,7 @@ footer {
     margin-right: 100px;
 }
 
-.choose-user-diary-buttons-div {
+.choose-groups-or-classmates-buttons-div {
     margin-bottom: 1em;
 }
 

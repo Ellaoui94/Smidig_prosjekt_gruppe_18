@@ -13,6 +13,7 @@ function MyGroupsCard({ assignments: { type, assignmentStudents } }) {
     <>
       <div className={"my-groups-card"}>
         <h4>{type}</h4>
+        <hr />
         {assignmentStudents.map((students) => (
           <>
             <h5 key={students}>{students}</h5>
@@ -164,7 +165,7 @@ function MyGroups() {
           </form>
         </div>
       ) : null}
-      <div className={"upcoming-div"}>
+      <div>
         {groupsList.map((assignments) => (
           <>
             {<MyGroupsCard key={assignments.type} assignments={assignments} />}
@@ -219,16 +220,24 @@ export function CourseView() {
           </IconButton>
           <p className={"subject-headline"}>{course}</p>
         </div>
-        <div className={"choose-user-diary-buttons-div"}>
+        <div className={"choose-groups-or-classmates-buttons-div"}>
           <button
             onClick={onClickHandlerMyGroups}
             className={"change-display-btn"}
+            style={{
+              backgroundColor: showMyGroups ? "#859585" : "#d8ddd8",
+              color: showMyGroups ? "white" : "black",
+            }}
           >
             Mine grupper
           </button>
           <button
             onClick={onClickHandlerPeople}
             className={"change-display-btn"}
+            style={{
+              backgroundColor: showPeople ? "#859585" : "#d8ddd8",
+              color: showPeople ? "white" : "black",
+            }}
           >
             Klassekamerater
           </button>
