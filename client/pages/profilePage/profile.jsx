@@ -36,7 +36,7 @@ export function Logout() {
 function ProfileCard({
   profile: { firstName, lastName, email, subjects, id, profileImg },
 }) {
-  const mockSubjects = ["Filosofi", "Programmering", "Design"];
+  const mockSubjects = ["Filosofi", "Programmering", "Design", "Webutvikling"];
   const [faceBook, setFaceBook] = useState();
   const [discord, setDiscord] = useState();
   const [bio, setBio] = useState();

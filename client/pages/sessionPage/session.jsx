@@ -22,7 +22,7 @@ const user = [
   },
 ];
 
-function MapView({ position, profile }) {
+function MapView({ position, profile, subject }) {
   return (
     <>
       <GoogleMap
@@ -45,9 +45,9 @@ function MapView({ position, profile }) {
               {user.map((userInfo) => (
                 <div>
                   <h1>
-                    {userInfo.firstName} {userInfo.lastName}
+                    {profile.firstName} {profile.lastName}
                   </h1>
-                  <p>{userInfo.course}</p>
+                  <p>{subject}</p>
                   <p>{userInfo.bio}</p>
                 </div>
               ))}
@@ -100,7 +100,11 @@ export default function Session({ profile }) {
   return (
     <div style={{ marginBottom: "9vh" }}>
       <h1>{data[0].courseTitle}</h1>
-      <MapView position={position} profile={profile} />
+      <MapView
+        position={position}
+        profile={profile}
+        subject={data[0].courseTitle}
+      />
       <p>Endre arbeidsstatus</p>
       <div className={"session-wrapper"}>
         <input type={"radio"} name={"set-status"} />
