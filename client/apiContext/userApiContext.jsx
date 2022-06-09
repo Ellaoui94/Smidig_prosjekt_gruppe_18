@@ -1,4 +1,4 @@
-import { fetchJSON } from "./fetchJSON";
+import { fetchJSON } from "../components/fetchJSON";
 import React from "react";
 
 export const UserApiContext = React.createContext({

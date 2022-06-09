@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import img from '../mainPage/dummyPics/img_2.png'
+import React from "react";
+import img from "../mainPage/dummyPics/img_2.png";
 import { SiDiscord, SiFacebook } from "react-icons/si";
 
 const courseView = [
@@ -50,7 +50,7 @@ export function FriendProfile() {
   return (
     <>
       <div className={"other-users-profile"}>
-        <img src={img}/>
+        <img src={img} />
         {user.map((profile) => (
           <>
             <ProfileCard key={profile.firstName} profile={profile} />

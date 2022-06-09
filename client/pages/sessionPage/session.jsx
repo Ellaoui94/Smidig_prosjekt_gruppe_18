@@ -1,8 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import React, { useContext } from "react";
-import { MainPageApiContext } from "../../mainPageApiContext";
-import { useLoading } from "../../useLoading";
+import { MainPageApiContext } from "../../apiContext/mainPageApiContext";
+import { useLoading } from "../../components/useLoading";
 import { TodoList } from "./todoList";
 import {
   GoogleMap,
@@ -114,7 +113,7 @@ export default function Session({ profile }) {
         <label>Usynlig</label>
       </div>
       <TodoList sessionId={sessionId} />
-      <button style={{fontSize: "1.6vh", marginTop: "1.5vh"}}>
+      <button style={{ fontSize: "1.6vh", marginTop: "1.5vh" }}>
         <Link to={"/end-session/" + sessionId}>Vurder økten og avslutt</Link>
       </button>
     </div>

@@ -4,7 +4,7 @@ import { MySubjectsCard } from "./cards/mySubjectsCard";
 import { FinishedSessionsCard } from "./cards/finishedSessionsCard";
 import { Link } from "react-router-dom";
 import img from "./dummyPics/img.png";
-import imgProfile from "../../imgProfile.png";
+import imgProfile from "../../components/assests/images/imgProfile.png";
 
 // main page. first page you see when you log in, with all the subjects and sessions listed
 

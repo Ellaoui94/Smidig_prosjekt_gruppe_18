@@ -1,13 +1,14 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { UserApiContext } from "../../userApiContext";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@mui/material";
 
 function DeleteFriend({ name, id }) {
   async function deleteFriend() {
-    await axios.delete(`${window.location.origin}/api/users/friendsDelete/${id}/${name}`);
-    location.reload()
+    await axios.delete(
+      `${window.location.origin}/api/users/friendsDelete/${id}/${name}`
+    );
+    location.reload();
   }
 
   return (
@@ -20,7 +21,8 @@ function DeleteFriend({ name, id }) {
           fontWeight: "bold",
           color: "white",
           borderRadius: "50px",
-          boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+          boxShadow:
+            "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
         }}
       >
         Slett venn
@@ -29,19 +31,19 @@ function DeleteFriend({ name, id }) {
   );
 }
 
-function ViewFriendCard({ id ,friend: { name, photo } } ) {
+function ViewFriendCard({ id, friend: { name, photo } }) {
   return (
     <>
       <div className={"view-friends-card"}>
-        <img src={photo}/>
+        <img src={photo} />
         <h2>{name}</h2>
-        <DeleteFriend id={id} name={name}/>
+        <DeleteFriend id={id} name={name} />
       </div>
     </>
   );
 }
 
-export function FriendsPage({profile}) {
+export function FriendsPage({ profile }) {
   return (
     <>
       <div className={"list-friends-page"}>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { MainPageApiContext } from "../../../mainPageApiContext";
-import { useLoading } from "../../../useLoading";
+import { MainPageApiContext } from "../../../apiContext/mainPageApiContext";
+import { useLoading } from "../../../components/useLoading";
 import { Link } from "react-router-dom";
 
 // code for all planned sessions card on the front page

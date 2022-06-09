@@ -5,7 +5,7 @@
     grid-template-rows: auto 1fr;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
@@ -19,7 +19,6 @@ body {
     overflow-x: hidden;
     position: relative;
 }
-
 
 #nav-bar {
     display: flex;
@@ -35,6 +34,19 @@ footer {
     bottom: 0;
     position: fixed;
     background-color: #D7DDD7;
+}
+
+a {
+    color: #24393a;
+}
+
+hr {
+    border-top: 1px solid #d8ddd8;
+    margin-top: -10px;
+}
+
+.body-div {
+    margin-bottom: 5em;
 }
 
 /* main page */
@@ -56,7 +68,6 @@ footer {
     margin-left: auto;
     margin-right: 0;
 }
-
 
 .main-page-components-card {
     text-align: left;
@@ -81,112 +92,16 @@ footer {
     margin-bottom: -0.5em;
 }
 
-a {
-    color: #24393a;
-}
-
-.my-groups-card {
-    width: 600px;
-    height: fit-content;
-    border-radius: 15px;
-    margin-bottom: 1em;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: white;
-    text-align: left;
-    padding: 10px 1em 10px 1em;
-}
-
-hr {
-    border-top: 1px solid #d8ddd8;
-    margin-top: -10px;
-}
-
-.add-new-group-div {
-    background-color: #d8ddd8;
-    width: 600px;
-    padding: 1em;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 15px;
-    margin-bottom: 1em;
-    text-align: left;
-}
-
-.add-new-group-btn {
-    margin-bottom: 1em;
-    background-color: #d8ddd8;
-    border: 0;
-    border-radius: 13px;
-    padding: 5px 10px 5px 10px;
-}
-
-.add-group-btn {
-    background-color: #859585;
-    padding: 5px 10px 5px 10px;
-    border-radius: 13px;
-    border: 0;
-    color: white;
-}
-
-.arrow-back {
-    float: left;
-}
-
-.group-input-label {
-    font-weight: 600;
-}
-
-.input-div {
-    margin-top: 1em;
-}
-
-#type-input {
-    width: 300px;
-    margin-bottom: 10px;
-}
-
-.people-in-course-div {
-    width: 500px;
-    height: fit-content;
-    margin-bottom: 1em;
-    background-color: lavender;
-}
-
-.change-display-btn {
-    margin: 10px;
-    font-size: large;
-    border-radius: 20px;
-    border: 0;
-    padding: 10px 15px 10px 15px;
-}
-
-.headline-div {
-    margin-top: -20px;
-    margin-left: 1.5em;
-}
-
-.subject-headline {
-    font-size: xx-large;
-    font-weight: 600;
-    margin-bottom: 0.5em;
-    margin-right: 100px;
-}
-
-.choose-groups-or-classmates-buttons-div {
-    margin-bottom: 1em;
-}
-
-.friends-container{
+.friends-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 
-.friends-wrapper{
+.friends-wrapper {
     display: flex;
     align-items: center;
     padding-left: max(80px, 5%);
-/*    padding-top: max(10px);  fix later with mediaQuery*/
+    /*    padding-top: max(10px);  fix later with mediaQuery*/
 }
 
 .friends-card-div {
@@ -212,7 +127,6 @@ hr {
     font-size: x-large;
 }
 
-
 .friends-headline {
     flex: 1;
     text-align: left;
@@ -224,6 +138,96 @@ hr {
     flex: 1;
     text-align: right;
     padding-right: 10vw;
+}
+
+/* Course page */
+.my-groups-card {
+    width: 30em;
+    height: fit-content;
+    border-radius: 15px;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    text-align: left;
+    padding: 10px 1em 10px 1em;
+}
+
+.add-new-group-div {
+    background-color: #d8ddd8;
+    width: 30em;
+    padding: 1em;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 15px;
+    margin-bottom: 1em;
+    text-align: left;
+}
+
+.add-new-group-btn {
+    margin-bottom: 1em;
+    background-color: #d8ddd8;
+    border: 0;
+    border-radius: 13px;
+    font-size: 0.7em;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+.add-group-btn {
+    background-color: #859585;
+    padding: 0.5em 1em 0.5em 1em;
+    font-size: 0.7em;
+    border-radius: 13px;
+    border: 0;
+    color: white;
+}
+
+.arrow-back {
+    float: left;
+}
+
+.group-input-label {
+    font-weight: 600;
+}
+
+.input-div {
+    margin-top: 1em;
+}
+
+#type-input {
+    width: 20em;
+    margin-bottom: 10px;
+}
+
+.people-in-course-div {
+    width: 500px;
+    height: fit-content;
+    margin-bottom: 1em;
+    background-color: lavender;
+}
+
+.change-display-btn {
+    margin: 10px;
+    font-size: 0.9em;
+    border-radius: 20px;
+    border: 0;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+.headline-div {
+    margin-top: -20px;
+    margin-left: 1.5em;
+}
+
+.subject-headline {
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    margin-right: 100px;
+}
+
+.choose-groups-or-classmates-buttons-div {
+    margin-bottom: 1em;
 }
 
 /* list friends page */
@@ -245,8 +249,8 @@ hr {
     align-items: center;
 }
 
-.view-friends-card button{
-margin-left: 10vh;
+.view-friends-card button {
+    margin-left: 10vh;
 }
 
 
@@ -291,6 +295,7 @@ margin-left: 10vh;
     border-radius: 10px;
     margin-bottom: 1em;
 }
+
 /* mini-map in session*/
 .mini-map-container {
     width: 90%;
@@ -298,6 +303,7 @@ margin-left: 10vh;
     margin-right: auto;
     margin-left: auto;
 }
+
 /* map */
 .map-container {
     width: 90%;
@@ -305,26 +311,32 @@ margin-left: 10vh;
     margin-left: auto;
     margin-right: auto;
 }
+
 .filter-by-course {
     color: black;
     width: auto;
-    line-height:0.6em;
+    line-height: 0.6em;
 }
+
 .flex-container {
     display: flex;
 }
+
 .flex-item {
     flex: 1;
     height: fit-content;
     font-size: small;
 }
-.flex-item button{
+
+.flex-item button {
     font-size: 1.5vh;
 }
+
 /* Info window in map */
 .info-window {
     color: black;
 }
+
 /* Marker/pin in map (which is profile picture now */
 .marker {
     border: 6px solid green;
@@ -333,16 +345,17 @@ margin-left: 10vh;
 
 /*profile*/
 
-.addSubj{
+.addSubj {
     font-size: 60px;
     color: #285057;
 }
-.addSubj:hover{
+
+.addSubj:hover {
     transform: rotate(180deg);
     transition: transform 0.5s;
 }
 
-.bottomSheet{
+.bottomSheet {
     background: #5D7C8D;
     color: white;
     height: 18em;
@@ -354,27 +367,25 @@ margin-left: 10vh;
 .alert-enter {
     opacity: 0;
 }
+
 .alert-enter-active {
     margin-top: 100px;
     opacity: 1;
     transform: translateY(-100px);
     transition: opacity 700ms, transform 2s;
 }
+
 .alert-exit {
     opacity: 1;
 }
+
 .alert-exit-active {
     opacity: 0;
     transform: translateY(100px);
     transition: opacity 700ms, transform 2s;
 }
 
-#wrapper{
-/*    display: flex;
-    justify-content: center;*/
-}
-
-.subjectDiv{
+.subjectDiv {
     padding: 7px;
     margin: 10px;
     display: inline-block;
@@ -383,7 +394,7 @@ margin-left: 10vh;
     border-radius: 40px;
 }
 
-.contact-wrapper{
+.contact-wrapper {
     background-color: white;
     border-radius: 100px;
     padding: 20px;
@@ -392,7 +403,7 @@ margin-left: 10vh;
 }
 
 .input-file input[type=file] {
-font-size: 30px;
+    font-size: 30px;
 }
 
 /**
@@ -408,18 +419,18 @@ SESSION
     display: inline-flex;
 }
 
-.session-div{
-    width: 50%;
+.session-div {
+    width: 30em;
     margin-right: auto;
     margin-left: auto;
     border-radius: 25px;
 }
 
-.start-session-btn:hover{
+.start-session-btn:hover {
     background-color: #70A790;
 }
 
-.end-session-btn{
+.end-session-btn {
     background-color: #285057;
     color: white;
     border-radius: 25px;
@@ -430,19 +441,19 @@ SESSION
     margin-bottom: 10em;
 }
 
-.session-wrapper{
+.session-wrapper {
     font-size: 1.7vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.session-wrapper input{
+.session-wrapper input {
     transform: scale(3);
     margin: 2.5vw;
 }
 
-.todo-wrapper{
+.todo-wrapper {
     padding-bottom: 1vh;
     display: flex;
     align-items: center;
@@ -453,7 +464,7 @@ SESSION
     border-radius: 15px;
 }
 
-.todo-div{
+.todo-div {
     padding: 1vh 0 1vh 0;
     background-color: #CFDADF;
     width: 85%;
@@ -462,9 +473,26 @@ SESSION
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px
 }
 
-.todo-div input{
+.todo-div input {
     transform: scale(3);
     margin: 2.5vw;
 }
 
+.your-evaluation-div > h5 {
+    font-size: 1em;
+    margin-bottom: -0.7em;
+}
+
+.your-evaluation-div > p {
+    font-size: 0.8em;
+}
+
+.session-date {
+    margin-top: -1.2em;
+    margin-bottom: 2em;
+}
+
+.session-address {
+    margin-top: -1.2em;
+}
 

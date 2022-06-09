@@ -27,6 +27,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 
 /* This is taken from Johannes' repo, postJSON. Only thing I edited is "PUT", but doesnt know
  * if that will work. Probably not. */
+
 /*async function updateJSON(url, object) {
   //doublecheck that this one makes updates!
   const res = await fetch(url, {
@@ -45,7 +46,6 @@ async function updateUserProfile(user) {
   //doublecheck if url-endpoint-user_id and "user" is the same thing.
   return await updateJSON(`/api/profile/edit/${user_id}`, user);
 }*/
-
 
 export function EditProfile({ id }) {
   const [data, setData] = useState({
@@ -89,85 +89,85 @@ export function EditProfile({ id }) {
         <ArrowBackIosNew />
       </IconButton>
 
-        <h1 style={{ color: "#023F4A" }}>Endre informasjon om din bruker</h1>
+      <h1 style={{ color: "#023F4A" }}>Endre informasjon om din bruker</h1>
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            "& .MuiTextField-root": { width: "50ch" },
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          "& .MuiTextField-root": { width: "50ch" },
+        }}
+      >
+        <TextField
+          type="text"
+          name="firstName"
+          style={{ background: "white" }}
+          InputLabelProps={{
+            style: { fontSize: "1.5vh" },
+          }}
+          inputProps={{
+            style: { height: "4vh", fontSize: "2vh" },
+          }}
+          label={"Fornavn"}
+          margin="normal"
+          onChange={handleChange}
+          value={data.firstName}
+          required
+        />
+
+        <TextField
+          type="text"
+          name="lastName"
+          style={{ background: "white" }}
+          InputLabelProps={{
+            style: { fontSize: "1.5vh" },
+          }}
+          inputProps={{
+            style: { height: "4vh", fontSize: "2vh" },
+          }}
+          label={"Etternavn"}
+          margin="normal"
+          onChange={handleChange}
+          value={data.lastName}
+          required
+        />
+
+        <TextField
+          type="email"
+          name="email"
+          style={{ background: "white" }}
+          InputLabelProps={{
+            style: { fontSize: "1.5vh" },
+          }}
+          inputProps={{
+            style: { height: "4vh", fontSize: "2vh" },
+          }}
+          label={"Email"}
+          margin="normal"
+          onChange={handleChange}
+          value={data.email}
+          required
+        />
+
+        {error && <div>{error}</div>}
+
+        <Button
+          type={"submit"}
+          style={{
+            top: "10px",
+            background: "#5D7C8D",
+            fontSize: "60px",
+            fontWeight: "bold",
+            color: "white",
+            borderRadius: "50px",
+            boxShadow:
+              "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
           }}
         >
-          <TextField
-            type="text"
-            name="firstName"
-            style={{ background: "white" }}
-            InputLabelProps={{
-              style: { fontSize: "1.5vh" }
-            }}
-            inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
-            }}
-            label={"Fornavn"}
-            margin="normal"
-            onChange={handleChange}
-            value={data.firstName}
-            required
-          />
-
-          <TextField
-            type="text"
-            name="lastName"
-            style={{ background: "white" }}
-            InputLabelProps={{
-              style: { fontSize: "1.5vh" }
-            }}
-            inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
-            }}
-            label={"Etternavn"}
-            margin="normal"
-            onChange={handleChange}
-            value={data.lastName}
-            required
-          />
-
-          <TextField
-            type="email"
-            name="email"
-            style={{ background: "white" }}
-            InputLabelProps={{
-              style: { fontSize: "1.5vh" }
-            }}
-            inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
-            }}
-            label={"Email"}
-            margin="normal"
-            onChange={handleChange}
-            value={data.email}
-            required
-          />
-
-          {error && <div>{error}</div>}
-
-          <Button
-            type={"submit"}
-            style={{
-              top: "10px",
-              background: "#5D7C8D",
-              fontSize: "60px",
-              fontWeight: "bold",
-              color: "white",
-              borderRadius: "50px",
-              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-
-            }}
-          >
-            Endre bruker
-          </Button>
-          {/*    {!isPending && <Button style={{
+          Endre bruker
+        </Button>
+        {/*    {!isPending && <Button style={{
               top: "10px",
               background: "#3E989C",
               fontSize: "25px",
@@ -177,7 +177,7 @@ export function EditProfile({ id }) {
             }} className={buttonStyle}>Registrer deg</Button>}
             {isPending && <button disabled>loading</button>}
             {error && <p>{error}</p>}*/}
-        </Box>
+      </Box>
     </form>
   );
 }

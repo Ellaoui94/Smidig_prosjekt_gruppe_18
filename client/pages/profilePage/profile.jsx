@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserApiContext } from "../../userApiContext";
+import { UserApiContext } from "../../apiContext/userApiContext";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import img from "../../imgProfile.png";
+import { Link } from "react-router-dom";
+import img from "../../components/assests/images/imgProfile.png";
 import { SiDiscord, SiFacebook } from "react-icons/si";
 import FileBase64 from "react-file-base64";
 
@@ -21,7 +21,7 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
-  borderRadius: "50px"
+  borderRadius: "50px",
 };
 
 export function Logout() {
@@ -119,27 +119,27 @@ function ProfileCard({
                   <form onSubmit={handleSubmit}>
                     {error && <div>{error}</div>}
                     <div className={"input-file"}>
-                    <FileBase64
-                      type="file"
-                      multiple={false}
-                      onDone={({ base64 }) =>
-                        setImgString({ ...imgString, profileImg: base64 })
-                      }
-                    />
-                    <Button
-                      type={"submit"}
-                      style={{
-                        background: "#5D7C8D",
-                        fontSize: "30px",
-                        fontWeight: "bold",
-                        color: "white",
-                        borderRadius: "50px",
-                        boxShadow:
-                          "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
-                      }}
-                    >
-                      Last opp
-                    </Button>
+                      <FileBase64
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) =>
+                          setImgString({ ...imgString, profileImg: base64 })
+                        }
+                      />
+                      <Button
+                        type={"submit"}
+                        style={{
+                          background: "#5D7C8D",
+                          fontSize: "30px",
+                          fontWeight: "bold",
+                          color: "white",
+                          borderRadius: "50px",
+                          boxShadow:
+                            "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                        }}
+                      >
+                        Last opp
+                      </Button>
                     </div>
                   </form>
                 </Box>

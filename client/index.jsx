@@ -21,17 +21,14 @@ import AddContactInfo from "./pages/profilePage/addContactInfo";
 import { FriendProfile } from "./pages/friendProfilePage/friendProfile";
 import { FinishedSession } from "./pages/sessionPage/finishedSession";
 import { AddNewFriendPage } from "./pages/addNewFriendPage/addNewFriendPage";
-import NotFound from "./notFound";
+import NotFound from "./pages/notFound/notFound";
 import RoomIcon from "@mui/icons-material/Room";
-import imgPic from "./img.png";
+import imgPic from "./components/assests/images/img.png";
 import HouseIcon from "@mui/icons-material/House";
-import PageOne from "./pages/introPages/pageOne";
-import PageTwo from "./pages/introPages/pageTwo";
-import PageThree from "./pages/introPages/pageThree";
 import AnimatedRoutes from "./pages/introPages/AnimatedRoutes";
 import EditContactInfo from "./pages/profilePage/editContactInfo";
-import { MainPageApiContext } from "./mainPageApiContext";
-import { useLoading } from "./useLoading";
+import { MainPageApiContext } from "./apiContext/mainPageApiContext";
+import { useLoading } from "./components/useLoading";
 
 async function getUser() {
   const res = await axios.get(`${window.location.origin}/api/auth/me`);
@@ -120,10 +117,10 @@ function Application() {
     });
 
     /*const allUsers = `${window.location.origin}/api/users/getAllUsers`;
-    const { data: res } = await axios.get(allUsers);
-    res.map((r) => {
-      setAllUsers(r)
-    });*/
+        const { data: res } = await axios.get(allUsers);
+        res.map((r) => {
+          setAllUsers(r)
+        });*/
   }, [id]);
 
   const profile = {

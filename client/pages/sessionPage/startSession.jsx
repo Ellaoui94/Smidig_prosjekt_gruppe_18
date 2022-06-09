@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IconButton, TextField } from "@mui/material";
 import "./session.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import axios from "axios";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
+import { ArrowBackIosNew } from "@mui/icons-material";
 
 /*
   Here is the code for when you start a new session
@@ -78,19 +79,6 @@ export function StartSession({
   const [sessionError, setSessionError] = useState("");
   const navigate = useNavigate();
 
-  /*
-  const userURL = `${window.location.origin}/api/users/getAllUsers/${id}`;
-  const { data: res } = await axios.get(userURL);
-  console.log("INSIDE start session " + JSON.stringify(res));
-
-
-
-  res.map((r) => {
-    setUserSubjects(r.subjects);
-  });
-
-   */
-
   const handleChange = ({ currentTarget: input }) => {
     setSessionData({ ...sessionData, [input.name]: input.value });
   };
@@ -127,6 +115,17 @@ export function StartSession({
 
   return (
     <div className={"new-session-div"}>
+      <IconButton
+        className={"arrow-back"}
+        component={Link}
+        to="/main-page"
+        size="large"
+        aria-label="menu"
+        sx={{ mr: "auto" }}
+      >
+        <ArrowBackIosNew />
+      </IconButton>
+      <br />
       <h1>Oprett ny studieøkt</h1>
 
       <form onSubmit={handleSubmit}>
@@ -187,14 +186,19 @@ export function StartSession({
           ))}
           <div>
             <input
-              style={{fontSize: "1.1vh"}}
+              style={{ fontSize: "1.1vh" }}
               type="text"
               id="location-input"
               onChange={(e) => setLocation(e.target.value)}
               value={location}
               placeholder="Legg til nytt arbeidssted.."
             />
-            <button style={{fontSize: "1.3vh"}} onClick={handleAddNewLocation}>Legg til</button>
+            <button
+              style={{ fontSize: "1.3vh" }}
+              onClick={handleAddNewLocation}
+            >
+              Legg til
+            </button>
           </div>
         </div>
 
@@ -239,9 +243,9 @@ export function StartSession({
               value={startDateSession}
               renderInput={(params) => (
                 <TextField
-                  style={{width: "20vh" ,background: "white" }}
+                  style={{ width: "20vh", background: "white" }}
                   InputLabelProps={{
-                    style: { fontSize: "1.5vh" }
+                    style: { fontSize: "1.5vh" },
                   }}
                   margin={"normal"}
                   {...params}

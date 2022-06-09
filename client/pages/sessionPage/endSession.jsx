@@ -1,6 +1,6 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Checkbox, FormControlLabel, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { TextField } from "@mui/material";
+import React, { useState } from "react";
 import axios from "axios";
 import "./session.css";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";

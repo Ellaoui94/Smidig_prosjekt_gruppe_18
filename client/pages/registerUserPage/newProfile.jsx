@@ -1,11 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowBackIosNew } from "@mui/icons-material";
-import { Box, Button, Container, IconButton, TextField } from "@mui/material";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { Box, Button, IconButton, TextField } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
-import { DatePicker } from "@mui/x-date-pickers";
 import "./register.css";
 
 const schools = [
@@ -16,8 +13,7 @@ const schools = [
   "UIO Bergen",
 ];
 
-export function NewProfile({setRegistered}) {
-
+export function NewProfile({ setRegistered }) {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -37,7 +33,7 @@ export function NewProfile({setRegistered}) {
       const url = `${window.location.origin}/api/users`;
       const { data: res } = await axios.post(url, data);
       navigate("/intro/introOne");
-      setRegistered(true)
+      setRegistered(true);
       console.log(res.message);
     } catch (error) {
       if (
@@ -62,99 +58,98 @@ export function NewProfile({setRegistered}) {
         <ArrowBackIosNew />
       </IconButton>
 
+      <h1 style={{ color: "#023F4A", fontSize: 60 }}>Registrer deg her</h1>
 
-        <h1 style={{ color: "#023F4A", fontSize: 60 }}>Registrer deg her</h1>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          "& .MuiTextField-root": { width: "50ch" },
+        }}
+      >
+        <TextField
+          type="text"
+          name="firstName"
+          style={{ background: "white" }}
+          InputLabelProps={{
+            style: { fontSize: "1.5vh" },
+          }}
+          inputProps={{
+            style: { height: "4vh", fontSize: "2vh" },
+          }}
+          label={"Fornavn"}
+          margin="normal"
+          onChange={handleChange}
+          value={data.firstName}
+          required
+        />
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-            "& .MuiTextField-root": { width: "50ch" },
+        <TextField
+          type="text"
+          name="lastName"
+          style={{ background: "white" }}
+          InputLabelProps={{
+            style: { fontSize: "1.5vh" },
+          }}
+          inputProps={{
+            style: { height: "4vh", fontSize: "2vh" },
+          }}
+          label={"Etternavn"}
+          margin="normal"
+          onChange={handleChange}
+          value={data.lastName}
+          required
+        />
+
+        <TextField
+          type="email"
+          name="email"
+          style={{ background: "white" }}
+          InputLabelProps={{
+            style: { fontSize: "1.5vh" },
+          }}
+          inputProps={{
+            style: { height: "4vh", fontSize: "2vh" },
+          }}
+          label={"Email"}
+          margin="normal"
+          onChange={handleChange}
+          value={data.email}
+          required
+        />
+
+        <TextField
+          type="password"
+          name="password"
+          style={{ background: "white" }}
+          InputLabelProps={{
+            style: { fontSize: "1.5vh" },
+          }}
+          inputProps={{
+            style: { height: "4vh", fontSize: "2vh" },
+          }}
+          label={"Passord"}
+          margin="normal"
+          onChange={handleChange}
+          value={data.password}
+          required
+        />
+        {error && <div>{error}</div>}
+        <Button
+          type={"submit"}
+          style={{
+            top: "60px",
+            background: "#326683",
+            fontSize: "60px",
+            fontWeight: "bold",
+            color: "white",
+            borderRadius: "50px",
           }}
         >
-          <TextField
-            type="text"
-            name="firstName"
-            style={{ background: "white" }}
-            InputLabelProps={{
-              style: { fontSize: "1.5vh" }
-            }}
-            inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
-            }}
-            label={"Fornavn"}
-            margin="normal"
-            onChange={handleChange}
-            value={data.firstName}
-            required
-          />
-
-          <TextField
-            type="text"
-            name="lastName"
-            style={{ background: "white" }}
-            InputLabelProps={{
-              style: { fontSize: "1.5vh" }
-            }}
-            inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
-            }}
-            label={"Etternavn"}
-            margin="normal"
-            onChange={handleChange}
-            value={data.lastName}
-            required
-          />
-
-          <TextField
-            type="email"
-            name="email"
-            style={{ background: "white" }}
-            InputLabelProps={{
-              style: { fontSize: "1.5vh" }
-            }}
-            inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
-            }}
-            label={"Email"}
-            margin="normal"
-            onChange={handleChange}
-            value={data.email}
-            required
-          />
-
-          <TextField
-            type="password"
-            name="password"
-            style={{ background: "white" }}
-            InputLabelProps={{
-              style: { fontSize: "1.5vh" }
-            }}
-            inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
-            }}
-            label={"Passord"}
-            margin="normal"
-            onChange={handleChange}
-            value={data.password}
-            required
-          />
-          {error && <div>{error}</div>}
-          <Button
-            type={"submit"}
-            style={{
-              top: "60px",
-              background: "#326683",
-              fontSize: "60px",
-              fontWeight: "bold",
-              color: "white",
-              borderRadius: "50px",
-            }}
-          >
-            Registrer deg
-          </Button>
-          {/*    {!isPending && <Button style={{
+          Registrer deg
+        </Button>
+        {/*    {!isPending && <Button style={{
               top: "10px",
               background: "#3E989C",
               fontSize: "25px",
@@ -164,7 +159,7 @@ export function NewProfile({setRegistered}) {
             }} className={buttonStyle}>Registrer deg</Button>}
             {isPending && <button disabled>loading</button>}
             {error && <p>{error}</p>}*/}
-        </Box>
+      </Box>
     </form>
   );
 }

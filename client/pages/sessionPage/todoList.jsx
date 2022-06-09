@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { MainPageApiContext } from "../../mainPageApiContext";
-import { useLoading } from "../../useLoading";
+import { MainPageApiContext } from "../../apiContext/mainPageApiContext";
+import { useLoading } from "../../components/useLoading";
 import axios from "axios";
 
 // code for the to-do-list inside planned session and active session
@@ -71,43 +71,43 @@ export function TodoList({ sessionId }) {
       <div>
         <h3>Gjøremål</h3>
         <div className={"todo-wrapper"}>
-        {joiError && <div>{joiError}</div>}
-        {/* add todos from database */}
-        {data[0].todos.map((todos, i) => (
-          <>
-            <div key={i} className={"todo-div"} >
-              <label>
-                <input type={"radio"} />
-                {todos.todo}
-              </label>
-            </div>
-          </>
-        ))}
+          {joiError && <div>{joiError}</div>}
+          {/* add todos from database */}
+          {data[0].todos.map((todos, i) => (
+            <>
+              <div key={i} className={"todo-div"}>
+                <label>
+                  <input type={"checkbox"} />
+                  {todos.todo}
+                </label>
+              </div>
+            </>
+          ))}
 
-        {/* add newly added todos from websockets */}
-        {[...todoList].map((todos) => (
-          <>
-            <div className={"todo-div"}>
-              <label>
-                <input type={"radio"} />
-                {todos.todo}
-              </label>
-            </div>
-          </>
-        ))}
+          {/* add newly added todos from websockets */}
+          {[...todoList].map((todos) => (
+            <>
+              <div className={"todo-div"}>
+                <label>
+                  <input type={"checkbox"} />
+                  {todos.todo}
+                </label>
+              </div>
+            </>
+          ))}
 
-        {/* input field to add new todos */}
-        <form onSubmit={handleSubmit}>
-          <input
-            style={{fontSize: "1.5vh", marginTop: "1vh"}}
-            type="text"
-            id="myInput"
-            onChange={(e) => setTodo(e.target.value)}
-            value={todo}
-            placeholder="Legg til nytt gjøremål.."
-          />
-          <button style={{fontSize: "1.4vh"}}>Legg til</button>
-        </form>
+          {/* input field to add new todos */}
+          <form onSubmit={handleSubmit}>
+            <input
+              style={{ fontSize: "1.5vh", marginTop: "1vh" }}
+              type="text"
+              id="myInput"
+              onChange={(e) => setTodo(e.target.value)}
+              value={todo}
+              placeholder="Legg til nytt gjøremål.."
+            />
+            <button style={{ fontSize: "1.4vh" }}>Legg til</button>
+          </form>
         </div>
       </div>
     </>

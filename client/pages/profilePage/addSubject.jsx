@@ -15,7 +15,7 @@ export default function AddSubject({ id, setNewSubject }) {
 
   const [ws, setWs] = useState("");
 
-  const subjectObj = { subjectName, subjectCode, startDate, endDate }
+  const subjectObj = { subjectName, subjectCode, startDate, endDate };
 
   useEffect(() => {
     const ws = new WebSocket(window.location.origin.replace(/^http/, "ws"));
@@ -32,7 +32,11 @@ export default function AddSubject({ id, setNewSubject }) {
     e.preventDefault();
     try {
       ws.send(JSON.stringify(subjectObj));
-      const url = `${window.location.origin}/api/users/subject/${id}/${encodeURIComponent(JSON.stringify(subjectObj))}`;
+      const url = `${
+        window.location.origin
+      }/api/users/subject/${id}/${encodeURIComponent(
+        JSON.stringify(subjectObj)
+      )}`;
       const { data: res } = await axios.post(url, subjectObj);
       console.log(res.message);
     } catch (error) {
@@ -57,10 +61,10 @@ export default function AddSubject({ id, setNewSubject }) {
             name="subjectName"
             style={{ background: "white" }}
             InputLabelProps={{
-              style: { fontSize: "1.5vh" }
+              style: { fontSize: "1.5vh" },
             }}
             inputProps={{
-              style: { height: "2vh", fontSize: "1.5vh" }
+              style: { height: "2vh", fontSize: "1.5vh" },
             }}
             label={"Emne Navn"}
             onChange={(e) => setSubjectName(e.target.value)}
@@ -74,10 +78,10 @@ export default function AddSubject({ id, setNewSubject }) {
             name="subjectCode"
             style={{ background: "white" }}
             InputLabelProps={{
-              style: { fontSize: "1.5vh" }
+              style: { fontSize: "1.5vh" },
             }}
             inputProps={{
-              style: { height: "2vh", fontSize: "1.5vh" }
+              style: { height: "2vh", fontSize: "1.5vh" },
             }}
             label={"Emne kode"}
             margin="normal"
@@ -95,10 +99,10 @@ export default function AddSubject({ id, setNewSubject }) {
               <TextField
                 style={{ background: "white" }}
                 InputLabelProps={{
-                  style: { fontSize: "1.1vh" }
+                  style: { fontSize: "1.1vh" },
                 }}
                 inputProps={{
-                  style: { width: "2vh", fontSize: "2vh" }
+                  style: { width: "2vh", fontSize: "2vh" },
                 }}
                 margin={"normal"}
                 {...params}
@@ -114,10 +118,10 @@ export default function AddSubject({ id, setNewSubject }) {
               <TextField
                 style={{ background: "white" }}
                 InputLabelProps={{
-                  style: { fontSize: "1.1vh" }
+                  style: { fontSize: "1.1vh" },
                 }}
                 inputProps={{
-                  style: { width: "2vh", fontSize: "2vh" }
+                  style: { width: "2vh", fontSize: "2vh" },
                 }}
                 margin={"normal"}
                 {...params}
@@ -136,9 +140,11 @@ export default function AddSubject({ id, setNewSubject }) {
               fontWeight: "bold",
               color: "#2E7713",
               borderRadius: "50px",
-              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+              boxShadow:
+                "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
             }}
-          >Start emne
+          >
+            Start emne
           </Button>
         </div>
       </form>

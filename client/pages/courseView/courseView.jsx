@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { MainPageApiContext } from "../../mainPageApiContext";
-import { useLoading } from "../../useLoading";
+import { MainPageApiContext } from "../../apiContext/mainPageApiContext";
+import { useLoading } from "../../components/useLoading";
 import { Link, useParams } from "react-router-dom";
 import "../../css/index.css";
 import { ArrowBackIosNew } from "@mui/icons-material";

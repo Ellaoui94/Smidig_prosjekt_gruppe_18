@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchJSON } from "./fetchJSON";
+import { fetchJSON } from "../components/fetchJSON";
 
 export const MainPageApiContext = React.createContext({
   async showCourse(course) {
@@ -21,13 +21,13 @@ export const MainPageApiContext = React.createContext({
     );
   },
   /*async endPlannedSession() {
-      const res = await fetch("/api/session/planned-session", {
-        method: "DELETE",
-      });
-      if (!res.ok) {
-        throw new Error(`Failed to post ${res.status}: ${res.statusText}`);
-      }
-    },*/
+        const res = await fetch("/api/session/planned-session", {
+          method: "DELETE",
+        });
+        if (!res.ok) {
+          throw new Error(`Failed to post ${res.status}: ${res.statusText}`);
+        }
+      },*/
   async getPlannedOrActiveSession(sessionId) {
     return await fetchJSON(
       "/api/session/new-session?" + new URLSearchParams(sessionId)

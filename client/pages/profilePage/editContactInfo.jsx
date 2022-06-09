@@ -9,7 +9,7 @@ export default function EditContactInfo({ id }) {
     _id: id,
     faceBook: "",
     discord: "",
-    bio: ""
+    bio: "",
   });
   const [error, setError] = useState("");
 
@@ -20,9 +20,15 @@ export default function EditContactInfo({ id }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (data.faceBook.length > 1 && data.faceBook.substring(0, 25) !== "https://www.facebook.com/") {
+      if (
+        data.faceBook.length > 1 &&
+        data.faceBook.substring(0, 25) !== "https://www.facebook.com/"
+      ) {
         setError("Dette er ikke en link til facebook profil");
-      } else if (data.discord.length > 1 && data.discord.substring(0, 29) !== "https://discordapp.com/users/") {
+      } else if (
+        data.discord.length > 1 &&
+        data.discord.substring(0, 29) !== "https://discordapp.com/users/"
+      ) {
         setError("Dette er ikke en discord link");
       } else {
         const url = `${window.location.origin}/api/contactInfo/update/${id}`;
@@ -69,10 +75,10 @@ export default function EditContactInfo({ id }) {
             name="faceBook"
             style={{ background: "white" }}
             InputLabelProps={{
-              style: { fontSize: "1.5vh" }
+              style: { fontSize: "1.5vh" },
             }}
             inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
+              style: { height: "4vh", fontSize: "2vh" },
             }}
             label={"Facebook link"}
             margin="normal"
@@ -85,10 +91,10 @@ export default function EditContactInfo({ id }) {
             name="discord"
             style={{ background: "white" }}
             InputLabelProps={{
-              style: { fontSize: "1.5vh" }
+              style: { fontSize: "1.5vh" },
             }}
             inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
+              style: { height: "4vh", fontSize: "2vh" },
             }}
             label={"Discord link"}
             margin="normal"
@@ -101,10 +107,10 @@ export default function EditContactInfo({ id }) {
             name="bio"
             style={{ background: "white" }}
             InputLabelProps={{
-              style: { fontSize: "1.5vh" }
+              style: { fontSize: "1.5vh" },
             }}
             inputProps={{
-              style: { height: "4vh", fontSize: "2vh" }
+              style: { height: "4vh", fontSize: "2vh" },
             }}
             label={"Selvbiografi"}
             margin="normal"
@@ -125,7 +131,8 @@ export default function EditContactInfo({ id }) {
               fontWeight: "bold",
               color: "white",
               borderRadius: "50px",
-              boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+              boxShadow:
+                "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
             }}
           >
             Endre Info
