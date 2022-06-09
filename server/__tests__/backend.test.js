@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 /* This test-file is testing API and database */
 
 dotenv.config();
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -21,7 +22,7 @@ describe("API connection", () => {
 
   //because this test is directly posting to database, the test only works one time.
   // go to the database and delete it if u want to test it again.
-  it("should log in", async () => {
+  it.only("should log in", async () => {
     //Register a user
     const register = await axios
       .post(
