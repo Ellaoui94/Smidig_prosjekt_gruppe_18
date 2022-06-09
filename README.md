@@ -19,9 +19,9 @@ Gruppe 18:
 3. Et vindu dukker opp og trykk på "started on 'http://localhost:3000' " som da er en nettleserløsning for vår prosjekt
 
 ## Oppgave
-```
-«Hvordan kan vi gjøre det enkelt for studenter å finne andre studenter, som de kommer til å jobbe godt sammen med, og samtidig gjøre det enkelt for dem å jobbe sammen?»
-```
+
+> «Hvordan kan vi gjøre det enkelt for studenter å finne andre studenter, som de kommer til å jobbe godt sammen med, og samtidig gjøre det enkelt for dem å jobbe sammen?»
+
 
 ## Intro
 Applikasjonen har som mål om å gjøre det så enkelt som mulig å jobbe sammen på en studie-økt, om man kjenner hverandre eller hvis man ikke kjenner hverandre så godt. Av erfaring vet vi at studenter ønsker å gjøre ting enkelt som mulig, spesielt når det komme til å sette seg ned for å studere.
