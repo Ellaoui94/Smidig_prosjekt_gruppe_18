@@ -11,9 +11,11 @@ Gruppe 18:
 | Benjamin Ulvevadet      | Interaktivt design          |
 
 ## Link til Heroku
-https://atcampus-studybuddy.herokuapp.com/
+[Heroku](https://atcampus-studybuddy.herokuapp.com/)
 
 ## Hvordan kjøre prosjektet lokalt
 1. Hent prosjekt fra Wiseflow og åpne i ønsket program (IntelliJ, BrainStorm eller Visual Studio anbefales)
 2. kjør enten ved å skrive 'npm run dev' i terminalen, eller å gå direkte til package.json i root-folder og trykk på play-knappen ved siden av dev under 'scripts'.
 3. Et vindu dukker opp og trykk på "started on 'http://localhost:3000' " som da er en nettleserløsning for vår prosjekt
+
+## Kort forklaring hva appen handler om
