@@ -9,8 +9,8 @@ export function AuthRoutes() {
   const router = new Router();
 
   /*
-  Checking if the email and password is correct.
-   */
+    Checking if the email and password is correct.
+     */
   router.post("/", async (req, res) => {
     try {
       const { error } = validate(req.body);

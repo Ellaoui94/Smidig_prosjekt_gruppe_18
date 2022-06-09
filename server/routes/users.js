@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { friendValidate, pictureValidate, subjectValidate, updateValidate, User, validate } from "../models/user.js";
+import {
+  friendValidate,
+  pictureValidate,
+  subjectValidate,
+  updateValidate,
+  User,
+  validate,
+} from "../models/user.js";
 import bcrypt from "bcrypt";
 import { ContactDetails } from "../models/contactDetails.js";
-import Joi from "joi";
 
 const maxAge = 3 * 24 * 60 * 60;
 
@@ -10,11 +16,11 @@ export function UsersRoutes() {
   const router = new Router();
 
   /*
-  Here we do some validations when register a user.
-  - Checking if email already exists.
-  - Checking if the password contains at least eight characters. (salt)
-  - Crypt the password when adding it to the database
-   */
+    Here we do some validations when register a user.
+    - Checking if email already exists.
+    - Checking if the password contains at least eight characters. (salt)
+    - Crypt the password when adding it to the database
+     */
   router.post("/", async (req, res) => {
     try {
       const { error } = validate(req.body);
@@ -50,18 +56,17 @@ export function UsersRoutes() {
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
-      const {id} = req.params
-      const friend = JSON.parse(req.params.friend)
+      const { id } = req.params;
+      const friend = JSON.parse(req.params.friend);
 
-      User.findOne({ _id: { $eq: id } }).then((record)=> {
+      User.findOne({ _id: { $eq: id } }).then((record) => {
         record.friends.push(friend);
-        record.save()
-      })
-
-    }catch{
-      res.status(404).send({error: "User is not found"})
+        record.save();
+      });
+    } catch {
+      res.status(404).send({ error: "User is not found" });
     }
-  })
+  });
 
   router.get("/getUser/:id", async (req, res) => {
     try {
@@ -73,8 +78,6 @@ export function UsersRoutes() {
       } else {
         console.log("userId", id);
       }
-
-
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
@@ -83,7 +86,7 @@ export function UsersRoutes() {
   router.get("/getAllUsers", async (req, res) => {
     try {
       await User.find().then((result) => {
-          res.json(result);
+        res.json(result);
       });
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -92,14 +95,12 @@ export function UsersRoutes() {
 
   router.post("/update/:id", async (req, res) => {
     try {
-
       const { error } = updateValidate(req.body);
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
-
       const { id } = req.params;
-      const user = await  User.findOne({ _id: { $eq: id } });
+      const user = await User.findOne({ _id: { $eq: id } });
       Object.assign(user, req.body);
       user.save();
 
@@ -116,14 +117,12 @@ export function UsersRoutes() {
 
   router.post("/pictureUpdate/:id", async (req, res) => {
     try {
-
       const { error } = pictureValidate(req.body);
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
-
       const { id } = req.params;
-      const user = await  User.findOne({ _id: { $eq: id } });
+      const user = await User.findOne({ _id: { $eq: id } });
       Object.assign(user, req.body);
       user.save();
 
@@ -144,47 +143,46 @@ export function UsersRoutes() {
       if (error)
         return res.status(400).send({ message: error.details[0].message });
 
-      const {id} = req.params
-      const subject = JSON.parse(req.params.subject)
+      const { id } = req.params;
+      const subject = JSON.parse(req.params.subject);
 
-      User.findOne({ _id: { $eq: id } }).then((record)=> {
+      User.findOne({ _id: { $eq: id } }).then((record) => {
         record.subjects.push(subject);
-        record.save()
-      })
-
-    }catch{
-      res.status(404).send({error: "User is not found"})
+        record.save();
+      });
+    } catch {
+      res.status(404).send({ error: "User is not found" });
     }
-  })
+  });
 
   router.delete("/delete/:id", async (req, res) => {
     try {
-      const {id} = req.params
+      const { id } = req.params;
       const user = await User.findOne({ _id: { $eq: id } });
       const userDetails = await ContactDetails.findOne({ _id: { $eq: id } });
-      if (userDetails){
+      if (userDetails) {
         await userDetails.remove();
       }
       await user.remove();
       res.clearCookie("jwt");
-      res.send({data: true});
-    }catch{
-      res.status(404).send({error: "User is not found"})
+      res.send({ data: true });
+    } catch {
+      res.status(404).send({ error: "User is not found" });
     }
-  })
+  });
 
   router.delete("/friendsDelete/:id/:name", async (req, res) => {
     try {
-      const { id, name } = req.params
+      const { id, name } = req.params;
 
-      await User.updateOne({"_id" : id}, {"$pull" : {"friends" : { "name" : name}}}),
-        { "multi" : true }
+      await User.updateOne({ _id: id }, { $pull: { friends: { name: name } } }),
+        { multi: true };
 
       res.send({ data: true });
     } catch {
-      res.status(404).send({ error: "User is not found" })
+      res.status(404).send({ error: "User is not found" });
     }
-  })
+  });
 
   return router;
 }

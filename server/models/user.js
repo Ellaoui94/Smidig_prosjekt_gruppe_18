@@ -8,24 +8,22 @@ const subjectSchema = new mongoose.Schema({
   subjectCode: { type: String, required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
-})
+});
 
 const friendsSchema = new mongoose.Schema({
-  name: {type: String, required: true},
-  photo: {type: String, required: true},
-})
-
+  name: { type: String, required: true },
+  photo: { type: String, required: true },
+});
 
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  profileImg: {type: String, required: false},
-  subjects: { type: [subjectSchema], required: false},
-  friends: { type: [friendsSchema], required: false},
+  profileImg: { type: String, required: false },
+  subjects: { type: [subjectSchema], required: false },
+  friends: { type: [friendsSchema], required: false },
 });
-
 
 //How long the token lasts.
 userSchema.methods.generateAuthToken = function () {
@@ -62,7 +60,7 @@ const subjectValidate = (data) => {
     subjectCode: Joi.string().required().label("Emne kode"),
     startDate: Joi.date().required().label("Emne start"),
     endDate: Joi.date().required().label("Emne slutt"),
-    location: Joi.object().optional().label("Lokasjon")
+    location: Joi.object().optional().label("Lokasjon"),
   });
   return schema.validate(data);
 };
@@ -75,7 +73,6 @@ const friendValidate = (data) => {
   return schema.validate(data);
 };
 
-
 const pictureValidate = (data) => {
   const schema = Joi.object({
     profileImg: Joi.string().required().label("Bilde"),
@@ -83,4 +80,11 @@ const pictureValidate = (data) => {
   return schema.validate(data);
 };
 
-export { User, validate, updateValidate, subjectValidate, friendValidate, pictureValidate };
+export {
+  User,
+  validate,
+  updateValidate,
+  subjectValidate,
+  friendValidate,
+  pictureValidate,
+};

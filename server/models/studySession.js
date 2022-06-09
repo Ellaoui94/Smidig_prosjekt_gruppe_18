@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import jwt from "jsonwebtoken";
 import Joi from "joi";
 
 /*
@@ -28,9 +27,13 @@ const userSchema = new mongoose.Schema(
     stage: { type: String, required: false },
     startDate: { type: Date, required: false },
     endDate: { type: Date, required: false },
-    position: {lat: {type: Number, required: false}, lng: {type: Number, required: false}, required: false},
+    position: {
+      lat: { type: Number, required: false },
+      lng: { type: Number, required: false },
+      required: false,
+    },
     userName: { type: String, required: false },
-    profileImg: { type: String, required: false }
+    profileImg: { type: String, required: false },
   },
   { timestamps: true }
 );

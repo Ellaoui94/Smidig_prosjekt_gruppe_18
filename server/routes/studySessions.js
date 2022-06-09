@@ -21,8 +21,8 @@ export function StudySessionApi() {
   });
 
   /*
-      Here we update the schema. But we need to find the right schema to update.
-     */
+        Here we update the schema. But we need to find the right schema to update.
+       */
   router.post("/update/:email", async (req, res) => {
     try {
       //We need to know if there is some problems. Maybe a value is not set, that we said need to be required
@@ -202,7 +202,7 @@ export function StudySessionApi() {
     try {
       const { sessionId } = req.params;
       console.log(sessionId);
-      const session = await Session.findOne({_id: {$eq: sessionId}});
+      const session = await Session.findOne({ _id: { $eq: sessionId } });
       await session.remove();
       res.send({ data: true });
     } catch (error) {

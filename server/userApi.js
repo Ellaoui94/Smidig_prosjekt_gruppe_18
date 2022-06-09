@@ -31,16 +31,14 @@ export function UserApi(mongoDatabase) {
   router.post("/", (req, res) => {
     const { first_name, last_name, email, password, date_of_birth, school } =
       req.body;
-    mongoDatabase
-      .collection("user")
-      .insertOne({
-        first_name,
-        last_name,
-        email,
-        password,
-        date_of_birth,
-        school,
-      });
+    mongoDatabase.collection("user").insertOne({
+      first_name,
+      last_name,
+      email,
+      password,
+      date_of_birth,
+      school,
+    });
     res.sendStatus(200);
   });
 
