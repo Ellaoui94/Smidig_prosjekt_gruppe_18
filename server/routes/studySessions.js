@@ -198,11 +198,11 @@ export function StudySessionApi() {
 
   //Here we tried to delete a session that already existed, but this we failed.
   //We chose not to delete this if some of us found a way to fix it
-  router.delete("/delete/:id", async (req, res) => {
+  router.delete("/delete/:sessionId", async (req, res) => {
     try {
       const { sessionId } = req.params;
-      const session = await Session.findOne({ _id: { $eq: sessionId } });
-
+      console.log(sessionId);
+      const session = await Session.findOne({_id: {$eq: sessionId}});
       await session.remove();
       res.send({ data: true });
     } catch (error) {

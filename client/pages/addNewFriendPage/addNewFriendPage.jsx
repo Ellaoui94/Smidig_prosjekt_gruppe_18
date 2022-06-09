@@ -70,8 +70,10 @@ export function AddNewFriendPage({ id }) {
     try {
       alert(`${friendName} lagt til!`)
       const url = `${window.location.origin}/api/users/postFriend/${id}/${encodeURIComponent(JSON.stringify(friendObj))}`;
+      location.reload()
       const { data: res } = await axios.post(url, friendObj);
       console.log(res.message);
+
     } catch (error) {
       if (
         error.response &&

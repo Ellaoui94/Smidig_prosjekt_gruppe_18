@@ -7,15 +7,15 @@ import axios from "axios";
 
 // code for when youre inside a planned session
 
-function DeleteButton({ label, id }) {
+function DeleteButton({ label, sessionId }) {
   const navigate = useNavigate();
 
   //const { endPlannedSession } = useContext(MainPageApiContext);
 
   async function deletePlannedSession() {
-    await axios.delete(`${window.location.origin}/api/session/delete/${id}`);
+    await axios.delete(`${window.location.origin}/api/session/delete/${sessionId}`);
     //await endPlannedSession();
-    navigate("/");
+    navigate("/main-page");
   }
 
   return (
@@ -69,7 +69,7 @@ export function PlannedSession({ id }) {
       <h6>{data[0].address}</h6>
       <TodoList sessionId={sessionId} />
       <button style={{fontSize: "2.5vh", marginTop: "1vh", backgroundColor: "#508B0A", color: "white", borderRadius: "20px", borderColor: "72A23A"}} onClick={onClickHandler}>Start økt</button>
-      <DeleteButton label={"Slett økt"} id={id} />
+      <DeleteButton label={"Slett økt"} sessionId={sessionId} />
     </>
   );
 }
