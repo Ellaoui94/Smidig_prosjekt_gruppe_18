@@ -18,7 +18,7 @@ Gruppe 18:
 2. kjør enten ved å skrive 'npm run dev' i terminalen, eller å gå direkte til package.json i root-folder og trykk på play-knappen ved siden av dev under 'scripts'.
 3. Et vindu dukker opp og trykk på "started on 'http://localhost:3000' " som da er en nettleserløsning for vår prosjekt
 
-## Oppgave
+## Oppgavetekst
 Dette er oppgaveteksten som vi har fått utdelt fra vår produkteier atCampus.
 > «Hvordan kan vi gjøre det enkelt for studenter å finne andre studenter, som de kommer til å jobbe godt sammen med, og samtidig gjøre det enkelt for dem å jobbe sammen?»
 
