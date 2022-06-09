@@ -26,8 +26,6 @@ export function EndSession({ emailInput }) {
     endDate: null,
   });
 
-  console.log("inside startSession: " + emailInput);
-
   data.email = emailInput;
   data.endDate = endDateSession;
 

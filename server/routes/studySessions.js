@@ -157,11 +157,9 @@ export function StudySessionApi() {
     try {
       const { sessionId } = req.query;
       const emailCookie = req.signedCookies.jwt.email;
-      console.log("sessionid " + sessionId);
       let queryResult = "";
       if (sessionId) {
         await Session.find({ _id: { $eq: sessionId } }).then((result) => {
-          console.log(result);
           queryResult = result;
         });
       } else {
@@ -201,7 +199,6 @@ export function StudySessionApi() {
   router.delete("/delete/:sessionId", async (req, res) => {
     try {
       const { sessionId } = req.params;
-      console.log(sessionId);
       const session = await Session.findOne({ _id: { $eq: sessionId } });
       await session.remove();
       res.send({ data: true });

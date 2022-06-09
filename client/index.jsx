@@ -61,7 +61,6 @@ function NavBar() {
       </div>
     );
   }
-  console.log(data.length);
 
   return (
     <>
