@@ -57,6 +57,29 @@ export function CourseRoutes() {
         },
       ],
     },
+    {
+      subject: "Webutvlikling",
+      code: "PGR110",
+      students: [
+        "Frida",
+        "Truls",
+        "Tina",
+        "Michael",
+        "Louise",
+        "Ludvig",
+        "Mari",
+      ],
+      assignments: [
+        {
+          type: "Arbeidskrav",
+          assignmentStudents: ["Frida", "Tina", "Truls"],
+        },
+        {
+          type: "Eksamen",
+          assignmentStudents: ["Mari", "Louise", "Tina"],
+        },
+      ],
+    },
   ];
 
   //Getting data from const above
