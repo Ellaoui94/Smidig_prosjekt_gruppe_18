@@ -70,13 +70,14 @@ export function TodoList({ sessionId }) {
     <>
       <div>
         <h3>Gjøremål</h3>
+        <div className={"todo-wrapper"}>
         {joiError && <div>{joiError}</div>}
         {/* add todos from database */}
         {data[0].todos.map((todos, i) => (
           <>
-            <div key={i}>
+            <div key={i} className={"todo-div"} >
               <label>
-                <input type={"checkbox"} />
+                <input type={"radio"} />
                 {todos.todo}
               </label>
             </div>
@@ -86,9 +87,9 @@ export function TodoList({ sessionId }) {
         {/* add newly added todos from websockets */}
         {[...todoList].map((todos) => (
           <>
-            <div>
+            <div className={"todo-div"}>
               <label>
-                <input type={"checkbox"} />
+                <input type={"radio"} />
                 {todos.todo}
               </label>
             </div>
@@ -98,14 +99,16 @@ export function TodoList({ sessionId }) {
         {/* input field to add new todos */}
         <form onSubmit={handleSubmit}>
           <input
+            style={{fontSize: "1.5vh", marginTop: "1vh"}}
             type="text"
             id="myInput"
             onChange={(e) => setTodo(e.target.value)}
             value={todo}
             placeholder="Legg til nytt gjøremål.."
           />
-          <button>Legg til</button>
+          <button style={{fontSize: "1.4vh"}}>Legg til</button>
         </form>
+        </div>
       </div>
     </>
   );

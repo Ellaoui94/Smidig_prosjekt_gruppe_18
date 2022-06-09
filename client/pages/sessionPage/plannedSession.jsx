@@ -20,7 +20,7 @@ function DeleteButton({ label, id }) {
 
   return (
     <div>
-      <button onClick={deletePlannedSession}>{label}</button>
+      <button style={{fontSize: "2.1vh", marginTop: "1vh", backgroundColor: "#AF0000", color: "white", borderRadius: "20px"}} onClick={deletePlannedSession}>{label}</button>
     </div>
   );
 }
@@ -68,7 +68,7 @@ export function PlannedSession({ id }) {
       <h3>{data[0].location}</h3>
       <h6>{data[0].address}</h6>
       <TodoList sessionId={sessionId} />
-      <button onClick={onClickHandler}>Start økt</button>
+      <button style={{fontSize: "2.5vh", marginTop: "1vh", backgroundColor: "#508B0A", color: "white", borderRadius: "20px", borderColor: "72A23A"}} onClick={onClickHandler}>Start økt</button>
       <DeleteButton label={"Slett økt"} id={id} />
     </>
   );

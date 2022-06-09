@@ -32,12 +32,14 @@ export function MapPage({ profile }) {
 
 function Map({ profile }) {
   const [showingInfoWindow, setShowingInfoWindow] = useState(true);
+  const [sessions, setSessions] = useState({});
 
   useEffect(async () => {
-    const sessionUrl = `${window.location.origin}/api/session/active-session/`;
+    const sessionUrl = `${window.location.origin}/api/session/active-session/all`;
     const { data: response } = await axios.get(sessionUrl);
-    setSessions(response);
+    response.map((r) => setSessions(r) )
   }, []);
+
 
   //const center = useMemo(() => ({ lat: 59.911491, lng: 10.757933 }), []);
 
@@ -53,6 +55,7 @@ function Map({ profile }) {
   // 4. Filtrer ut fra emner som skal vises på kart. Plan B: drit i det
   // 5. Fikse CSS på bruker
 
+  const sessionArray = [sessions]
   return (
     <>
       {/*<ListSubjects />*/}
@@ -61,11 +64,12 @@ function Map({ profile }) {
         center={{ lat: 59.911491, lng: 10.757933 }}
         mapContainerClassName="map-container"
       >
-        {profile.friends.map((userInfo) => (
+        {sessionArray.map((userSession, i) => (
           <Marker
+            animation={window.google.maps.Animation.DROP}
             icon={{
-              url: `${userInfo.photo}`,
-              scaledSize: { width: 70, height: 70 },
+              url: `${userSession.profileImg}`,
+              scaledSize: { width: 70, height: 70 }
             }}
             position={{ lat: 59.911481, lng: 10.757923 }}
             onClick={() => setShowingInfoWindow(!showingInfoWindow)}
@@ -73,12 +77,15 @@ function Map({ profile }) {
             {showingInfoWindow && (
               <InfoWindow
                 options={{ pixelOffset: new window.google.maps.Size(0, -1) }}
-                position={{ lat: 59.911481, lng: 10.757923 }}
-                onCloseClick={() => setShowingInfoWindow(false)}
-              >
+                position={{ lat: 59.914481, lng: 10.757923 }}
+                onCloseClick={() => setShowingInfoWindow(false)}>
                 <div className={"info-window"}>
                   <div>
-                    <h1>{userInfo.name}</h1>
+                    <h1>
+                      {userSession.userName}
+                    </h1>
+                    <h4>{userSession.courseTitle}</h4>
+                    <p>{userSession.studyStatus}</p>
                   </div>
                 </div>
               </InfoWindow>
@@ -87,6 +94,7 @@ function Map({ profile }) {
         ))}
 
         <Marker
+          animation={window.google.maps.Animation.DROP}
           icon={{
             url: `${profile.profileImg}`,
             scaledSize: { width: 70, height: 70 },
@@ -106,14 +114,11 @@ function Map({ profile }) {
           </InfoWindow>
         </Marker>
         <Marker
-          style={{
-            backgroundColor: "red",
-            width: "101px",
-          }}
+          animation={window.google.maps.Animation.DROP}
           icon={{
             url: "https://www.linkpicture.com/q/img_2.112eb9c4-2.png",
             scaledSize: { width: 70, height: 70 },
-            style: { backgroundColor: "red", width: "101px" },
+            style: { backgroundColor: "red", width: "101px" }
           }}
           onClick={() => (window.location = "/friend-profile")}
           position={{ lat: 59.941481, lng: 10.767923 }}

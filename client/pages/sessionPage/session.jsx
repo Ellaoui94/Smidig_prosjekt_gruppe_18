@@ -103,18 +103,18 @@ export default function Session({ profile }) {
       <h1>{data[0].courseTitle}</h1>
       <MapView position={position} profile={profile} />
       <p>Endre arbeidsstatus</p>
-      <div>
+      <div className={"session-wrapper"}>
         <input type={"radio"} name={"set-status"} />
         <label>Tilgjengelig</label>
         <input type={"radio"} name={"set-status"} />
         <label>Opptatt</label>
         <input type={"radio"} name={"set-status"} />
-        <label>Kun synlig for venner</label>
+        <label>Kun venner</label>
         <input type={"radio"} name={"set-status"} />
         <label>Usynlig</label>
       </div>
       <TodoList sessionId={sessionId} />
-      <button>
+      <button style={{fontSize: "1.6vh", marginTop: "1.5vh"}}>
         <Link to={"/end-session/" + sessionId}>Vurder økten og avslutt</Link>
       </button>
     </div>

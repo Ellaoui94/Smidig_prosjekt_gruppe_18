@@ -145,13 +145,9 @@ export function StudySessionApi() {
 
   router.get("/active-session/:email", async (req, res) => {
     try {
-      const { email } = req.params;
-      console.log("dd", email);
-      await Session.find({ stage: "active", $and: [{ email }] }).then(
-        (result) => {
-          res.json(result);
-        }
-      );
+      await Session.find({ stage: "active" }).then((result) => {
+        res.json(result);
+      });
     } catch {
       res.status(404).send({ error: "Session not found" });
     }
