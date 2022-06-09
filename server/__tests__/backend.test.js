@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 
 /* This test-file is testing API and database */
+/** TEST WORKED AT FIRST, BUT NOW IT SEEMS THEY DOESNT GET CONNECTED TO SERVER */
 
 dotenv.config();
 
