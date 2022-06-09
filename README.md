@@ -1,5 +1,5 @@
-# PRO201: Smidig_prosjekt_gruppe_18
-Gruppe 18: 
+# PRO201: Smidig prosjekt, gruppe 18
+
 | Navn                    | Studieretning               |
 | ----------------------- | --------------------------- |
 | Abdulquddous Abdellaoui | Frontend og mobil-utvikling |
